@@ -1,3 +1,8 @@
-- clean: []
-- link: {}
-- shell: []
+- clean: ['~']
+- link:
+    ~/.bashrc: bash/bashrc
+    ~/.bash_aliases: bash/bash_aliases
+    ~/.vim: vim/
+- shell:
+    - [git submodule update --init --recursive, Installing submodules]
+    - [bash ~/.vim/install.sh, Installing vim (this may take a while)]
