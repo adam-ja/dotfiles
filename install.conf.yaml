@@ -4,5 +4,6 @@
     ~/.bash_aliases: bash/bash_aliases
     ~/.vim: vim/
 - shell:
+    - [~/dotfiles/install_packages.sh, Installing useful packages]
     - [git submodule update --init --recursive, Installing submodules]
-    - [bash ~/.vim/install.sh, Installing vim (this may take a while)]
+    - [~/.vim/install.sh, Installing vim (this may take a while)]
