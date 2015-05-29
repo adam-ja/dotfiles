@@ -1,5 +1,0 @@
-# Maintain colour highlights when chaining grep
-alias grep='grep --color=always'
-
-# Always use tmux in 256 colour mode
-alias tmux='tmux -2'

@@ -1,7 +1,6 @@
 - clean: ['~']
 - link:
-    ~/.bashrc: bash/bashrc
-    ~/.bash_aliases: bash/bash_aliases
+    ~/.zshrc: zsh/.zshrc
     ~/.gitconfig: git/.gitconfig
     ~/.vim: vim/
 - shell:
