@@ -2,10 +2,14 @@
 - link:
     ~/.bashrc: bash/bashrc
     ~/.bash_aliases: bash/bash_aliases
+    ~/.gitconfig: git/.gitconfig
     ~/.vim: vim/
 - shell:
     - [git submodule update --init --recursive, Installing submodules]
     - [~/dotfiles/install_packages.sh, Installing useful packages]
     - [~/.vim/install.sh, Installing vim (this may take a while)]
-    - [chsh -s `which zsh`, Making zsh the default shell]
-    - [gsettings set org.gnome.desktop.input-sources xkb-options "['caps:escape']", Mapping caps lock to escape]
+    - [~/dotfiles/gsettings.sh, Applying gsettings]
+    -
+        command: printf "\nRemember to set the default shell to zsh\n\n"
+        description: chsh -s `which zsh`
+        stdout: true

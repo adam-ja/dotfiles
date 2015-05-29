@@ -1,0 +1,14 @@
+[color]
+    ui = true
+[core]
+    editor = vim
+[push]
+    default = simple
+[alias]
+    ci = commit
+    puff = pull --ff-only
+    st = status
+    uc = reset --soft 'HEAD^' # undo commit
+    diffc = diff --cached
+[include]
+    path = ~/.gitconfig_local
