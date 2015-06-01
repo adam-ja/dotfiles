@@ -2,18 +2,16 @@
 export ZSH=$HOME/dotfiles/oh-my-zsh
 
 # Enable command auto-correction.
-ENABLE_CORRECTION="true"
+ENABLE_CORRECTION=true
 
 # Uncomment the following line to display red dots whilst waiting for completion.
-COMPLETION_WAITING_DOTS="true"
+COMPLETION_WAITING_DOTS=true
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(bower command-not-found composer dircycle git last-working-dir sudo tmux)
-
-# User configuration
+plugins=(bower command-not-found composer dircycle git last-working-dir sudo)
 
 export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
@@ -33,6 +31,10 @@ export VISUAL='vim'
 # For a full list of active aliases, run `alias`.
 alias tmux='tmux -2' # Always assume terminal supports 256 colours
 
+# Include promptline config
+if [ -f ~/dotfiles/zsh/promptline-snapshot ]; then
+    source ~/dotfiles/zsh/promptline-snapshot
+fi
 
 # Include extra local config if it exists
 if [ -f ~/.zshrc_local ]; then
