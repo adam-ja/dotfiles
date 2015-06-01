@@ -5,10 +5,7 @@
 [push]
     default = simple
 [alias]
-    ci = commit
     puff = pull --ff-only
-    st = status
-    uc = reset --soft 'HEAD^' # undo commit
-    diffc = diff --cached
+    uc   = reset --soft 'HEAD^' # undo commit
 [include]
     path = ~/.gitconfig_local

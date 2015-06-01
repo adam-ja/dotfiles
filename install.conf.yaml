@@ -3,6 +3,7 @@
     ~/.zshrc: zsh/.zshrc
     ~/.gitconfig: git/.gitconfig
     ~/.vim: vim/
+    ~/.tmux.conf: tmux/.tmux.conf
 - shell:
     - [git submodule update --init --recursive, Installing submodules]
     - [~/dotfiles/install_packages.sh, Installing useful packages]
