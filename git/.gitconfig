@@ -6,6 +6,11 @@
     default = simple
 [alias]
     puff = pull --ff-only
-    uc   = reset --soft 'HEAD^' # undo commit
+    # Show all my commits to the current branch from today (add --all for all branches)
+    today = !git log --since=midnight --author=\"$(git config user.name)\"
+    # Undo commit
+    uc = reset --soft 'HEAD^'
+    # Show all my commits to the current branch from yesterday (add --all for all branches)
+    yesterday = !git log --since=yesterday.midnight --until=midnight --author=\"$(git config user.name)\"
 [include]
     path = ~/.gitconfig_local
