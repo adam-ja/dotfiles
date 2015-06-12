@@ -22,6 +22,9 @@ export LANG=en_GB.UTF-8
 # Make vim the default editor
 export VISUAL='vim'
 
+# Remove the space at the end of the right prompt (only for v5.0.5+)
+ZLE_RPROMPT_INDENT=0
+
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
