@@ -14,3 +14,6 @@
     yesterday = !git log --since=yesterday.midnight --until=midnight --author=\"$(git config user.name)\"
 [include]
     path = ~/.gitconfig_local
+[credential]
+    # Cache git credentials (e.g. GitHub username and password) for an hour
+	helper = cache --timeout=3600
