@@ -6,7 +6,7 @@
     ~/.vim: vim/
     ~/.tmux.conf: tmux/.tmux.conf
 - shell:
-    - [git submodule update --init --recursive, Installing submodules]
+    - [git submodule foreach --recursive git submodule update --init, Installing submodules]
     - [~/dotfiles/install_packages.sh, Installing useful packages]
     - [~/.vim/install.sh, Installing vim (this may take a while)]
     - [~/dotfiles/gsettings.sh, Applying gsettings]
