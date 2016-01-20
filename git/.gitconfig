@@ -2,6 +2,7 @@
     ui = true
 [core]
     editor = vim
+    excludesfile = ~/dotfiles/git/.gitignore_global
 [push]
     default = simple
 [alias]
