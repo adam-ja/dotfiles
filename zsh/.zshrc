@@ -11,7 +11,7 @@ COMPLETION_WAITING_DOTS=true
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(bower command-not-found composer encode64 git last-working-dir sudo vagrant vi-mode web-search)
+plugins=(bower command-not-found composer encode64 git last-working-dir sudo vagrant web-search)
 
 export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
