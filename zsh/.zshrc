@@ -31,6 +31,7 @@ export VISUAL='vim'
 # For a full list of active aliases, run `alias`.
 alias tmux='tmux -2' # Always assume terminal supports 256 colours
 alias grep='grep --color=always' # Always colour highlight matching strings with grep
+alias lesss='less -r' # Output raw control characters (maintains colours etc when piping through less)
 
 # Include promptline config
 if [ -f ~/dotfiles/zsh/promptline-snapshot ]; then
