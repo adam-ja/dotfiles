@@ -18,3 +18,6 @@
 [credential]
     # Cache git credentials (e.g. GitHub username and password) for an hour
 	helper = cache --timeout=3600
+[diff]
+    # The number of files to consider when performing the copy/rename detection
+    renameLimit = 10000
