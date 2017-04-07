@@ -7,7 +7,7 @@ This repo contains all of my dotfiles and a script to bootstrap them using [Dotb
 This software is hereby released into the public domain. That means you can do
 whatever you want with it without restriction. See `LICENSE.md` for details.
 
-If you like what you see, feel free to fork it (or just copy and bits you like) but these are my personal configs so I won't be accepting any pull requests unless there's a suggestion I really like and can see being useful for myself.
+If you like what you see, feel free to fork it (or just copy any bits you like) but these are my personal configs so I won't be accepting any pull requests unless there's a suggestion I really like and can see being useful for myself.
 
 [dotbot]: https://github.com/anishathalye/dotbot
 [fork]: https://github.com/anishathalye/dotfiles_template/fork
