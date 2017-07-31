@@ -43,3 +43,7 @@ fi
 if [ -f ~/.zshrc_local ]; then
     source ~/.zshrc_local
 fi
+
+if [[ ! $TERM =~ screen-256color ]]; then
+    tmux -2
+fi
