@@ -5,6 +5,8 @@
     excludesfile = ~/dotfiles/git/.gitignore_global
 [push]
     default = simple
+[pull]
+    rebase = true
 [alias]
     puff = pull --ff-only
     # Show all my commits to the current branch from today (add --all for all branches)
@@ -17,7 +19,7 @@
     path = ~/.gitconfig_local
 [credential]
     # Cache git credentials (e.g. GitHub username and password) for an hour
-	helper = cache --timeout=3600
+    helper = cache --timeout=3600
 [diff]
     # The number of files to consider when performing the copy/rename detection
     renameLimit = 10000
