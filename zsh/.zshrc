@@ -39,11 +39,6 @@ if [ -f ~/dotfiles/zsh/promptline-snapshot ]; then
     source ~/dotfiles/zsh/promptline-snapshot
 fi
 
-# Include extra local config if it exists
-if [ -f ~/.zshrc_local ]; then
-    source ~/.zshrc_local
-fi
-
 if [[ ! $TERM =~ screen-256color ]]; then
     tmux -2
 fi
