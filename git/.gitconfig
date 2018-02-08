@@ -1,5 +1,7 @@
 [color]
     ui = true
+[commit]
+    verbose = true
 [core]
     editor = vim
     excludesfile = ~/dotfiles/git/.gitignore_global
