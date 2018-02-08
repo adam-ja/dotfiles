@@ -33,6 +33,8 @@ alias tmux='tmux -2' # Always assume terminal supports 256 colours
 alias grep='grep --color=always' # Always colour highlight matching strings with grep
 alias lesss='less -r' # Output raw control characters (maintains colours etc when piping through less)
 alias sedhelp='echo "grep -rl --color=never SEARCH PATHS | xargs sed -i '\''s/SEARCH/REPLACE/g'\''"'
+alias findswp='find . -name "*.swp"'
+alias rmswp='findswp -print0 | xargs -0 rm'
 
 # Include promptline config
 if [ -f ~/dotfiles/zsh/promptline-snapshot ]; then
