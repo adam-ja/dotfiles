@@ -5,6 +5,8 @@
 [core]
     editor = vim
     excludesfile = ~/dotfiles/git/.gitignore_global
+    # Set tab stop for diffs etc to 4 spaces
+    pager = less -x4
 [push]
     default = simple
 [pull]
