@@ -2,6 +2,15 @@
 
 This repo contains all of my dotfiles and a script to bootstrap them using [Dotbot][dotbot]. It is forked from [dotfiles_template][fork].
 
+## Installation
+
+```
+cd ~
+git clone https://github.com/adam-ja/dotfiles.git --recurse-submodules
+cd dotfiles
+./install
+```
+
 ## License
 
 This software is hereby released into the public domain. That means you can do
