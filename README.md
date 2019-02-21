@@ -4,7 +4,7 @@ This repo contains all of my dotfiles and a script to bootstrap them using [Dotb
 
 ## Installation
 
-- Run the following commans
+- Run the following commands
 ```bash
 cd ~
 git clone https://github.com/adam-ja/dotfiles.git --recurse-submodules
