@@ -4,6 +4,8 @@
     ~/.gitconfig: git/.gitconfig
     ~/.vim: vim/
     ~/.tmux.conf: tmux/.tmux.conf
+    oh-my-zsh/custom/themes/spaceship-prompt: spaceship-prompt
+    oh-my-zsh/custom/themes/spaceship.zsh-theme: oh-my-zsh/custom/themes/spaceship-prompt/spaceship.zsh-theme
 - shell:
     - [git submodule foreach --recursive git submodule update --init, Installing submodules]
     - [~/dotfiles/install_packages.sh, Installing useful packages]

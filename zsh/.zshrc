@@ -15,6 +15,10 @@ plugins=(bower command-not-found composer encode64 git last-working-dir sudo vag
 
 export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
+# Spaceship prompt must be set before sourcing oh-my-zsh
+SPACESHIP_TIME_SHOW=true
+ZSH_THEME="spaceship"
+
 source $ZSH/oh-my-zsh.sh
 
 export LANG=en_GB.UTF-8
@@ -35,11 +39,6 @@ alias lesss='less -r' # Output raw control characters (maintains colours etc whe
 alias sedhelp='echo "grep -rl --color=never SEARCH PATHS | xargs sed -i '\''s/SEARCH/REPLACE/g'\''"'
 alias findswp='find . -name "*.swp"'
 alias rmswp='findswp -print0 | xargs -0 rm'
-
-# Include promptline config
-if [ -f ~/dotfiles/zsh/promptline-snapshot ]; then
-    source ~/dotfiles/zsh/promptline-snapshot
-fi
 
 if [[ ! $TERM =~ screen-256color ]]; then
     tmux -2
