@@ -12,7 +12,7 @@ for i in \
     tree \
     zsh \
 ; do
-    sudo apt-get install --assume-yes $i
+    sudo apt install --assume-yes $i
 done
 
 # Install joe - a .gitignore generator

@@ -1,17 +1,17 @@
 - clean: ['~']
+- shell:
+    - [git submodule foreach --recursive git submodule update --init, Installing submodules]
+    - [~/dotfiles/install_packages.sh, Installing useful packages]
+    - [~/dotfiles/vim/install.sh, Installing vim (this may take a while)]
+    - [~/dotfiles/gsettings.sh, Applying gsettings]
+    -
+        command: printf "\nRemember to set the default shell to zsh\n\n"
+        description: chsh -s `which zsh`
+        stdout: true
 - link:
     ~/.agignore: misc/agignore
     ~/.gitconfig: git/.gitconfig
     ~/.vim: vim/
     ~/.tmux.conf: tmux/.tmux.conf
     oh-my-zsh/custom/themes/spaceship-prompt: spaceship-prompt
-    oh-my-zsh/custom/themes/spaceship.zsh-theme: oh-my-zsh/custom/themes/spaceship-prompt/spaceship.zsh-theme
-- shell:
-    - [git submodule foreach --recursive git submodule update --init, Installing submodules]
-    - [~/dotfiles/install_packages.sh, Installing useful packages]
-    - [~/.vim/install.sh, Installing vim (this may take a while)]
-    - [~/dotfiles/gsettings.sh, Applying gsettings]
-    -
-        command: printf "\nRemember to set the default shell to zsh\n\n"
-        description: chsh -s `which zsh`
-        stdout: true
+    oh-my-zsh/custom/themes/spaceship.zsh-theme: spaceship-prompt/spaceship.zsh-theme
