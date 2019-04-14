@@ -23,6 +23,7 @@ export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
 # Use spaceship prompt
 SPACESHIP_TIME_SHOW=true
+SPACESHIP_BATTERY_SHOW=false
 ZSH_THEME="spaceship"
 
 # Automatically start tmux when opening a new terminal window (window will also automatically close when exiting tmux)
