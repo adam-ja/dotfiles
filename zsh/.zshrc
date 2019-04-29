@@ -45,6 +45,9 @@ export LANG=en_GB.UTF-8
 # Make vim the default editor
 export VISUAL='vim'
 
+# Set a global config file for ripgrep (rg)
+export RIPGREP_CONFIG_PATH="$HOME/dotfiles/misc/ripgreprc"
+
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.

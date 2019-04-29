@@ -9,7 +9,7 @@
         description: chsh -s `which zsh`
         stdout: true
 - link:
-    ~/.agignore: misc/agignore
+    ~/.ignore: misc/ignore
     ~/.gitconfig: git/.gitconfig
     ~/.vim: vim/
     ~/.tmux.conf: tmux/.tmux.conf
