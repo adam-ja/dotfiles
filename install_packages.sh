@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Install useful apt packages
-PACKAGES='curl gsettings htop jq network-manager-openvpn openssh-server python-pip tmux tree zsh'
+PACKAGES='curl htop jq network-manager-openvpn openssh-server python-pip tmux tree zsh'
 sudo apt install --assume-yes ${PACKAGES}
 
 # Install joe - a .gitignore generator
