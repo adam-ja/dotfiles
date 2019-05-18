@@ -3,3 +3,6 @@
 
 # Don't respect .gitignore and similar VCS ignore files. Only ignore things specified in more general .ignore files
 --no-ignore-vcs
+
+# Always show colours even when piping etc
+--color=always

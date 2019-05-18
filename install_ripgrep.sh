@@ -4,7 +4,7 @@ DOWNLOAD_URL='https://github.com/BurntSushi/ripgrep/releases/download/'
 VERSION=$(curl -sSL 'https://api.github.com/repos/BurntSushi/ripgrep/releases/latest' | jq --raw-output .tag_name)
 
 if type 'rg' &> /dev/null && [[ $(rg --version) == *${VERSION}* ]]; then
-    # Latest version already installed
+    echo ripgrep is already installed at latest version ${VERSION}
     exit
 fi
 

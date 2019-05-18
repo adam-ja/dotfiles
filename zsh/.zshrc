@@ -13,7 +13,7 @@ COMPLETION_WAITING_DOTS=true
 # Add wisely, as too many plugins slow down shell startup.
 #
 # vi-mode goes first as it can otherwise override things that break other plugins
-plugins=(vi-mode command-not-found composer git history-substring-search tmux)
+plugins=(vi-mode command-not-found composer fzf git history-substring-search tmux fzf-git)
 
 export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
@@ -51,6 +51,19 @@ export VISUAL='vim'
 # Set a global config file for ripgrep (rg)
 export RIPGREP_CONFIG_PATH="$HOME/dotfiles/misc/ripgreprc"
 
+# Set the path to the bat config file
+export BAT_CONFIG_PATH="$HOME/dotfiles/misc/bat.conf"
+
+# Set fzf installation directory path
+export FZF_BASE="$HOME/.fzf"
+
+# Use rg rather than find to respect the .ignore (but not VCS ignore)
+export FZF_DEFAULT_COMMAND='rg --color=never --no-ignore-vcs --ignore-case --hidden -l ""'
+
+# Set default FZF options
+# - Reverse causes FZF to list top to bottom rather than bottom to top
+export FZF_DEFAULT_OPTS="--layout=reverse"
+
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
@@ -60,3 +73,4 @@ alias lesss='less -r' # Output raw control characters (maintains colours etc whe
 alias sedhelp='echo "grep -rl --color=never SEARCH PATHS | xargs sed -i '\''s/SEARCH/REPLACE/g'\''"'
 alias findswp='find . -name "*.swp"'
 alias rmswp='findswp -print0 | xargs -0 rm'
+alias fzfp="fzf --preview '(bat --color=always {} || cat {})'"

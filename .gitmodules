@@ -11,3 +11,7 @@
 	path = zsh_custom/themes/spaceship-prompt
 	url = https://github.com/denysdovhan/spaceship-prompt.git
 	branch = master
+[submodule "zsh_custom/plugins/fzf-git"]
+	path = zsh_custom/plugins/fzf-git
+	url = https://github.com/zulu-zsh/plugin-fzf-git.git
+	branch = master
