@@ -2,11 +2,15 @@
 - shell:
     - [git submodule foreach --recursive git submodule update --init, Installing submodules]
     - [~/dotfiles/install_packages.sh, Installing useful packages]
-    - [~/dotfiles/vim/install.sh, Installing vim (this may take a while)]
+    -
+      command: ~/dotfiles/vim/install.sh
+      description: Installing vim (this may take a while)
+      stdout: true
+      stderr: true
     - [~/dotfiles/gsettings.sh, Applying gsettings]
     -
-        command: printf "\nRemember to set the default shell to zsh\n\n"
-        description: chsh -s `which zsh`
+        command: >-
+          printf "\e[38;5;202mRemember to set the default shell to zsh using: \e[7mchsh -s `which zsh`\e[0m\n"
         stdout: true
 - link:
     ~/.ignore: misc/ignore
