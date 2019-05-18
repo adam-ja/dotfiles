@@ -21,6 +21,9 @@ export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 # In general, all ZSH_* variables for controlling oh-my-zsh behaviour need to be set before sourcing oh-my-zsh.sh
 #####
 
+# Set location for custom themes and plugins
+ZSH_CUSTOM=$HOME/dotfiles/zsh_custom
+
 # Use spaceship prompt
 SPACESHIP_TIME_SHOW=true
 SPACESHIP_BATTERY_SHOW=false

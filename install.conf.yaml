@@ -17,5 +17,4 @@
     ~/.gitconfig: git/.gitconfig
     ~/.vim: vim/
     ~/.tmux.conf: tmux/.tmux.conf
-    oh-my-zsh/custom/themes/spaceship-prompt: spaceship-prompt
-    oh-my-zsh/custom/themes/spaceship.zsh-theme: spaceship-prompt/spaceship.zsh-theme
+    zsh_custom/themes/spaceship.zsh-theme: zsh_custom/themes/spaceship-prompt/spaceship.zsh-theme

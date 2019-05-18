@@ -7,6 +7,7 @@
 [submodule "oh-my-zsh"]
 	path = oh-my-zsh
 	url = https://github.com/robbyrussell/oh-my-zsh.git
-[submodule "spaceship-prompt"]
-	path = spaceship-prompt
-	url = https://github.com/denysdovhan/spaceship-prompt
+[submodule "zsh_custom/themes/spaceship-prompt"]
+	path = zsh_custom/themes/spaceship-prompt
+	url = https://github.com/denysdovhan/spaceship-prompt.git
+	branch = master
