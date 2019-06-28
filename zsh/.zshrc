@@ -74,3 +74,6 @@ alias sedhelp='echo "grep -rl --color=never SEARCH PATHS | xargs sed -i '\''s/SE
 alias findswp='find . -name "*.swp"'
 alias rmswp='findswp -print0 | xargs -0 rm'
 alias fzfp="fzf --preview '(bat --color=always {} || cat {})'"
+alias fgco='gco $(git_branches)'
+alias fgbd='gbd $(git_branches)'
+alias fgbD='gbD $(git_branches)'
