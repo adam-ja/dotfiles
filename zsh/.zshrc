@@ -70,7 +70,7 @@ export FZF_DEFAULT_OPTS="--layout=reverse"
 # For a full list of active aliases, run `alias`.
 alias grep='grep --color=always' # Always colour highlight matching strings with grep
 alias lesss='less -r' # Output raw control characters (maintains colours etc when piping through less)
-alias sedhelp='echo "grep -rl --color=never SEARCH PATHS | xargs sed -i '\''s/SEARCH/REPLACE/g'\''"'
+alias sedhelp='echo "rg --files-with-matches --color=never SEARCH_TERM [PATHS] | xargs sed -i '\''s/SEARCH_TERM/REPLACEMENT/g'\''"'
 alias findswp='find . -name "*.swp"'
 alias rmswp='findswp -print0 | xargs -0 rm'
 alias fzfp="fzf --preview '(bat --color=always {} || cat {})'"
