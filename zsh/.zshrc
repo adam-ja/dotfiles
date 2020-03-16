@@ -13,7 +13,7 @@ COMPLETION_WAITING_DOTS=true
 # Add wisely, as too many plugins slow down shell startup.
 #
 # vi-mode goes first as it can otherwise override things that break other plugins
-plugins=(vi-mode command-not-found composer fzf git history-substring-search tmux fzf-git)
+plugins=(vi-mode command-not-found composer fzf git history-substring-search last-working-dir tmux fzf-git)
 
 export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
