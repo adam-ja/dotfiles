@@ -61,8 +61,9 @@ export FZF_BASE="$HOME/.fzf"
 export FZF_DEFAULT_COMMAND='rg --color=never --no-ignore-vcs --ignore-case --hidden -l ""'
 
 # Set default FZF options
-# - Reverse causes FZF to list top to bottom rather than bottom to top
-export FZF_DEFAULT_OPTS="--layout=reverse"
+# - layout=reverse causes FZF to list top to bottom rather than bottom to top
+# - bind overrides the default bindings to scroll the preview window up/down
+export FZF_DEFAULT_OPTS="--layout=reverse --bind ctrl-alt-k:preview-up,ctrl-alt-j:preview-down"
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
