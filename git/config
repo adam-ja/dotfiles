@@ -3,8 +3,8 @@
 [commit]
     verbose = true
 [core]
-    editor = vim
-    excludesfile = ~/dotfiles/git/.gitignore_global
+    editor = nvim
+    excludesfile = ~/dotfiles/git/gitignore_global
     # Set tab stop for diffs etc to 4 spaces
     pager = less -x4
 [push]
@@ -20,7 +20,7 @@
     # Show all my commits to the current branch from yesterday (add --all for all branches)
     yesterday = !git log --since=yesterday.midnight --until=midnight --author=\"$(git config user.name)\"
 [include]
-    path = ~/.gitconfig_local
+    path = ~/.config/git/config_local
 [credential]
     # Cache git credentials (e.g. GitHub username and password) for an hour
     helper = cache --timeout=3600

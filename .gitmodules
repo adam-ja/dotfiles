@@ -1,21 +1,18 @@
 [submodule "dotbot"]
 	path = dotbot
 	url = https://github.com/anishathalye/dotbot
-    ignore = dirty
-[submodule "vim"]
-	path = vim
-	url = https://github.com/adam-ja/vim-config
+	ignore = dirty
 [submodule "oh-my-zsh"]
 	path = oh-my-zsh
 	url = https://github.com/robbyrussell/oh-my-zsh.git
-    ignore = dirty
+	ignore = dirty
 [submodule "zsh_custom/themes/spaceship-prompt"]
 	path = zsh_custom/themes/spaceship-prompt
 	url = https://github.com/denysdovhan/spaceship-prompt.git
 	branch = master
-    ignore = dirty
+	ignore = dirty
 [submodule "zsh_custom/plugins/fzf-git"]
 	path = zsh_custom/plugins/fzf-git
 	url = https://github.com/zulu-zsh/plugin-fzf-git.git
 	branch = master
-    ignore = dirty
+	ignore = dirty

@@ -1,4 +1,5 @@
 .lvimrc
+.DS_Store
 
 #####=== Vim ===#####
 [._]*.s[a-w][a-z]

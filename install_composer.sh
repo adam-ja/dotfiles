@@ -1,6 +1,6 @@
 #!/bin/sh
 
-EXPECTED_CHECKSUM="$(wget -q -O - https://composer.github.io/installer.sig)"
+EXPECTED_CHECKSUM="$(php -r 'copy("https://composer.github.io/installer.sig", "php://stdout");')"
 php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
 ACTUAL_CHECKSUM="$(php -r "echo hash_file('sha384', 'composer-setup.php');")"
 
@@ -14,4 +14,5 @@ fi
 php composer-setup.php --quiet
 RESULT=$?
 rm composer-setup.php
+mv composer.phar /usr/local/bin/composer
 exit $RESULT

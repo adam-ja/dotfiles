@@ -2,15 +2,29 @@
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}"  )" >/dev/null 2>&1 && pwd  )"
 
-# Install useful apt packages
-PACKAGES='curl htop jq openssh-server php ripgrep tmux tree zsh'
-sudo apt install --assume-yes ${PACKAGES}
+case "$(uname -s)" in
+    Linux)
+        PACKAGES='bat curl fzf jq openssh-server php ripgrep tmux tree wget zsh'
+        sudo apt install --assume-yes ${PACKAGES}
 
-# Install node as a snap (includes npm and yarn)
-sudo snap install node
+        # bat clashes with another package so the executable is installed as batcat. Alias this to bat.
+        mkdir -p ~/.local/bin
+        ln -s /usr/bin/batcat ~/.local/bin/bat
 
-# Install bat - a cat clone with syntax highlighting and git integration
-${DIR}/install_bat.sh
+        sudo snap install --edge nvim --classic
+        ;;
+    Darwin)
+        brew install bat fzf jq php ripgrep tmux tree wget
 
-# Install composer
+        brew install --HEAD luajit neovim
+
+        brew tap homebrew/cask-fonts
+        brew install --cask font-hack-nerd-font
+        ;;
+    *)
+        echo 'Unknown OS'
+        ;;
+esac
+
 ${DIR}/install_composer.sh
+${DIR}/install_nvm.sh

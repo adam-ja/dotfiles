@@ -1,25 +1,16 @@
 - clean: ['~']
 - defaults:
     link:
-      create: true # Create parent directories to symlinks if they don't already exist
+        create: true # Create parent directories to symlinks if they don't already exist
 - link:
-  ~/.composer/composer.json: misc/composer.json
-  ~/.ignore: misc/ignore
-  ~/.gitconfig: git/.gitconfig
-  ~/.vim: vim/
-  ~/.tmux.conf: tmux/.tmux.conf
-  zsh_custom/themes/spaceship.zsh-theme: zsh_custom/themes/spaceship-prompt/spaceship.zsh-theme
+    ~/.ignore: misc/ignore
+    ~/.config/composer/composer.json: misc/composer.json
+    ~/.config/git/config: git/config
+    ~/.config/nvim: nvim/
+    ~/.tmux.conf: tmux/tmux.conf # tmux is supposed to search in ~/.config/tmux/ but for some reason doesn't work
+    zsh_custom/themes/spaceship.zsh-theme: zsh_custom/themes/spaceship-prompt/spaceship.zsh-theme
 - shell:
-  - [git submodule foreach --recursive git submodule update --init, Installing submodules]
-  - [~/dotfiles/install_packages.sh, Installing useful packages]
-  - [composer global install]
-  -
-  command: ~/dotfiles/vim/install.sh
-  description: Installing vim (this may take a while)
-  stdout: true
-  stderr: true
-- [~/dotfiles/gsettings.sh, Applying gsettings]
--
-  command: >-
-    printf "\e[38;5;202mRemember to set the default shell to zsh using: \e[7mchsh -s `which zsh`\e[0m\n"
-  stdout: true
+    - [git submodule update --init --recursive, Installing submodules]
+    - [~/dotfiles/install_packages.sh, Installing useful packages]
+    - [composer global install]
+    - [~/dotfiles/gsettings.sh, Applying gsettings]

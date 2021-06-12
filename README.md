@@ -5,18 +5,21 @@ This repo contains all of my dotfiles and a script to bootstrap them using [Dotb
 ## Installation
 
 - Run the following commands
-```bash
+```sh
 cd ~
 git clone https://github.com/adam-ja/dotfiles.git --recurse-submodules
 cd dotfiles
 ./install
+```
+- Edit your terminal profile and change the font to a [Nerd Font][nerdfonts] font to see fancy symbols in the tmux and vim status lines.
+- If ZSH is not already your default shell, you can make it so with:
+```sh
 chsh -s `which zsh`
 ```
-- Edit your terminal profile and change the font to a Powerline font to see fancy symbols in the tmux and vim status lines.
-- Logout and log back in. ZSH will now be your default shell.
-- When first opening a terminal, you will be prompted to follow the ZSH new user setup. Follow the instructions to create a blank `.zshrc` file and put the following content in it:
-```bash
-source $HOME/dotfiles/zsh/.zshrc
+- You may need to log out and back in for this to take effect.
+- If you do not already have a `~/.zshrc` file, create one and add the following to it:
+```sh
+source $HOME/dotfiles/zsh/zshrc
 ```
 - This will pull in all the config from dotfiles and allow you to set local overrides below this line for the specific machine you're installing on.
 - The next new terminal you open will be using the fully configured zsh.
@@ -31,3 +34,4 @@ If you like what you see, feel free to fork it (or just copy any bits you like) 
 
 [dotbot]: https://github.com/anishathalye/dotbot
 [fork]: https://github.com/anishathalye/dotfiles_template/fork
+[nerdfonts]: https://github.com/ryanoasis/nerd-fonts

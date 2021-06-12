@@ -1,6 +1,9 @@
 # Path to oh-my-zsh installation.
 export ZSH=$HOME/dotfiles/oh-my-zsh
 
+# Explicitly set XDG_CONFIG_HOME environment variable to encourage anything searching for config to look here first.
+export XDG_CONFIG_HOME="$HOME/.config"
+
 # Enable command auto-correction.
 ENABLE_CORRECTION=true
 
@@ -45,17 +48,14 @@ export KEYTIMEOUT=1
 
 export LANG=en_GB.UTF-8
 
-# Make vim the default editor
-export VISUAL='vim'
+# Make neovim the default editor
+export VISUAL='nvim'
 
 # Set a global config file for ripgrep (rg)
 export RIPGREP_CONFIG_PATH="$HOME/dotfiles/misc/ripgreprc"
 
 # Set the path to the bat config file
 export BAT_CONFIG_PATH="$HOME/dotfiles/misc/bat.conf"
-
-# Set fzf installation directory path
-export FZF_BASE="$HOME/.fzf"
 
 # Use rg rather than find to respect the .ignore (but not VCS ignore)
 export FZF_DEFAULT_COMMAND='rg --color=never --no-ignore-vcs --ignore-case --hidden -l ""'
@@ -78,3 +78,5 @@ alias fzfp="fzf --preview '(bat --color=always {} || cat {})'"
 alias fgco='gco $(git_branches)'
 alias fgbd='gbd $(git_branches)'
 alias fgbD='gbD $(git_branches)'
+alias vi='nvim'
+alias vim='nvim'
