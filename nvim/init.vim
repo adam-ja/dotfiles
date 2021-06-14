@@ -135,10 +135,6 @@ let g:rainbow_active = 1
 " Only highlight mis-spelled words (not rare, mis-capitalised, or words from a
 " different language region)
 let g:spelunker_highlight_type = 2
-" Automatically open markdown browser preview when entering a markdown buffer
-let g:mkdp_auto_start = 1
-" Automatically close markdown browser preview when leaving a markdown buffer
-let g:mkdp_auto_close = 1
 
 
 " Key mapping
