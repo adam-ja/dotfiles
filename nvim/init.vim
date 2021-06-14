@@ -55,7 +55,7 @@ Plug 'mhinz/vim-signify'
 "--------------
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'tomasr/molokai'
+Plug 'joshdick/onedark.vim'
 Plug 'edkolev/tmuxline.vim'
 Plug 'ryanoasis/vim-devicons'
 Plug 'nathanaelkane/vim-indent-guides'
@@ -207,13 +207,8 @@ nmap <expr> <Leader>R ':Rg<Space>'.expand('<cword>').'<cr>'
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 set termguicolors
-" Use molokai colorscheme
-if (!empty(glob("~/.vim/plugged/molokai")))
-    let g:molokai_original=1
-    colorscheme molokai
-endif
-" Use luna theme rather than molokai for vim-airline
-let g:airline_theme='luna'
+" Use onedark colorscheme
+colorscheme onedark
 " Use powerline font for nice VCS symbols for vim-airline
 let g:airline_powerline_fonts=1
 " Disable airline scrollbar extension - takes up unnecessary space
@@ -239,10 +234,6 @@ let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_guide_size = 1
 " Start indent guides from level 2 - no need to see it on column 1
 let g:indent_guides_start_level = 2
-" Use custom colours for indent guides (subtly darker than Molokai CursorColumn)
-let g:indent_guides_auto_colors = 0
-highlight IndentGuidesOdd  guibg=#39382d
-highlight IndentGuidesEven guibg=#39382d
 
 " Other
 "-------
