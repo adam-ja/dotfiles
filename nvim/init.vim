@@ -45,6 +45,7 @@ Plug 'arp242/auto_mkdir2.vim'
 Plug 'jremmen/vim-ripgrep'
 Plug 'stefandtw/quickfix-reflector.vim'
 Plug 'AndrewRadev/splitjoin.vim'
+Plug 'preservim/nerdtree'
 
 " Git integration
 "-----------------
@@ -194,6 +195,9 @@ nmap <Leader>tg :TestVisit<CR>
 nmap <Leader>r :Rg<Space>
 " Automatically submit search for word under cursor
 nmap <expr> <Leader>R ':Rg<Space>'.expand('<cword>').'<cr>'
+
+" Open NERDTree at the location of the current buffer
+nmap <Leader>n :NERDTreeFind<CR>
 
 " UI / styling
 "--------------
