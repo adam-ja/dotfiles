@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}"  )" >/dev/null 2>&1 && pwd  )"
 
@@ -12,9 +12,11 @@ case "$(uname -s)" in
         ln -s /usr/bin/batcat ~/.local/bin/bat
 
         sudo snap install --edge nvim --classic
+
+        ${DIR}/install_delta.sh
         ;;
     Darwin)
-        brew install bat fzf jq php ripgrep tmux tree wget
+        brew install bat fzf git-delta jq php ripgrep tmux tree wget
 
         brew install --HEAD luajit neovim
 

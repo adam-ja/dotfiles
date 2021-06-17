@@ -12,7 +12,6 @@
 [pull]
     rebase = true
 [alias]
-    puff = pull --ff-only
     # Show all my commits to the current branch from today (add --all for all branches)
     today = !git log --since=midnight --author=\"$(git config user.name)\"
     # Undo commit
@@ -27,3 +26,13 @@
 [diff]
     # The number of files to consider when performing the copy/rename detection
     renameLimit = 10000
+[pager]
+    diff = delta
+    log = delta
+    reflog = delta
+    show = delta
+[interactive]
+    diffFilter = delta --color-only
+[delta]
+    syntax-theme = OneHalfDark
+    line-numbers = true

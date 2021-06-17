@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 TAG=$(curl -sSL 'https://api.github.com/repos/nvm-sh/nvm/releases/latest' | jq --raw-output .tag_name)
 
