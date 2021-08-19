@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 DOWNLOAD_URL='https://github.com/dandavison/delta/releases/download/'
 TAG=$(curl -sSL 'https://api.github.com/repos/dandavison/delta/releases/latest' | jq --raw-output .tag_name)

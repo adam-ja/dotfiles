@@ -9,7 +9,7 @@ This repo contains all of my dotfiles and a script to bootstrap them using [Dotb
 cd ~
 git clone https://github.com/adam-ja/dotfiles.git --recurse-submodules
 cd dotfiles
-./install
+./install.sh
 ```
 - Edit your terminal profile and change the font to a [Nerd Font][nerdfonts] font to see fancy symbols in the tmux and vim status lines.
 - If ZSH is not already your default shell, you can make it so with:
