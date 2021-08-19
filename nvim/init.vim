@@ -42,7 +42,9 @@ Plug 'embear/vim-localvimrc'
 Plug 'janko/vim-test'
 Plug 'kburdett/vim-nuuid'
 Plug 'arp242/auto_mkdir2.vim'
-Plug 'jremmen/vim-ripgrep'
+" Use patched version of vim-ripgrep until this is merged
+" Plug 'jremmen/vim-ripgrep'
+Plug 'lamchau/vim-ripgrep', {'branch': 'patch-1'}
 Plug 'stefandtw/quickfix-reflector.vim'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'preservim/nerdtree'
