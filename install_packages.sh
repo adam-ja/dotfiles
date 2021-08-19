@@ -4,7 +4,10 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}"  )" >/dev/null 2>&1 && pwd  )"
 
 case "$(uname -s)" in
     Linux)
-        PACKAGES='bat curl fzf jq openssh-server php ripgrep tmux tree wget zsh'
+        # Get the latest version of php rather than the default for the current Ubuntu version
+        sudo add-apt-repository ppa:ondrej/php
+
+        PACKAGES='bat curl fzf jq openssh-server php php-curl php-mbstring php-xml ripgrep tmux tree wget zsh'
         sudo apt install --assume-yes ${PACKAGES}
 
         # bat clashes with another package so the executable is installed as batcat. Alias this to bat.
