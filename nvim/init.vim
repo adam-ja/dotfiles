@@ -12,7 +12,7 @@ call plug#begin()
 
 " Fuzzy finder
 "-----------------
-Plug 'junegunn/fzf'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'liuchengxu/vista.vim'
 
