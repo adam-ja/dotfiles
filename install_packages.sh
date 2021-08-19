@@ -29,4 +29,4 @@ case "$(uname -s)" in
 esac
 
 ${DIR}/install_composer.sh
-${DIR}/install_nvm.sh
+${DIR}/install_node.sh
