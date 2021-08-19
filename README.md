@@ -23,7 +23,7 @@ source $HOME/dotfiles/zsh/zshrc
 ```
 - This will pull in all the config from dotfiles and allow you to set local overrides below this line for the specific machine you're installing on.
 - The next new terminal you open will be using the fully configured zsh.
-- The onedark theme used for neovim and tmux also provides matching themes for various terminal emulators - just import them into your terminal profile from `nvim/plugged/onedark.vim/term`.
+- The onedark theme used for neovim and tmux also provides matching themes for various terminal emulators. Just import them into your terminal profile from `nvim/plugged/onedark.vim/term`. If using GNOME Terminal, which doesn't support theme/colour scheme imports, use [One for GNOME Terminal][one-gnome-terminal] instead.
 - You're done.
 
 ## License
@@ -36,3 +36,4 @@ If you like what you see, feel free to fork it (or just copy any bits you like) 
 [dotbot]: https://github.com/anishathalye/dotbot
 [fork]: https://github.com/anishathalye/dotfiles_template/fork
 [nerdfonts]: https://github.com/ryanoasis/nerd-fonts
+[one-gnome-terminal]: https://github.com/denysdovhan/one-gnome-terminal
