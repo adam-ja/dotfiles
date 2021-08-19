@@ -7,12 +7,18 @@ case "$(uname -s)" in
         # Get the latest version of php rather than the default for the current Ubuntu version
         sudo add-apt-repository ppa:ondrej/php
 
-        PACKAGES='bat curl fzf jq openssh-server php php-curl php-mbstring php-xml ripgrep tmux tree wget zsh'
+        PACKAGES='bat curl fzf jq openssh-server php php-curl php-mbstring php-xml tmux tree wget zsh'
         sudo apt install --assume-yes ${PACKAGES}
 
         # bat clashes with another package so the executable is installed as batcat. Alias this to bat.
         mkdir -p ~/.local/bin
         ln -s /usr/bin/batcat ~/.local/bin/bat
+
+        # Workaround for a bug with the ripgrep package
+        # https://bugs.launchpad.net/ubuntu/+source/rust-bat/+bug/1868517/comments/32
+        apt download ripgrep
+        sudo dpkg --force-overwrite -i ripgrep*.deb
+        rm ripgrep*.deb
 
         sudo snap install --edge nvim --classic
 
