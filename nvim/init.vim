@@ -273,11 +273,10 @@ let g:localvimrc_persistent=1
 " lvimrc file.
 let g:localvimrc_sandbox = 0
 
-" Run tests with vim-test in a split window inside vim instead of in the
-" terminal
-let test#strategy = 'vimterminal'
+" Run tests with vim-test using the neovim terminal in a split window
+let test#strategy = 'neovim'
 " Make it a vertical split
-let test#vim#term_position = 'vertical'
+let test#neovim#term_position = 'vertical'
 
 
 " Functions
