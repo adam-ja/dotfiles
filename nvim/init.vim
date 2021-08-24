@@ -261,7 +261,7 @@ set wildmenu
 set wildmode=list:longest,full
 
 " Use system clipboard by default
-set clipboard=unnamed,unnamedplus
+set clipboard+=unnamedplus
 
 " Make the decisions given when asked before sourcing local vimrc files
 " persistent over multiple vim runs and instances (only if the answer was given
