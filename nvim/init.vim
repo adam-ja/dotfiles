@@ -69,7 +69,7 @@ Plug 'nathanaelkane/vim-indent-guides'
 Plug 'mattn/emmet-vim'
 " PHP
 " ----
-Plug 'phpactor/phpactor', {'for': 'php', 'tag': '*', 'do': 'composer install --no-dev -o'}
+Plug 'phpactor/phpactor', {'for': 'php', 'do': 'composer install --no-dev -o'}
 
 " End vim-plug
 call plug#end()
