@@ -86,3 +86,4 @@ alias fgbd='gbd $(git_branches)'
 alias fgbD='gbD $(git_branches)'
 alias vi='nvim'
 alias vim='nvim'
+alias gcf='git status --porcelain | cut -c 1-3 --complement | xargs' # List all changed files (staged and unstaged) on a single line
