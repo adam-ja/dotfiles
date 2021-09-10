@@ -192,6 +192,9 @@ nmap <Leader>tl :TestLast<CR>
 " Go to the last run test
 nmap <Leader>tg :TestVisit<CR>
 
+" Press Ctrl-q to get back to Normal mode from Terminal mode
+tnoremap <C-q> <C-\><C-n>
+
 " Rg search within files under working directory (results open in quickfix window)
 nmap <Leader>r :Rg<Space>
 " Automatically submit search for word under cursor
