@@ -66,7 +66,7 @@ export FZF_DEFAULT_COMMAND='rg --color=never --no-ignore-vcs --ignore-case --hid
 # Set default FZF options
 # - layout=reverse causes FZF to list top to bottom rather than bottom to top
 # - bind overrides the default bindings to scroll the preview window up/down
-export FZF_DEFAULT_OPTS="--layout=reverse --bind ctrl-alt-k:preview-up,ctrl-alt-j:preview-down"
+export FZF_DEFAULT_OPTS="--layout=reverse --bind ctrl-alt-k:preview-up,ctrl-alt-j:preview-down,ctrl-alt-l:preview-page-up,ctrl-alt-h:preview-page-down"
 
 # Set up fnm
 eval "$(fnm env)"
