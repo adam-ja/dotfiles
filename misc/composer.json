@@ -2,7 +2,6 @@
     "require": {
         "d11wtq/boris": "@stable",
         "friendsofphp/php-cs-fixer": "@stable",
-        "phpmd/phpmd": "@stable",
         "phpstan/extension-installer": "@stable",
         "phpstan/phpstan": "@stable",
         "phpstan/phpstan-doctrine": "@stable",
@@ -14,4 +13,3 @@
         "sort-packages": true
     }
 }
-
