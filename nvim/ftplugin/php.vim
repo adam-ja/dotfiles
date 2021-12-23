@@ -29,3 +29,9 @@ if !exists('*PhpGoToDefinition')
         call CocAction('jumpDefinition')
     endfunction
 endif
+
+" Misc
+"------
+
+" Wrap lines at 120 characters
+setlocal textwidth=120
