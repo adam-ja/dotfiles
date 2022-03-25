@@ -1,6 +1,5 @@
-" Open fzf in a floating window taking up 90% of the horizontal and vertical
-" space
-let g:fzf_layout = { 'window' : { 'width' : 0.9, 'height' : 0.9 } }
+" Open fzf in full-screen mode
+let g:fzf_layout = { 'down' : '100%' }
 
 """"""""""""
 " Commands "
