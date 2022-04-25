@@ -68,8 +68,8 @@ export FZF_DEFAULT_COMMAND='rg --color=never --no-ignore-vcs --ignore-case --hid
 # - bind overrides the default bindings to scroll the preview window up/down
 export FZF_DEFAULT_OPTS="--layout=reverse --bind ctrl-alt-k:preview-up,ctrl-alt-j:preview-down,ctrl-alt-l:preview-page-up,ctrl-alt-h:preview-page-down"
 
-# Set up fnm
-eval "$(fnm env)"
+# Set up fnm (--use-on-cd auto-switches to the right version when a directory contains a .node-version or .nvmrc file)
+eval "$(fnm env --use-on-cd)"
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
