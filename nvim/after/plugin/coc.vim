@@ -6,11 +6,11 @@ let g:coc_global_extensions = [
     \ 'coc-html',
     \ 'coc-json',
     \ 'coc-pairs',
-    \ 'coc-phpls',
     \ 'coc-sh',
     \ 'coc-tsserver',
     \ 'coc-vetur',
     \ 'coc-yaml',
+    \ '@yaegassy/coc-intelephense'
     \]
 
 " Stop the cursor disappearing after running some coc commands
@@ -37,14 +37,16 @@ nmap <silent> <Leader>cgr <Plug>(coc-references)
 
 " Applying codeAction to the selected region.
 " Example: `<Leader>caap` for current paragraph
-xmap <Leader>ca  <Plug>(coc-codeaction-selected)
-nmap <Leader>ca  <Plug>(coc-codeaction-selected)
+xmap <silent> <Leader>cas  <Plug>(coc-codeaction-selected)
+nmap <silent> <Leader>cas  <Plug>(coc-codeaction-selected)
+
+nmap <silent> <Leader>cal <Plug>(coc-codeaction-line)
 
 " Remap keys for applying codeAction to the current buffer.
-nmap <Leader>cba  <Plug>(coc-codeaction)
+nmap <silent> <Leader>cba  <Plug>(coc-codeaction)
 
 " Run the Code Lens action on the current line.
-nmap <Leader>cl  <Plug>(coc-codelens-action)
+nmap <silent> <Leader>cl  <Plug>(coc-codelens-action)
 
 function! s:show_documentation()
     if (index(['vim','help'], &filetype) >= 0)
