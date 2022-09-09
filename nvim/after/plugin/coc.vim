@@ -14,6 +14,9 @@ let g:coc_global_extensions = [
     \ '@yaegassy/coc-intelephense'
     \]
 
+" Use return to apply the highlighted autocomplete option
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
+
 " Stop the cursor disappearing after running some coc commands
 let g:coc_disable_transparent_cursor = 1
 
