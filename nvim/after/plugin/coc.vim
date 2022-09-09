@@ -1,5 +1,6 @@
 " Extensions to install
 let g:coc_global_extensions = [
+    \ 'coc-blade',
     \ 'coc-css',
     \ 'coc-docker',
     \ 'coc-highlight',
