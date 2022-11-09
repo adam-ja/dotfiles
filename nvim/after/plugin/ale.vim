@@ -8,6 +8,7 @@ let g:ale_echo_msg_format = '[%linter%] %s'
 let g:ale_cursor_detail = 1
 let g:ale_floating_preview = 1
 let g:ale_floating_window_border = ['│', '─', '╭', '╮', '╯', '╰', '│', '─']
+let g:ale_close_preview_on_insert = 1
 " Disable LSP features in ALE as these are handled by another plugin
 let g:ale_disable_lsp = 1
 " Make ale error/warning gutter symbols prettier
