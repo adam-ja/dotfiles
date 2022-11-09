@@ -1,16 +1,15 @@
-" Open error window when ale detects errors
-let g:ale_open_list = 1
-" Show 5 errors at a time in the error window (default is 10)
-let g:ale_list_window_size = 5
 " Wait a second for me to finish typing before linting
 let g:ale_lint_delay = 1000
 " Show ale info in statusline
 let g:airline#extensions#ale#enabled = 1
 " Show linter at beginning of message
 let g:ale_echo_msg_format = '[%linter%] %s'
+" Show messages in a floating preview window
+let g:ale_cursor_detail = 1
+let g:ale_floating_preview = 1
+let g:ale_floating_window_border = ['│', '─', '╭', '╮', '╯', '╰', '│', '─']
 " Disable LSP features in ALE as these are handled by another plugin
 let g:ale_disable_lsp = 1
-
 " Make ale error/warning gutter symbols prettier
 let g:ale_sign_error = '😠'
 let g:ale_sign_warning = '😒'
