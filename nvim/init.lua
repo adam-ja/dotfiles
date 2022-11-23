@@ -258,6 +258,6 @@ vim.g.localvimrc_sandbox = 0
 vim.g.localvimrc_name = { '.lvimrc', '.local_init.lua' }
 
 -- Run tests with vim-test using the neovim terminal in a split window
-vim['test#strategy'] = 'neovim'
+vim.g['test#strategy'] = 'neovim'
 -- Make it a vertical split
-vim['test#neovim#term_position'] = 'vertical'
+vim.g['test#neovim#term_position'] = 'vertical'
