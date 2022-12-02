@@ -12,8 +12,8 @@ vim.g.ale_close_preview_on_insert = 1
 -- Disable LSP features in ALE as these are handled by another plugin
 vim.g.ale_disable_lsp = 1
 -- Make ale error/warning gutter symbols prettier
-vim.g.ale_sign_error = '😠'
-vim.g.ale_sign_warning = '😒'
+vim.g.ale_sign_error = '🙅'
+vim.g.ale_sign_warning = '🤨'
 
 -- Key Mappings
 ---------------
