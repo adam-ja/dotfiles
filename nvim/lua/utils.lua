@@ -44,4 +44,18 @@ function M.imap(shortcut, command, options)
     map_by_mode('i', shortcut, command, options)
 end
 
+-- Execute a command but maintain original cursor position
+-- https://stackoverflow.com/a/70730552
+function M.preserve_cursor_position(command)
+    local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+    vim.api.nvim_command(string.format('keepjumps keeppatterns execute %q', command))
+    -- If the command has shortened the file and the cursor was previously on the last line, it will need to move up to
+    -- the new last line.
+    local last_line = vim.fn.line("$")
+    if line > last_line then
+        line = last_line
+    end
+    vim.api.nvim_win_set_cursor(0, { line, col })
+end
+
 return M

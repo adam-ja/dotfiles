@@ -130,7 +130,7 @@ vim.opt.list = true
 vim.opt.listchars = { tab = '|·', trail = '`' }
 -- Remove trailing spaces when saving a buffer, and return cursor to starting position
 vim.api.nvim_create_autocmd('BufWritePre', {
-    command = '%s/\\s\\+$//e|norm!``'
+    command = [[lua require('utils').preserve_cursor_position('%s/\\s\\+$//e')]]
 })
 -- Enable rainbow parentheses
 vim.g.rainbow_active = 1
