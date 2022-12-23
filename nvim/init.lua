@@ -38,6 +38,7 @@ Plug 'kamykn/spelunker.vim'
 Plug 'kamykn/popup-menu.nvim'
 Plug('iamcco/markdown-preview.nvim', {['do'] = vim.fn['mkdp#util#install']})
 Plug 'luochen1990/rainbow'
+Plug 'gpanders/editorconfig.nvim'
 
 -- Utilities
 ------------
