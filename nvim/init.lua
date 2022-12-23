@@ -59,6 +59,7 @@ Plug 'jremmen/vim-ripgrep'
 Plug 'stefandtw/quickfix-reflector.vim'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'preservim/nerdtree'
+Plug 'nacro90/numb.nvim'
 
 -- Git integration
 ------------------
@@ -120,6 +121,8 @@ vim.opt.foldenable = false
 vim.opt.ignorecase = true
 -- Configure options to pass to ripgrep when using the :Rg command
 vim.g.rg_command = 'rg --vimgrep --smart-case --follow --ignore-vcs --color=never'
+-- Start the numb.nvim plugin which previews the line as you type :{number}
+require('numb').setup()
 
 
 -- Syntax
