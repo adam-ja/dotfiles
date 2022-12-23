@@ -206,6 +206,9 @@ utils.nmap('<Leader>n', ':NERDTreeFind<CR>')
 -- UI / styling
 ---------------
 
+-- Update the terminal title to the filename
+vim.opt.title = true
+vim.opt.titlestring = '%f - nvim'
 -- Enable true colour
 vim.opt.termguicolors = true
 -- Use onedark colorscheme
