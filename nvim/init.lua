@@ -32,13 +32,15 @@ Plug 'liuchengxu/vista.vim'
 -- Syntax
 ---------
 Plug 'dense-analysis/ale'
-Plug 'sheerun/vim-polyglot'
+Plug('nvim-treesitter/nvim-treesitter', {['do'] = vim.cmd['TSUpdate']})
 Plug('neoclide/coc.nvim', {branch = 'release'})
 Plug 'kamykn/spelunker.vim'
 Plug 'kamykn/popup-menu.nvim'
 Plug('iamcco/markdown-preview.nvim', {['do'] = vim.fn['mkdp#util#install']})
-Plug 'luochen1990/rainbow'
+Plug 'p00f/nvim-ts-rainbow'
 Plug 'gpanders/editorconfig.nvim'
+Plug 'JoosepAlviste/nvim-ts-context-commentstring'
+Plug 'numToStr/Comment.nvim'
 
 -- Utilities
 ------------
@@ -50,7 +52,6 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-abolish'
-Plug 'tpope/vim-commentary'
 Plug 'alvan/vim-closetag'
 Plug 'embear/vim-localvimrc'
 Plug 'janko/vim-test'
@@ -71,7 +72,7 @@ Plug 'mhinz/vim-signify'
 ---------------
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'joshdick/onedark.vim'
+Plug 'olimorris/onedarkpro.nvim'
 Plug 'edkolev/tmuxline.vim'
 Plug 'ryanoasis/vim-devicons'
 Plug 'nathanaelkane/vim-indent-guides'
@@ -81,6 +82,9 @@ Plug 'nathanaelkane/vim-indent-guides'
 -- HTML
 -------
 Plug 'mattn/emmet-vim'
+-- Blade
+-------
+Plug 'jwalton512/vim-blade' -- No treesitter support for blade yet
 -- PHP
 ------
 Plug('phpactor/phpactor', {
@@ -109,8 +113,9 @@ vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 -- Convert tabs to spaces
 vim.opt.expandtab = true
--- Fold automatically by indentation
-vim.opt.foldmethod = 'indent'
+-- Use treesitter for folding
+vim.opt.foldmethod = 'expr'
+vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
 -- Do not close folds by default when opening a file
 vim.opt.foldenable = false
 
@@ -137,8 +142,30 @@ vim.opt.listchars = { tab = '|·', trail = '`' }
 vim.api.nvim_create_autocmd('BufWritePre', {
     command = [[lua require('utils').preserve_cursor_position('%s/\\s\\+$//e')]]
 })
--- Enable rainbow parentheses
-vim.g.rainbow_active = 1
+-- Configure nvim-treesitter
+require'nvim-treesitter.configs'.setup {
+    ensure_installed = 'all',
+    auto_install = true,
+    highlight = {
+        enabled = true,
+    },
+    indent = {
+        enabled = true,
+    },
+    rainbow = {
+        enable = true,
+        extended_mode = true,
+        max_file_lines = nil,
+    },
+    context_commentstring = {
+        enable = true,
+        enable_autocmd = false,
+    },
+}
+-- Configure Comment.nvim
+require('Comment').setup {
+    pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook(),
+}
 -- Only highlight mis-spelled words (not rare, mis-capitalised, or words from a different language region)
 vim.g.spelunker_highlight_type = 2
 
