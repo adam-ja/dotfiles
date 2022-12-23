@@ -35,6 +35,7 @@ Plug 'dense-analysis/ale'
 Plug 'sheerun/vim-polyglot'
 Plug('neoclide/coc.nvim', {branch = 'release'})
 Plug 'kamykn/spelunker.vim'
+Plug 'kamykn/popup-menu.nvim'
 Plug('iamcco/markdown-preview.nvim', {['do'] = vim.fn['mkdp#util#install']})
 Plug 'luochen1990/rainbow'
 
