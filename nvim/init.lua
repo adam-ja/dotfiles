@@ -243,17 +243,22 @@ vim.opt.titlestring = '%f - nvim'
 -- Enable true colour
 vim.opt.termguicolors = true
 -- Use onedark colorscheme
-vim.cmd('colorscheme onedark')
+require('onedarkpro').setup({
+    options = {
+        cursorline = true,
+    },
+})
+vim.cmd('colorscheme onedark_vivid')
 -- Use powerline font for nice VCS symbols for vim-airline
 vim.g.airline_powerline_fonts = 1
+-- Use onedark airline theme
+vim.g.airline_theme = 'onedark'
 -- Disable airline scrollbar extension - takes up unnecessary space
 vim.g['airline#extensions#scrollbar#enabled'] = 0
 -- Show line numbers
 vim.opt.number = true
 -- Keep the cursor vertically centered, where possible
 vim.opt.scrolloff = 999
--- Highlight the line the cursor is currently on
-vim.opt.cursorline = true
 -- Draw a vertical line at 120 characters
 vim.opt.colorcolumn = '120'
 -- Enable indent guides by default
