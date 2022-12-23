@@ -66,7 +66,7 @@ Plug 'nacro90/numb.nvim'
 -- Git integration
 ------------------
 Plug 'tpope/vim-fugitive'
-Plug 'mhinz/vim-signify'
+Plug 'lewis6991/gitsigns.nvim'
 
 -- UI / styling
 ---------------
@@ -262,6 +262,16 @@ vim.g.indent_guides_enable_on_vim_startup = 1
 vim.g.indent_guides_guide_size = 1
 -- Start indent guides from level 2 - no need to see it on column 1
 vim.g.indent_guides_start_level = 2
+
+-- Setup gitsigns
+require('gitsigns').setup {
+    numhl = true,
+    current_line_blame = true,
+    current_line_blame_opts = {
+        virt_text_pos = 'right_align',
+        delay = 500,
+    },
+}
 
 
 -- Other
