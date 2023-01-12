@@ -87,3 +87,6 @@ alias fgbD='gbD $(git_branches)'
 alias vi='nvim'
 alias vim='nvim'
 alias gcf='git status --porcelain | cut -c 1-3 --complement | xargs' # List all changed files (staged and unstaged) on a single line
+alias apt='echo -e "\n\nCOULD YOU USE nala INSTEAD?\n\n" && apt'
+# Makes all aliases also work when running as root
+alias sudo='sudo '
