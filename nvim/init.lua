@@ -248,7 +248,7 @@ require('onedarkpro').setup({
         cursorline = true,
     },
 })
-vim.cmd('colorscheme onedark_vivid')
+vim.cmd('colorscheme onedark')
 -- Use powerline font for nice VCS symbols for vim-airline
 vim.g.airline_powerline_fonts = 1
 -- Use onedark airline theme
