@@ -9,6 +9,7 @@ vim.g.ale_cursor_detail = 1
 vim.g.ale_floating_preview = 1
 vim.g.ale_floating_window_border = {' ', '', '', '', '', '', '', ''}
 vim.g.ale_close_preview_on_insert = 1
+vim.g.ale_virtualtext_cursor = 'disabled'
 -- Disable LSP features in ALE as these are handled by another plugin
 vim.g.ale_disable_lsp = 1
 -- Make ale error/warning gutter symbols prettier
