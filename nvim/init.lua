@@ -74,8 +74,7 @@ Plug 'lewis6991/gitsigns.nvim'
 
 -- UI / styling
 ---------------
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+Plug 'nvim-lualine/lualine.nvim'
 Plug 'olimorris/onedarkpro.nvim'
 Plug 'edkolev/tmuxline.vim'
 Plug 'nvim-tree/nvim-web-devicons'
@@ -284,6 +283,25 @@ require('gitsigns').setup {
 
 -- Setup nvim-tree
 require('nvim-tree').setup()
+
+-- Setup lualine
+require('lualine').setup {
+    sections = {
+        lualine_a = {'mode'},
+        lualine_b = {'branch', 'diff'},
+        lualine_c = {'filename'},
+
+        lualine_x = {
+            '%{coc#status()}',
+            {
+                'diagnostics',
+                sources = {'nvim_diagnostic', 'coc', 'ale'},
+            },
+        },
+        lualine_y = {'filetype', 'filesize', 'encoding', 'fileformat'},
+        lualine_z = {'%c/%{strwidth(getline("."))}', '%l/%L', 'progress'},
+    }
+}
 
 
 -- Other
