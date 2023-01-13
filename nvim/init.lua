@@ -1,3 +1,7 @@
+-- Disable netrw straight away (advised by nvim-tree)
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 --------------
 -- VIM-PLUG --
 --------------
@@ -60,7 +64,7 @@ Plug 'arp242/auto_mkdir2.vim'
 Plug 'jremmen/vim-ripgrep'
 Plug 'stefandtw/quickfix-reflector.vim'
 Plug 'AndrewRadev/splitjoin.vim'
-Plug 'preservim/nerdtree'
+Plug 'nvim-tree/nvim-tree.lua'
 Plug 'nacro90/numb.nvim'
 
 -- Git integration
@@ -74,7 +78,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'olimorris/onedarkpro.nvim'
 Plug 'edkolev/tmuxline.vim'
-Plug 'ryanoasis/vim-devicons'
+Plug 'nvim-tree/nvim-web-devicons'
 Plug 'nathanaelkane/vim-indent-guides'
 
 -- Language specifics
@@ -230,8 +234,8 @@ utils.nmap('<Leader>r', ':Rg<Space>')
 -- Automatically submit search for word under cursor
 utils.nmap('<Leader>R', [[':Rg<Space>' . expand('<cword>') . '<CR>']], { expr = true })
 
--- Open NERDTree at the location of the current buffer
-utils.nmap('<Leader>n', ':NERDTreeFind<CR>')
+-- Open nvim-tree at the location of the current buffer
+utils.nmap('<Leader>n', ':NvimTreeFindFile<CR>')
 
 
 -- UI / styling
@@ -277,6 +281,9 @@ require('gitsigns').setup {
         delay = 500,
     },
 }
+
+-- Setup nvim-tree
+require('nvim-tree').setup()
 
 
 -- Other
