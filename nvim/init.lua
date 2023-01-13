@@ -79,6 +79,7 @@ Plug 'olimorris/onedarkpro.nvim'
 Plug 'edkolev/tmuxline.vim'
 Plug 'nvim-tree/nvim-web-devicons'
 Plug 'nathanaelkane/vim-indent-guides'
+Plug 'ap/vim-css-color'
 
 -- Language specifics
 ---------------------
