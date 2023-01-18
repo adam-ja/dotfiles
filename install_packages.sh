@@ -7,7 +7,10 @@ case "$(uname -s)" in
         # Get the latest version of php rather than the default for the current Ubuntu version
         sudo add-apt-repository ppa:ondrej/php
 
-        PACKAGES='bat curl fzf jq nala openssh-server php php-curl php-mbstring php-xml tmux tree wget xclip xtail zsh'
+        # Add neovim nightly ppa
+        sudo add-apt-repository ppa:neovim-ppa/unstable
+
+        PACKAGES='bat curl fzf jq nala neovim openssh-server php php-curl php-mbstring php-xml python3-neovim tmux tree wget xclip xtail zsh'
         sudo apt install --assume-yes ${PACKAGES}
 
         # bat clashes with another package so the executable is installed as batcat. Alias this to bat.
@@ -19,8 +22,6 @@ case "$(uname -s)" in
         apt download ripgrep
         sudo dpkg --force-overwrite -i ripgrep*.deb
         rm ripgrep*.deb
-
-        sudo snap install --edge nvim --classic
 
         ${DIR}/install_delta.sh
         ;;
