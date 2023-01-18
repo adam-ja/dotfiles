@@ -80,6 +80,7 @@ Plug 'edkolev/tmuxline.vim'
 Plug 'nvim-tree/nvim-web-devicons'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'ap/vim-css-color'
+Plug 'luukvbaal/statuscol.nvim'
 
 -- Language specifics
 ---------------------
@@ -120,8 +121,10 @@ vim.opt.expandtab = true
 -- Use treesitter for folding
 vim.opt.foldmethod = 'expr'
 vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
--- Do not close folds by default when opening a file
-vim.opt.foldenable = false
+-- Display folds in the status column (allows clickable folds with statuscol plugin)
+vim.opt.foldcolumn = 'auto:9'
+-- Causes folds to be calculated when a buffer is open (so they're displayed in foldcolumn) but not closed
+vim.opt.foldlevelstart = 99
 
 
 -- Search
@@ -303,6 +306,12 @@ require('lualine').setup {
         lualine_z = {'%c/%{strwidth(getline("."))}', '%l/%L', 'progress'},
     }
 }
+
+-- Setup statuscol
+require('statuscol').setup({
+    setopt = true,
+    separator = '|',
+})
 
 
 -- Other
