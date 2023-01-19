@@ -1,7 +1,5 @@
 -- Wait a second for me to finish typing before linting
 vim.g.ale_lint_delay = 1000
--- Show ale info in statusline
-vim.g['airline#extensions#ale#enabled'] = 1
 -- Show linter at beginning of message
 vim.g.ale_echo_msg_format = '[%linter%] %s'
 -- Show messages in a floating preview window

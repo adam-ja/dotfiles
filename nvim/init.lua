@@ -256,12 +256,6 @@ require('onedarkpro').setup({
     },
 })
 vim.cmd('colorscheme onedark')
--- Use powerline font for nice VCS symbols for vim-airline
-vim.g.airline_powerline_fonts = 1
--- Use onedark airline theme
-vim.g.airline_theme = 'onedark'
--- Disable airline scrollbar extension - takes up unnecessary space
-vim.g['airline#extensions#scrollbar#enabled'] = 0
 -- Show line numbers
 vim.opt.number = true
 -- Keep the cursor vertically centered, where possible
