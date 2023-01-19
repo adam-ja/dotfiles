@@ -78,8 +78,7 @@ eval "$(fnm env --use-on-cd)"
 alias grep='grep --color=always' # Always colour highlight matching strings with grep
 alias lesss='less -r' # Output raw control characters (maintains colours etc when piping through less)
 alias sedhelp='echo "rg --files-with-matches --color=never SEARCH_TERM [PATHS] | xargs sed -i '\''s/SEARCH_TERM/REPLACEMENT/g'\''"'
-alias findswp='fd --type=file --glob "*.swp"'
-alias rmswp='findswp -print0 | xargs -0 rm'
+alias rmswp='rm ~/.local/state/nvim/swap/*'
 alias fzfp="fzf --preview '(bat --color=always {} || cat {})'"
 alias vi='nvim'
 alias vim='nvim'
