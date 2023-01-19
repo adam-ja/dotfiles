@@ -16,7 +16,7 @@ COMPLETION_WAITING_DOTS=true
 # Add wisely, as too many plugins slow down shell startup.
 #
 # vi-mode goes first as it can otherwise override things that break other plugins
-plugins=(vi-mode command-not-found composer docker docker-compose fzf git history-substring-search last-working-dir tmux fzf-git)
+plugins=(vi-mode command-not-found composer docker docker-compose fzf git history-substring-search last-working-dir tmux fzf-tab)
 
 export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
@@ -81,9 +81,6 @@ alias sedhelp='echo "rg --files-with-matches --color=never SEARCH_TERM [PATHS] |
 alias findswp='fd --type=file --glob "*.swp"'
 alias rmswp='findswp -print0 | xargs -0 rm'
 alias fzfp="fzf --preview '(bat --color=always {} || cat {})'"
-alias fgco='gco $(git_branches)'
-alias fgbd='gbd $(git_branches)'
-alias fgbD='gbD $(git_branches)'
 alias vi='nvim'
 alias vim='nvim'
 alias gcf='git status --porcelain | cut -c 1-3 --complement | xargs' # List all changed files (staged and unstaged) on a single line

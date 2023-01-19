@@ -11,8 +11,6 @@
 	url = https://github.com/denysdovhan/spaceship-prompt.git
 	branch = master
 	ignore = dirty
-[submodule "zsh_custom/plugins/fzf-git"]
-	path = zsh_custom/plugins/fzf-git
-	url = https://github.com/zulu-zsh/plugin-fzf-git.git
-	branch = master
-	ignore = dirty
+[submodule "zsh_custom/plugins/fzf-tab"]
+	path = zsh_custom/plugins/fzf-tab
+	url = https://github.com/Aloxaf/fzf-tab
