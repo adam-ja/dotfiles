@@ -43,6 +43,9 @@ setopt HIST_FIND_NO_DUPS
 
 source $ZSH/oh-my-zsh.sh
 
+# Fix vi-mode indicator not updating
+eval spaceship_vi_mode_enable
+
 # Make Vi mode transitions faster (KEYTIMEOUT is in hundredths of a second, default is 40 so 0.4 seconds)
 export KEYTIMEOUT=1
 
