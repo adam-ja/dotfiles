@@ -60,8 +60,8 @@ export RIPGREP_CONFIG_PATH="$HOME/dotfiles/misc/ripgreprc"
 # Set the path to the bat config file
 export BAT_CONFIG_PATH="$HOME/dotfiles/misc/bat.conf"
 
-# Use rg rather than find to respect the .ignore (but not VCS ignore)
-export FZF_DEFAULT_COMMAND='rg --color=never --no-ignore-vcs --ignore-case --hidden -l ""'
+# Use fd rather than find as it is faster. Respect any .ignore files (but not VCS ignore such as .gitignore)
+export FZF_DEFAULT_COMMAND='fd --type=file --strip-cwd-prefix --no-ignore-vcs --hidden --ignore-case'
 
 # Set default FZF options
 # - layout=reverse causes FZF to list top to bottom rather than bottom to top
@@ -78,7 +78,7 @@ eval "$(fnm env --use-on-cd)"
 alias grep='grep --color=always' # Always colour highlight matching strings with grep
 alias lesss='less -r' # Output raw control characters (maintains colours etc when piping through less)
 alias sedhelp='echo "rg --files-with-matches --color=never SEARCH_TERM [PATHS] | xargs sed -i '\''s/SEARCH_TERM/REPLACEMENT/g'\''"'
-alias findswp='find . -name "*.swp"'
+alias findswp='fd --type=file --glob "*.swp"'
 alias rmswp='findswp -print0 | xargs -0 rm'
 alias fzfp="fzf --preview '(bat --color=always {} || cat {})'"
 alias fgco='gco $(git_branches)'

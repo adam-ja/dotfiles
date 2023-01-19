@@ -10,12 +10,14 @@ case "$(uname -s)" in
         # Add neovim nightly ppa
         sudo add-apt-repository ppa:neovim-ppa/unstable
 
-        PACKAGES='bat curl fzf jq nala neovim openssh-server php php-curl php-mbstring php-xml python3-neovim tmux tree wget xclip xtail zsh'
+        PACKAGES='bat curl fd-find fzf jq nala neovim openssh-server php php-curl php-mbstring php-xml python3-neovim tmux tree wget xclip xtail zsh'
         sudo apt install --assume-yes ${PACKAGES}
 
-        # bat clashes with another package so the executable is installed as batcat. Alias this to bat.
         mkdir -p ~/.local/bin
+        # bat clashes with another package so the executable is installed as batcat. Alias this to bat.
         ln -s /usr/bin/batcat ~/.local/bin/bat
+        # fd clashes with another package so the executable is installed as fdfind. Alias this to fd.
+        ln -s $(which fdfind) ~/.local/bin/fd
 
         # Workaround for a bug with the ripgrep package
         # https://bugs.launchpad.net/ubuntu/+source/rust-bat/+bug/1868517/comments/32
