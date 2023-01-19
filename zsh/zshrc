@@ -13,7 +13,7 @@ ENABLE_CORRECTION=true
 # Add wisely, as too many plugins slow down shell startup.
 #
 # vi-mode goes first as it can otherwise override things that break other plugins
-plugins=(vi-mode command-not-found composer docker docker-compose fzf git history-substring-search last-working-dir tmux fzf-tab)
+plugins=(vi-mode command-not-found composer docker docker-compose fzf git history-substring-search last-working-dir tmux fzf-tab zsh-autosuggestions)
 
 export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
