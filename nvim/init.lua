@@ -332,6 +332,7 @@ require('telescope').setup({
             },
         },
         sorting_strategy = 'ascending',
+        scroll_strategy = 'limit',
         prompt_prefix = '🔍 ',
         layout_config = {
             prompt_position = 'top',
@@ -352,6 +353,11 @@ require('telescope').setup({
         buffers = {
             ignore_current_buffer = true,
             sort_lastused = true,
+            mappings = {
+                i = {
+                    ['<C-d>'] = 'delete_buffer',
+                },
+            },
         }
     }
 })
