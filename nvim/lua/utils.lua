@@ -11,7 +11,7 @@ local function map_by_mode(mode, shortcut, command, options)
         options['silent'] = true
     end
 
-    vim.api.nvim_set_keymap(mode, shortcut, command, options)
+    vim.keymap.set(mode, shortcut, command, options)
 end
 
 -- Map in all modes except insert

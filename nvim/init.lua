@@ -27,11 +27,16 @@ local Plug = vim.fn['plug#']
 -- Initialise vim-plug to install plugins
 vim.call('plug#begin', '~/.config/nvim/plugged')
 
--- Fuzzy finder
+-- Libraries
+------------
+Plug('nvim-lua/plenary.nvim')
+
+-- Telescope
 ---------------
-Plug('junegunn/fzf', {['do'] = vim.fn['fzf#install']})
-Plug 'junegunn/fzf.vim'
-Plug 'liuchengxu/vista.vim'
+Plug('nvim-telescope/telescope.nvim', {branch = '0.1.x'})
+Plug('nvim-telescope/telescope-fzf-native.nvim', {['do'] = 'make'})
+Plug 'nvim-telescope/telescope-ui-select.nvim'
+Plug 'fannheyward/telescope-coc.nvim'
 
 -- Syntax
 ---------
@@ -306,6 +311,92 @@ require('statuscol').setup({
     setopt = true,
     separator = '|',
 })
+
+-- Telescope
+------------
+
+-- TODO: Move this to its own file
+
+require('telescope').setup({
+    defaults = {
+        mappings = {
+            i = {
+                ['<C-k>'] = 'move_selection_previous',
+                ['<C-j>'] = 'move_selection_next',
+            },
+            n = {
+                ['<C-k>'] = 'move_selection_previous',
+                ['<C-j>'] = 'move_selection_next',
+            },
+        },
+        sorting_strategy = 'ascending',
+        prompt_prefix = '🔍 ',
+        layout_config = {
+            prompt_position = 'top',
+            width = 0.95,
+            height = 0.95,
+            preview_width = 0.5,
+            scroll_speed = 5, -- number of lines to scroll through the previewer
+        },
+        dynamic_preview_title = true, -- use the picker result (e.g. file name) as the preview window title
+        path_display = {'truncate'}, -- truncate the start of file paths if they are too long to display
+    },
+    extensions = {
+        coc = {
+            prefer_locations = true, -- Even if there's only one result, always preview rather than jumping to it
+        },
+    },
+    pickers = {
+        buffers = {
+            ignore_current_buffer = true,
+            sort_lastused = true,
+        }
+    }
+})
+require('telescope').load_extension('fzf')
+require('telescope').load_extension('ui-select')
+require('telescope').load_extension('coc')
+
+vim.api.nvim_create_autocmd('User TelescopePreviewerLoaded', {
+    command = 'setlocal wrap | setlocal number'
+})
+
+-- Open telescope with all available pickers
+utils.nmap('<Leader>ft', require('telescope.builtin').builtin)
+-- Files under working directory
+utils.nmap('<Leader>ff', require('telescope.builtin').find_files)
+-- Open buffers
+utils.nmap('<Leader>fb', require('telescope.builtin').buffers)
+-- Lines in the current buffer
+utils.nmap('<Leader>fl', require('telescope.builtin').current_buffer_fuzzy_find)
+-- Rg search within files under working directory
+utils.nmap('<Leader>fr', require('telescope.builtin').live_grep)
+-- Search for the string under the cursor
+utils.nmap('<Leader>fR', require('telescope.builtin').grep_string)
+-- Modified files
+utils.nmap('<Leader>fm', require('telescope.builtin').git_status)
+-- Commits affecting current buffer
+utils.nmap('<Leader>fc', require('telescope.builtin').git_bcommits)
+-- All commits
+utils.nmap('<Leader>fC', require('telescope.builtin').git_commits)
+-- Fuzzy search LSP symbols (variables, methods, etc found by coc.nvim)
+utils.nmap('<Leader>ls', '<cmd>Telescope coc document_symbols<CR>')
+-- Fuzzy search LSP definitions
+utils.nmap('<Leader>ld', '<cmd>Telescope coc definitions<CR>')
+-- Fuzzy search LSP type definitions
+utils.nmap('<Leader>lt', '<cmd>Telescope coc type_definitions<CR>')
+-- Fuzzy search LSP implementations
+utils.nmap('<Leader>li', '<cmd>Telescope coc implementations<CR>')
+-- Fuzzy search LSP references
+utils.nmap('<Leader>lr', '<cmd>Telescope coc references<CR>')
+-- Fuzzy search LSP diagnostics (e for error)
+utils.nmap('<Leader>le', '<cmd>Telescope coc diagnostics<CR>')
+-- Fuzzy search LSP code actions for code under cursor
+utils.nmap('<Leader>la', '<cmd>Telescope coc code_actions<CR>')
+-- Fuzzy search LSP line-level code actions for code under cursor
+utils.nmap('<Leader>lla', '<cmd>Telescope coc line_code_actions<CR>')
+-- Fuzzy search LSP file-level code actions for code under cursor
+utils.nmap('<Leader>lfa', '<cmd>Telescope coc file_code_actions<CR>')
 
 
 -- Other
