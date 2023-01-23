@@ -37,6 +37,7 @@ Plug('nvim-telescope/telescope.nvim', {branch = '0.1.x'})
 Plug('nvim-telescope/telescope-fzf-native.nvim', {['do'] = 'make'})
 Plug 'nvim-telescope/telescope-ui-select.nvim'
 Plug 'fannheyward/telescope-coc.nvim'
+Plug 'TENMAJKL/phpactor-telescope'
 
 -- Syntax
 ---------
@@ -99,6 +100,7 @@ Plug 'jwalton512/vim-blade' -- No treesitter support for blade yet
 ------
 Plug('phpactor/phpactor', {
     ['for'] = 'php',
+    ['tag'] = '*',
     ['do'] = 'composer install --no-dev -o'
 })
 
@@ -397,6 +399,8 @@ utils.nmap('<Leader>la', '<cmd>Telescope coc code_actions<CR>')
 utils.nmap('<Leader>lla', '<cmd>Telescope coc line_code_actions<CR>')
 -- Fuzzy search LSP file-level code actions for code under cursor
 utils.nmap('<Leader>lfa', '<cmd>Telescope coc file_code_actions<CR>')
+-- Open Phpactor in telescope
+utils.nmap('<Leader>p', '<cmd>PhpactorTelescope<CR>')
 
 
 -- Other
