@@ -12,4 +12,8 @@
             "globals": ["vim"],
         },
     },
+    "cSpell": {
+        "language": "en-GB",
+        "showStatus": false,
+    },
 }

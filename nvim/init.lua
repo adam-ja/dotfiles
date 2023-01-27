@@ -44,8 +44,6 @@ Plug 'TENMAJKL/phpactor-telescope'
 Plug 'dense-analysis/ale'
 Plug('nvim-treesitter/nvim-treesitter', {['do'] = vim.cmd['TSUpdate']})
 Plug('neoclide/coc.nvim', {branch = 'release'})
-Plug 'kamykn/spelunker.vim'
-Plug 'kamykn/popup-menu.nvim'
 Plug('iamcco/markdown-preview.nvim', {['do'] = vim.fn['mkdp#util#install']})
 Plug 'p00f/nvim-ts-rainbow'
 Plug 'gpanders/editorconfig.nvim'
@@ -180,8 +178,6 @@ require'nvim-treesitter.configs'.setup {
 require('Comment').setup {
     pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook(),
 }
--- Only highlight mis-spelled words (not rare, mis-capitalised, or words from a different language region)
-vim.g.spelunker_highlight_type = 2
 
 
 -- Key mapping
