@@ -361,11 +361,6 @@ require('telescope').setup({
         dynamic_preview_title = true, -- use the picker result (e.g. file name) as the preview window title
         path_display = {'truncate'}, -- truncate the start of file paths if they are too long to display
     },
-    extensions = {
-        coc = {
-            prefer_locations = true, -- Even if there's only one result, always preview rather than jumping to it
-        },
-    },
     pickers = {
         buffers = {
             ignore_current_buffer = true,
