@@ -384,7 +384,9 @@ vim.api.nvim_create_autocmd('User TelescopePreviewerLoaded', {
 -- Open telescope with all available pickers
 utils.nmap('<Leader>ft', require('telescope.builtin').builtin)
 -- Files under working directory
-utils.nmap('<Leader>ff', require('telescope.builtin').find_files)
+utils.nmap('<Leader>ff', [[<cmd>lua require('telescope.builtin').find_files({hidden = true})<CR>]])
+-- Git files in current repository (including untracked)
+utils.nmap('<Leader>fg', [[<cmd>lua require('telescope.builtin').git_files({show_untracked = true})<CR>]])
 -- Open buffers
 utils.nmap('<Leader>fb', require('telescope.builtin').buffers)
 -- Lines in the current buffer
@@ -409,13 +411,13 @@ utils.nmap('<Leader>lt', '<cmd>Telescope coc type_definitions<CR>')
 utils.nmap('<Leader>li', '<cmd>Telescope coc implementations<CR>')
 -- Fuzzy search LSP references
 utils.nmap('<Leader>lr', '<cmd>Telescope coc references<CR>')
--- Fuzzy search LSP diagnostics (e for error)
+-- Fuzzy search LSP diagnostics in the buffer (e for error, since d is taken)
 utils.nmap('<Leader>le', '<cmd>Telescope coc diagnostics<CR>')
 -- Fuzzy search LSP code actions for code under cursor
 utils.nmap('<Leader>la', '<cmd>Telescope coc code_actions<CR>')
--- Fuzzy search LSP line-level code actions for code under cursor
+-- Fuzzy search LSP line-level code actions
 utils.nmap('<Leader>lla', '<cmd>Telescope coc line_code_actions<CR>')
--- Fuzzy search LSP file-level code actions for code under cursor
+-- Fuzzy search LSP file-level code actions
 utils.nmap('<Leader>lfa', '<cmd>Telescope coc file_code_actions<CR>')
 -- Open Phpactor in telescope
 utils.nmap('<Leader>p', '<cmd>PhpactorTelescope<CR>')
