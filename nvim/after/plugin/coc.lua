@@ -47,7 +47,7 @@ local utils = require('utils')
 utils.imap('<CR>', [[coc#pum#visible() ? coc#pum#confirm() : "\<CR>"]], { expr = true })
 
 -- Show documentation in preview window
-utils.nmap('<Leader>d', '<CMD>lua _G.coc_show_docs()<CR>')
+utils.nmap('<Leader>d', [[<CMD>lua require('utils').close_floating_windows(); _G.coc_show_docs()<CR>]])
 
 utils.nmap('<C-j>', [[coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-j>"]], { expr = true, nowait = true })
 utils.nmap('<C-k>', [[coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-k>"]], { expr = true, nowait = true })

@@ -58,4 +58,15 @@ function M.preserve_cursor_position(command)
     vim.api.nvim_win_set_cursor(0, { line, col })
 end
 
+-- Close all floating windows but leave other windows open
+-- https://www.reddit.com/r/neovim/comments/nrz9hp/comment/h0lg5m1
+function M.close_floating_windows()
+    for _, window_id in ipairs(vim.api.nvim_list_wins()) do
+        local config = vim.api.nvim_win_get_config(window_id)
+        if config.relative ~= '' then
+            vim.api.nvim_win_close(window_id, false)
+        end
+    end
+end
+
 return M
