@@ -257,6 +257,25 @@ require('onedarkpro').setup({
     options = {
         cursorline = true,
     },
+    styles = {
+        comments = 'italic',
+        virtual_text = 'italic',
+    },
+    highlights = {
+        GitSignsCurrentLineBlame = {
+            -- Highlight the current line blame virtual text as a comment (required to make it italic)
+            link = 'Comment',
+        },
+        htmlBold = {
+            cterm = 'bold',
+        },
+        htmlItalic = {
+            cterm = 'italic',
+        },
+        htmlLink = {
+            cterm = 'underline',
+        },
+    },
 })
 vim.cmd('colorscheme onedark')
 -- Show line numbers
@@ -280,6 +299,8 @@ require('gitsigns').setup {
         virt_text_pos = 'eol',
         delay = 500,
     },
+    current_line_blame_formatter = '      <author>, <author_time:%Y-%m-%d>  <summary>',
+    current_line_blame_formatter_nc = '      Not committed yet',
 }
 
 -- Setup nvim-tree
