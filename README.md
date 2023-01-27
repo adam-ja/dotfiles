@@ -11,7 +11,6 @@ git clone https://github.com/adam-ja/dotfiles.git --recurse-submodules
 cd dotfiles
 ./install.sh
 ```
-- Edit your terminal profile and change the font to a [Nerd Font][nerdfonts] font to see fancy symbols in the tmux and vim status lines.
 - If ZSH is not already your default shell, you can make it so with:
 ```sh
 chsh -s `which zsh`
@@ -23,8 +22,14 @@ source $HOME/dotfiles/zsh/zshrc
 ```
 - This will pull in all the config from dotfiles and allow you to set local overrides below this line for the specific machine you're installing on.
 - The next new terminal you open will be using the fully configured zsh.
-- The onedark theme used for neovim and tmux also provides matching themes for various terminal emulators. Just import them into your terminal profile from `nvim/plugged/onedark.vim/term`. If using GNOME Terminal, which doesn't support theme/colour scheme imports, use [One for GNOME Terminal][one-gnome-terminal] instead.
-- You're done.
+
+### Extras
+
+- A [Nerd Font][nerdfonts] is required to see fancy symbols. The popular JetBrains Mono Nerd Font is installed as part of the process above, and this also includes ligatures where supported.
+- The kitty terminal emulator is also installed and configured to use the JetBrains font (kitty supports ligatures) and the matching theme from the onedarkpro neovim theme. If using kitty, it's worth changing the default terminal app in the OS to this, and updating any keyboard shortcuts (e.g. Ctrl-Alt-T in Ubuntu).
+- If not using kitty, you'll need to set the font and theme in your terminal emulator of choice.
+    - Some themes are provided in `nvim/plugged/onedarkpro.nvim/extras`. GNOME Terminal doesn't support theme imports, but you can use [One for GNOME Terminal][one-gnome-terminal] instead.
+    - Not all terminal emulators support ligatures (including GNOME Terminal).
 
 ## License
 
