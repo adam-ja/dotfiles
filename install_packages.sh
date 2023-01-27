@@ -10,7 +10,7 @@ case "$(uname -s)" in
         # Add neovim nightly ppa
         sudo add-apt-repository ppa:neovim-ppa/unstable
 
-        PACKAGES='bat curl fd-find fzf jq nala neovim openssh-server php php-curl php-mbstring php-xml python3-neovim tmux tree wget xclip xtail zsh'
+        PACKAGES='bat curl fd-find fzf jq kitty nala neovim openssh-server php php-curl php-mbstring php-xml python3-neovim tmux tree wget xclip xtail zsh'
         sudo apt install --assume-yes ${PACKAGES}
 
         mkdir -p ~/.local/bin
@@ -26,6 +26,7 @@ case "$(uname -s)" in
         rm ripgrep*.deb
 
         ${DIR}/install_delta.sh
+        ${DIR}/install_font.sh
         ;;
     Darwin)
         brew install bat fzf git-delta jq php ripgrep tmux tree wget

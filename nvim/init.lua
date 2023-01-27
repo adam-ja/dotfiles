@@ -307,7 +307,7 @@ require('lualine').setup {
 -- Setup statuscol
 require('statuscol').setup({
     setopt = true,
-    separator = '|',
+    separator = ' ',
 })
 
 -- Telescope
