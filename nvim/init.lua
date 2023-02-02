@@ -84,6 +84,8 @@ Plug 'nvim-tree/nvim-web-devicons'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'ap/vim-css-color'
 Plug 'luukvbaal/statuscol.nvim'
+Plug 'kevinhwang91/promise-async'
+Plug 'kevinhwang91/nvim-ufo'
 
 -- Language specifics
 ---------------------
@@ -122,13 +124,6 @@ vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 -- Convert tabs to spaces
 vim.opt.expandtab = true
--- Use treesitter for folding
-vim.opt.foldmethod = 'expr'
-vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
--- Display folds in the status column (allows clickable folds with statuscol plugin)
-vim.opt.foldcolumn = 'auto:9'
--- Causes folds to be calculated when a buffer is open (so they're displayed in foldcolumn) but not closed
-vim.opt.foldlevelstart = 99
 
 
 -- Search
@@ -329,6 +324,18 @@ require('statuscol').setup({
     setopt = true,
     separator = ' ',
 })
+
+-- Use treesitter for folding
+vim.opt.foldmethod = 'expr'
+vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
+-- Display folds in the status column (allows clickable folds with statuscol plugin)
+vim.opt.foldcolumn = 'auto:3'
+-- Limit nested folds to 3 levels deep (any more is unnecessary and makes the fold status column too wide)
+vim.opt.foldnestmax = 3
+-- Causes folds to be calculated but not collapsed when a buffer is opened (so they're displayed in foldcolumn)
+vim.opt.foldlevelstart = 3
+-- Modernise fold symbols
+vim.opt.fillchars:append('foldopen:,foldsep:│,foldclose:')
 
 -- Telescope
 ------------
