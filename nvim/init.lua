@@ -373,7 +373,7 @@ require('telescope').setup({
             sort_mru = true,
             mappings = {
                 i = {
-                    ['<C-d>'] = 'delete_buffer',
+                    ['<C-S-d>'] = 'delete_buffer',
                 },
             },
         }
