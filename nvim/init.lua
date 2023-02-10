@@ -69,6 +69,7 @@ Plug 'stefandtw/quickfix-reflector.vim'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'nvim-tree/nvim-tree.lua'
 Plug 'nacro90/numb.nvim'
+Plug 'ziontee113/icon-picker.nvim'
 
 -- Git integration
 ------------------
@@ -303,7 +304,12 @@ require('nvim-tree').setup()
 -- Setup lualine
 require('lualine').setup {
     sections = {
-        lualine_a = {'mode'},
+        lualine_a = {
+            {
+                'mode',
+                icon = '',
+            },
+        },
         lualine_b = {'branch', 'diff'},
         lualine_c = {'filename'},
 
@@ -316,7 +322,17 @@ require('lualine').setup {
         },
         lualine_y = {'filetype', 'filesize', 'encoding', 'fileformat'},
         lualine_z = {'%c/%{strwidth(getline("."))}', '%l/%L', 'progress'},
-    }
+    },
+    options = {
+        section_separators = {
+            left = '',
+            right = '',
+        },
+        component_separators = {
+            left = '',
+            right = '',
+        },
+    },
 }
 
 -- Setup statuscol
@@ -382,6 +398,9 @@ require('telescope').setup({
 require('telescope').load_extension('fzf')
 require('telescope').load_extension('ui-select')
 require('telescope').load_extension('coc')
+require('icon-picker').setup({
+    disable_legacy_commands = true,
+})
 
 vim.api.nvim_create_autocmd('User TelescopePreviewerLoaded', {
     command = 'setlocal wrap | setlocal number'
@@ -407,6 +426,9 @@ utils.nmap('<Leader>fm', require('telescope.builtin').git_status)
 utils.nmap('<Leader>fc', require('telescope.builtin').git_bcommits)
 -- All commits
 utils.nmap('<Leader>fC', require('telescope.builtin').git_commits)
+-- Icon picker
+utils.nmap('<Leader>fi', '<cmd>IconPickerNormal<CR>')
+utils.imap('<C-i>', '<cmd>IconPickerNormal<CR>')
 -- Fuzzy search LSP symbols (variables, methods, etc found by coc.nvim)
 utils.nmap('<Leader>ls', '<cmd>Telescope coc document_symbols<CR>')
 -- Fuzzy search LSP definitions
