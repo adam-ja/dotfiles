@@ -311,7 +311,12 @@ require('lualine').setup {
             },
         },
         lualine_b = {'branch', 'diff'},
-        lualine_c = {'filename'},
+        lualine_c = {
+            {
+                'filename',
+                newfile_status = true,
+            },
+        },
 
         lualine_x = {
             '%{coc#status()}',
@@ -320,7 +325,13 @@ require('lualine').setup {
                 sources = {'nvim_diagnostic', 'coc', 'ale'},
             },
         },
-        lualine_y = {'filetype', 'filesize', 'encoding', 'fileformat'},
+        lualine_y = {
+            'filetype',
+            {
+                'filesize',
+                icon = '',
+            },
+        },
         lualine_z = {
             {
                 '%c/%{strwidth(getline("."))}',
@@ -330,7 +341,6 @@ require('lualine').setup {
                 '%l/%L',
                 icon = '',
             },
-            'progress',
         },
     },
     options = {
