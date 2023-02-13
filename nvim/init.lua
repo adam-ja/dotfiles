@@ -438,7 +438,7 @@ utils.nmap('<Leader>fc', require('telescope.builtin').git_bcommits)
 utils.nmap('<Leader>fC', require('telescope.builtin').git_commits)
 -- Icon picker
 utils.nmap('<Leader>fi', '<cmd>IconPickerNormal<CR>')
-utils.imap('<C-i>', '<cmd>IconPickerNormal<CR>')
+utils.imap('<A-i>', '<cmd>IconPickerNormal<CR>')
 -- Fuzzy search LSP symbols (variables, methods, etc found by coc.nvim)
 utils.nmap('<Leader>ls', '<cmd>Telescope coc document_symbols<CR>')
 -- Fuzzy search LSP definitions
