@@ -321,7 +321,17 @@ require('lualine').setup {
             },
         },
         lualine_y = {'filetype', 'filesize', 'encoding', 'fileformat'},
-        lualine_z = {'%c/%{strwidth(getline("."))}', '%l/%L', 'progress'},
+        lualine_z = {
+            {
+                '%c/%{strwidth(getline("."))}',
+                icon = '',
+            },
+            {
+                '%l/%L',
+                icon = '',
+            },
+            'progress',
+        },
     },
     options = {
         section_separators = {
