@@ -49,6 +49,7 @@ Plug 'p00f/nvim-ts-rainbow'
 Plug 'gpanders/editorconfig.nvim'
 Plug 'JoosepAlviste/nvim-ts-context-commentstring'
 Plug 'numToStr/Comment.nvim'
+Plug 'github/copilot.vim'
 
 -- Utilities
 ------------
