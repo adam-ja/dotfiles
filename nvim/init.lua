@@ -67,7 +67,7 @@ Plug 'kburdett/vim-nuuid'
 Plug 'arp242/auto_mkdir2.vim'
 Plug 'jremmen/vim-ripgrep'
 Plug 'stefandtw/quickfix-reflector.vim'
-Plug 'AndrewRadev/splitjoin.vim'
+Plug 'Wansmer/treesj'
 Plug 'nvim-tree/nvim-tree.lua'
 Plug 'nacro90/numb.nvim'
 Plug 'ziontee113/icon-picker.nvim'
@@ -175,6 +175,11 @@ require('Comment').setup {
     pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook(),
 }
 
+-- Configure treesj (treesitter-based split join)
+require('treesj').setup({
+    use_default_keymap = false,
+})
+
 
 -- Key mapping
 --------------
@@ -204,9 +209,9 @@ utils.map(',b', '<Plug>CamelCaseMotion_b')
 utils.map(',e', '<Plug>CamelCaseMotion_e')
 utils.map(',ge', '<Plug>CamelCaseMotion_ge')
 -- Sort the paragraph around the current cursor position (above and below to the nearest blank line) alphabetically
-utils.nmap('<Leader>s', '<C-v>apb:sort i<CR>')
+utils.nmap('<Leader>al', '<C-v>apb:sort i<CR>')
 -- Sort the selected lines alphabetically
-utils.vmap('<Leader>s', ':sort<CR>')
+utils.vmap('<Leader>al', ':sort<CR>')
 -- Disable default nuuid plugin mappings
 vim.g.nuuid_no_mappings = 1
 
@@ -238,6 +243,11 @@ utils.nmap('<Leader>R', [[':Rg<Space>' . expand('<cword>') . '<CR>']], { expr = 
 
 -- Open nvim-tree at the location of the current buffer
 utils.nmap('<Leader>n', ':NvimTreeFindFile<CR>')
+
+-- treesj mappings
+utils.nmap('<Leader>st', '<cmd>TSJToggle<CR>')
+utils.nmap('<Leader>ss', '<cmd>TSJSplit<CR>')
+utils.nmap('<Leader>sj', '<cmd>TSJJoin<CR>')
 
 
 -- UI / styling
