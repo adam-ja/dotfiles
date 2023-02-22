@@ -44,7 +44,7 @@ Plug 'TENMAJKL/phpactor-telescope'
 Plug 'dense-analysis/ale'
 Plug('nvim-treesitter/nvim-treesitter', {['do'] = vim.cmd['TSUpdate']})
 Plug('neoclide/coc.nvim', {branch = 'release'})
-Plug('iamcco/markdown-preview.nvim', {['do'] = vim.fn['mkdp#util#install']})
+Plug('iamcco/markdown-preview.nvim', {['do'] = 'cd app && npm install'})
 Plug 'p00f/nvim-ts-rainbow'
 Plug 'gpanders/editorconfig.nvim'
 Plug 'JoosepAlviste/nvim-ts-context-commentstring'
