@@ -5,8 +5,7 @@
 [core]
     editor = nvim
     excludesfile = ~/dotfiles/git/gitignore_global
-    # Set tab stop for diffs etc to 4 spaces
-    pager = less -x4
+    pager = delta
 [push]
     default = simple
 [pull]
@@ -26,11 +25,6 @@
 [diff]
     # The number of files to consider when performing the copy/rename detection
     renameLimit = 10000
-[pager]
-    diff = delta
-    log = delta
-    reflog = delta
-    show = delta
 [interactive]
     diffFilter = delta --color-only
 [delta]
