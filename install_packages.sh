@@ -10,12 +10,10 @@ case "$(uname -s)" in
         # Add neovim nightly ppa
         sudo add-apt-repository ppa:neovim-ppa/unstable
 
-        PACKAGES='bat curl fd-find fzf jq kitty nala neovim openssh-server php php-curl php-mbstring php-xml python3-neovim tmux tree wget xclip xtail zsh'
+        PACKAGES='curl fd-find fzf jq kitty nala neovim openssh-server php php-curl php-mbstring php-xml python3-neovim tmux tree wget xclip xtail zsh'
         sudo apt install --assume-yes ${PACKAGES}
 
         mkdir -p ~/.local/bin
-        # bat clashes with another package so the executable is installed as batcat. Alias this to bat.
-        ln -s /usr/bin/batcat ~/.local/bin/bat
         # fd clashes with another package so the executable is installed as fdfind. Alias this to fd.
         ln -s $(which fdfind) ~/.local/bin/fd
 
@@ -25,6 +23,7 @@ case "$(uname -s)" in
         sudo dpkg --force-overwrite -i ripgrep*.deb
         rm ripgrep*.deb
 
+        ${DIR}/install_bat.sh
         ${DIR}/install_delta.sh
         ${DIR}/install_font.sh
         ;;
@@ -35,6 +34,8 @@ case "$(uname -s)" in
 
         brew tap homebrew/cask-fonts
         brew install --cask font-hack-nerd-font
+
+        bat cache --build
         ;;
     *)
         echo 'Unknown OS'

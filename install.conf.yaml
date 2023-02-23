@@ -5,6 +5,7 @@
 - link:
     ~/.ignore: misc/ignore
     ~/.config/composer/composer.json: misc/composer.json
+    ~/.config/bat/syntaxes/PHP.sublime-syntax: misc/PHP.sublime-syntax
     ~/.config/git/config: git/config
     ~/.config/kitty/kitty.conf: misc/kitty.conf
     ~/.config/nvim: nvim/
