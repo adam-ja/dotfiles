@@ -86,7 +86,11 @@ return {
             {
                 '<Leader>fg',
                 function()
-                    require('telescope.builtin').git_files({show_untracked = true})
+                    local builtin = require('telescope.builtin')
+                    if not pcall(builtin.git_files, {show_untracked = true}) then
+                        -- If not in a git repository, fall back to find_files
+                        builtin.find_files({hidden = true})
+                    end
                 end,
                 desc = 'Find git files in current repository (including untracked)',
             },
