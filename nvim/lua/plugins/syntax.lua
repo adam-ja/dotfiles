@@ -6,14 +6,21 @@ return {
             ensure_installed = 'all',
             auto_install = true,
             highlight = {
-                enabled = true,
+                enable = true,
             },
             indent = {
-                enabled = true,
+                enable = true,
             },
             context_commentstring = {
                 enable = true,
                 enable_autocmd = false,
+            },
+            rainbow = {
+                enable = true,
+                query = {
+                    'rainbow-parens',
+                    html = 'rainbow-tags',
+                },
             },
         },
         config = function(_, opts)
@@ -37,6 +44,11 @@ return {
             pre_hook = function()
                 require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook()
             end,
+        },
+    },
+    {'HiPhish/nvim-ts-rainbow2',
+        dependencies = {
+            'nvim-treesitter/nvim-treesitter',
         },
     },
     {'Wansmer/treesj',
