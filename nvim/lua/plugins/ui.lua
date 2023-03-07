@@ -119,4 +119,11 @@ return {
         },
     },
     'ap/vim-css-color',
+    {'declancm/cinnamon.nvim',
+        opts = {
+            extra_keymaps = true,
+            extended_keymaps = true,
+            default_delay = 1,
+        },
+    },
 }
