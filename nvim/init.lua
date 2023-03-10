@@ -126,7 +126,7 @@ vim.opt.fillchars:append('foldopen:,foldsep:│,foldclose:')
 -- Attempt to improve performance
 vim.opt.lazyredraw = true
 
--- coc.nvim requests that this be low to avoid lag
+-- Lower values allow plugins to respond quicker to changes, but can cause performance issues
 vim.opt.updatetime = 300
 
 -- Set persistent undo (so undo history is saved even when buffers are closed)

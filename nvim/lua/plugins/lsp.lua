@@ -1,78 +1,179 @@
--- Define where docs should come from
-function _G.coc_show_docs()
-    local cw = vim.fn.expand('<cword>')
-    if vim.fn.index({ 'vim', 'help' }, vim.bo.filetype) >= 0 then
-        vim.cmd('h ' .. cw)
-    elseif vim.api.nvim_eval('coc#rpc#ready()') then
-        vim.fn.CocActionAsync('doHover')
-    else
-        vim.cmd('!' .. vim.o.keywordprg .. ' ' .. cw)
-    end
-end
-
 return {
-    {'neoclide/coc.nvim',
-        branch = 'release',
+    {'williamboman/mason-lspconfig.nvim',
         lazy = false,
-        config = function ()
-            -- Extensions to install
-            vim.g.coc_global_extensions = {
-                'coc-blade',
-                'coc-css',
-                'coc-docker',
-                'coc-highlight',
-                'coc-html',
-                'coc-json',
-                'coc-lua',
-                'coc-pairs',
-                'coc-sh',
-                'coc-spell-checker',
-                'coc-tsserver',
-                'coc-vetur',
-                'coc-yaml',
-                '@yaegassy/coc-intelephense',
-                '@yaegassy/coc-tailwindcss3',
-            }
-
-            -- Stop the cursor disappearing after running some coc commands
-            vim.g.coc_disable_transparent_cursor = 1
-
-            -- Highlight symbol under cursor on CursorHold
-            vim.api.nvim_create_autocmd('CursorHold', {
-                command = [[silent call CocActionAsync('highlight')]],
-            })
-        end,
-        keys = {
-            {
-                '<CR>',
-                [[coc#pum#visible() ? coc#pum#confirm() : "\<CR>"]],
-                desc = 'Use return to apply the highlighted autocomplete option',
-                expr = true,
-                mode = 'i',
+        dependencies = {
+            {'williamboman/mason.nvim',
+                config = true,
             },
-            {
-                '<Leader>d',
-                [[<cmd>lua require('utils').close_floating_windows(); _G.coc_show_docs()<CR>]],
-                desc = 'Show documentation in preview window',
-            },
-            {
-                '<C-j>',
-                [[coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-j>"]],
-                desc = 'Scroll floating window down',
-                expr = true,
-                nowait = true,
-            },
-            {
-                '<C-k>',
-                [[coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-k>"]],
-                desc = 'Scroll floating window up',
-                expr = true,
-                nowait = true,
+            {'folke/neodev.nvim',
+                config = true,
             },
         },
+        build = ':MasonUpdate',
+        config = function ()
+            local mason_lspconfig = require('mason-lspconfig')
+
+            mason_lspconfig.setup({
+                ensure_installed = {
+                    'bashls',
+                    'cssls',
+                    'dockerls',
+                    -- TODO: change from emmet.vim to emmet-ls?
+                    'html',
+                    'jsonls',
+                    'lua_ls',
+                    'intelephense',
+                    'tailwindcss',
+                    'tsserver',
+                    'vimls',
+                    'yamlls',
+                },
+            })
+
+            mason_lspconfig.setup_handlers({
+                function (server_name)
+                    require('lspconfig')[server_name].setup({})
+                end
+            })
+        end,
+    },
+    {'neovim/nvim-lspconfig',
+        lazy = false,
+        dependencies = {
+            'williamboman/mason-lspconfig.nvim',
+        },
+        keys = {
+            {
+                '<Leader>d',
+                function ()
+                    -- Prevent diagnostics from showing up when the hover window is open
+                    -- https://www.reddit.com/r/neovim/comments/pg1o6k/neovim_lsp_hover_window_is_hidden_behind_line
+                    vim.api.nvim_command('set eventignore=CursorHold')
+                    vim.lsp.buf.hover()
+                    vim.api.nvim_command('autocmd CursorMoved <buffer> ++once set eventignore=""')
+                end,
+                desc = 'Show documentation',
+            },
+            {
+                '<Leader>la',
+                vim.lsp.buf.code_action,
+                desc = 'Show code actions',
+            }
+        },
+        init = function ()
+            vim.diagnostic.config({
+                virtual_text = false,
+                underline = false,
+                severity_sort = true,
+            })
+
+            vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
+                border = 'rounded',
+            })
+
+            local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+            for type, icon in pairs(signs) do
+                local hl = "DiagnosticSign" .. type
+                vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+            end
+
+            vim.api.nvim_create_autocmd("CursorHold", {
+                callback = function()
+                    vim.diagnostic.open_float({
+                        focusable = false,
+                        close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+                        border = 'rounded',
+                        source = 'if_many',
+                        prefix = ' ',
+                    })
+                end
+            })
+        end
+    },
+    {'hrsh7th/nvim-cmp',
+        dependencies = {
+            'neovim/nvim-lspconfig',
+            'onsails/lspkind.nvim',
+            {'L3MON4D3/LuaSnip',
+                build = 'make install_jsregexp',
+            },
+            'saadparwaiz1/cmp_luasnip',
+            'hrsh7th/cmp-nvim-lsp',
+            'hrsh7th/cmp-nvim-lsp-signature-help',
+            'hrsh7th/cmp-buffer',
+            'hrsh7th/cmp-path',
+            'hrsh7th/cmp-cmdline',
+            'hrsh7th/cmp-calc',
+        },
+        config = function()
+            local cmp = require('cmp')
+            local lspkind = require('lspkind')
+
+            cmp.setup({
+                formatting = {
+                    format = lspkind.cmp_format({
+                        mode = 'symbol_text',
+                    }),
+                },
+
+                window = {
+                    completion = cmp.config.window.bordered(),
+                    documentation = cmp.config.window.bordered(),
+                },
+
+                mapping = cmp.mapping.preset.insert({
+                    ['<C-u>'] = cmp.mapping.scroll_docs(-4),
+                    ['<C-d>'] = cmp.mapping.scroll_docs(4),
+                    ['<C-j>'] = cmp.mapping.select_next_item(),
+                    ['<C-k>'] = cmp.mapping.select_prev_item(),
+                    ['<CR>'] = cmp.mapping.confirm({select = true}),
+                    ['<C-q>'] = cmp.mapping.abort(),
+                }),
+
+                sources = {
+                    { name = 'nvim_lsp' },
+                    { name = 'nvim_lsp_signature_help' },
+                    { name = 'luasnip' },
+                    {
+                        name = 'buffer',
+                        option = {
+                            get_bufnrs = function()
+                                return vim.api.nvim_list_bufs()
+                            end,
+                        },
+                    },
+                    { name = 'path' },
+                    { name = 'calc' },
+                },
+
+                snippet = {
+                    expand = function(args)
+                        require('luasnip').lsp_expand(args.body)
+                    end,
+                },
+            })
+
+            cmp.setup.cmdline('/', {
+                mapping = cmp.mapping.preset.cmdline(),
+                sources = {
+                    { name = 'buffer' },
+                },
+            })
+
+            cmp.setup.cmdline(':', {
+                mapping = cmp.mapping.preset.cmdline(),
+                sources = {
+                    { name = 'path' },
+                    { name = 'cmdline' },
+                },
+            })
+        end,
     },
     {'phpactor/phpactor',
         build = 'composer install --no-dev -o',
         ft = 'php',
     },
+    {'j-hui/fidget.nvim',
+        config = true,
+    }
 }

@@ -1,23 +1,18 @@
 -- Note due to the dependencies and the way Telescope extensions are loaded, all key mappings for Telescope extensions
 -- are defined in the main Telescope plugin configuration.
 return {
-    {'nvim-telescope/telescope-fzf-native.nvim',
-        build = 'make',
-    },
-    'nvim-telescope/telescope-ui-select.nvim',
-    'fannheyward/telescope-coc.nvim',
-    {'TENMAJKL/phpactor-telescope',
-        dependencies = {
-            'phpactor/phpactor',
-        },
-    },
     {'nvim-telescope/telescope.nvim',
         dependencies = {
             'nvim-lua/plenary.nvim',
-            'nvim-telescope/telescope-fzf-native.nvim',
+            {'nvim-telescope/telescope-fzf-native.nvim',
+                build = 'make',
+            },
             'nvim-telescope/telescope-ui-select.nvim',
-            'fannheyward/telescope-coc.nvim',
-            'TENMAJKL/phpactor-telescope',
+            {'TENMAJKL/phpactor-telescope',
+                dependencies = {
+                    'phpactor/phpactor',
+                },
+            }
         },
         branch = '0.1.x',
         lazy = false,
@@ -67,7 +62,6 @@ return {
             require('telescope').setup(opts)
             require('telescope').load_extension('fzf')
             require('telescope').load_extension('ui-select')
-            require('telescope').load_extension('coc')
 
             vim.api.nvim_create_autocmd('User TelescopePreviewerLoaded', {
                 command = 'setlocal wrap | setlocal number',
@@ -196,48 +190,45 @@ return {
             -- LSP
             {
                 '<Leader>ls',
-                '<cmd>Telescope coc document_symbols<CR>',
-                desc = 'LSP symbols (variables, methods, etc found by coc.nvim)',
+                function()
+                    require('telescope.builtin').lsp_document_symbols()
+                end,
+                desc = 'LSP symbols (variables, methods, etc)',
             },
             {
                 '<Leader>ld',
-                '<cmd>Telescope coc definitions<CR>',
+                function()
+                    require('telescope.builtin').lsp_definitions()
+                end,
                 desc = 'LSP definitions',
             },
             {
                 '<Leader>lt',
-                '<cmd>Telescope coc type_definitions<CR>',
+                function()
+                    require('telescope.builtin').lsp_type_definitions()
+                end,
                 desc = 'LSP type definitions',
             },
             {
                 '<Leader>li',
-                '<cmd>Telescope coc implementations<CR>',
+                function()
+                    require('telescope.builtin').lsp_implementations()
+                end,
                 desc = 'LSP implementations',
             },
             {
                 '<Leader>lr',
-                '<cmd>Telescope coc references<CR>',
+                function()
+                    require('telescope.builtin').lsp_references()
+                end,
                 desc = 'LSP references',
             },
             {
                 '<Leader>le',
-                '<cmd>Telescope coc diagnostics<CR>',
+                function()
+                    require('telescope.builtin').diagnostics({bufnr = 0})
+                end,
                 desc = 'LSP diagnostics in the buffer (e for errors)',
-            },
-            {
-                '<Leader>la',
-                '<cmd>Telescope coc code_actions<CR>',
-                desc = 'LSP code actions for code under cursor',
-            },
-            {
-                '<Leader>lla',
-                '<cmd>Telescope coc line_code_actions<CR>',
-                desc = 'LSP line-level code actions',
-            },
-            {
-                '<Leader>lfa',
-                '<cmd>Telescope coc file_code_actions<CR>',
-                desc = 'LSP file-level code actions',
             },
             {
                 '<Leader>p',

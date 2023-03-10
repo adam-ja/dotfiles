@@ -52,10 +52,9 @@ return {
                 },
 
                 lualine_x = {
-                    '%{coc#status()}',
                     {
                         'diagnostics',
-                        sources = {'nvim_diagnostic', 'coc', 'ale'},
+                        sources = {'nvim_diagnostic', 'ale'},
                     },
                 },
                 lualine_y = {
