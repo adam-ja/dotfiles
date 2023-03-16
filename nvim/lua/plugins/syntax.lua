@@ -52,6 +52,9 @@ return {
         },
     },
     {'Wansmer/treesj',
+        dependencies = {
+            'nvim-treesitter/nvim-treesitter',
+        },
         opts = {
             use_default_keymap = false,
         },
@@ -72,6 +75,12 @@ return {
                 'Join treesitter block',
             },
         },
+    },
+    {'nvim-treesitter/nvim-treesitter-context',
+        dependencies = {
+            'nvim-treesitter/nvim-treesitter',
+        },
+        config = true,
     },
     'jwalton512/vim-blade', -- No treesitter support for blade yet
     {'dense-analysis/ale',
