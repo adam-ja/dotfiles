@@ -126,4 +126,7 @@ return {
             default_delay = 1,
         },
     },
+    {'cpea2506/relative-toggle.nvim',
+        config = true,
+    },
 }
