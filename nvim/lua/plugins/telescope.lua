@@ -34,7 +34,7 @@ return {
                 },
                 sorting_strategy = 'ascending',
                 scroll_strategy = 'limit',
-                prompt_prefix = '🔍 ',
+                prompt_prefix = ' 🔭 ',
                 layout_config = {
                     prompt_position = 'top',
                     width = 0.95,
