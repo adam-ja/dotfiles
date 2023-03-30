@@ -9,27 +9,39 @@ return {
     },
     'gpanders/editorconfig.nvim',
     'vim-scripts/SearchComplete',
-    {'bkad/CamelCaseMotion',
+    {'chrisgrieser/nvim-spider',
         keys = {
             {
-                ',w',
-                '<Plug>CamelCaseMotion_w',
+                'w',
+                function ()
+                    require('spider').motion('w')
+                end,
                 desc = 'Move to next word',
+                mode = {'n', 'o', 'x'},
             },
             {
-                ',b',
-                '<Plug>CamelCaseMotion_b',
-                desc = 'Move to previous word',
-            },
-            {
-                ',e',
-                '<Plug>CamelCaseMotion_e',
+                'e',
+                function ()
+                    require('spider').motion('e')
+                end,
                 desc = 'Move to end of word',
+                mode = {'n', 'o', 'x'},
             },
             {
-                ',ge',
-                '<Plug>CamelCaseMotion_ge',
+                'b',
+                function ()
+                    require('spider').motion('b')
+                end,
+                desc = 'Move to previous word',
+                mode = {'n', 'o', 'x'},
+            },
+            {
+                'ge',
+                function ()
+                    require('spider').motion('ge')
+                end,
                 desc = 'Move to end of previous word',
+                mode = {'n', 'o', 'x'},
             },
         },
     },
