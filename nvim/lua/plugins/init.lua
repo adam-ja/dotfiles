@@ -99,6 +99,9 @@ return {
         config = true,
     },
     {'ziontee113/icon-picker.nvim',
+        dependencies = {
+            'nvim-telescope/telescope.nvim',
+        },
         opts = {
             disable_legacy_commands = true,
         },
@@ -113,6 +116,37 @@ return {
                 '<cmd>IconPickerNormal<CR>',
                 desc = 'Pick an icon',
                 mode = 'i',
+            },
+        },
+    },
+    {'AckslD/nvim-neoclip.lua',
+        dependencies = {
+            'nvim-telescope/telescope.nvim',
+        },
+        opts = {
+            keys = {
+                telescope = {
+                    i = {
+                        paste_behind = '<C-S-p>', -- replace default <c-k> which is used to move up telescope results
+                        delete = '<C-S-d>', -- delete an entry (replace default <c-d> which is used to scroll down telescope preview)
+                    },
+                },
+            },
+        },
+        keys = {
+            {
+                '<Leader>c',
+                function ()
+                    require('telescope').extensions.neoclip['plus']()
+                end,
+                desc = 'Show yank history',
+            },
+            {
+                '<Leader>m',
+                function ()
+                    require('telescope').extensions.macroscope.default()
+                end,
+                desc = 'Show macro history',
             },
         },
     },
