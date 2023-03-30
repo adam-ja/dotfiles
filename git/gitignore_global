@@ -1,6 +1,7 @@
 .lvimrc
 .vim/
 .DS_Store
+.ignore
 
 #####=== Vim ===#####
 [._]*.s[a-w][a-z]
