@@ -56,7 +56,7 @@ return {
             'nvim-treesitter/nvim-treesitter',
         },
         opts = {
-            use_default_keymap = false,
+            use_default_keymaps = false,
         },
         keys = {
             {
