@@ -140,6 +140,6 @@ return {
         },
     },
     {'cpea2506/relative-toggle.nvim',
-        config = true,
+        event = 'BufEnter',
     },
 }
