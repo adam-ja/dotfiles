@@ -109,11 +109,24 @@ return {
         dependencies = {
             'nvim-tree/nvim-web-devicons',
         },
-        config = true,
+        opts = {
+            view = {
+                width = {
+                    max = '40%',
+                },
+                number = true,
+                relativenumber = true,
+            },
+        },
         keys = {
             {
                 '<Leader>n',
-                '<cmd>NvimTreeFindFile<CR>',
+                function ()
+                    require('nvim-tree.api').tree.find_file({
+                        open = true,
+                        focus = true,
+                    })
+                end,
                 desc = 'Open nvim-tree at the location of the current buffer',
             },
         },
