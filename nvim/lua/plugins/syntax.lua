@@ -62,17 +62,55 @@ return {
             {
                 '<Leader>st',
                 '<cmd>TSJToggle<CR>',
-                'Toggle treesitter block split/join',
+                desc = 'Toggle treesitter block split/join',
             },
             {
                 '<Leader>ss',
                 '<cmd>TSJSplit<CR>',
-                'Split treesitter block',
+                desc = 'Split treesitter block',
             },
             {
                 '<Leader>sj',
                 '<cmd>TSJJoin<CR>',
-                'Join treesitter block',
+                desc = 'Join treesitter block',
+            },
+        },
+    },
+    {'Wansmer/sibling-swap.nvim',
+        dependencies = {
+            'nvim-treesitter/nvim-treesitter',
+        },
+        opts = {
+            use_default_keymaps = false,
+        },
+        keys = {
+            {
+                '<Leader>,',
+                function()
+                    require('sibling-swap').swap_with_left()
+                end,
+                desc = 'Swap with sibling to the left (`a, _b_, c` becomes `_b_, a, c`, `5 > _3_` becomes `_3_ > 5`)',
+            },
+            {
+                '<Leader><M-,>',
+                function()
+                    require('sibling-swap').swap_with_left_with_opp()
+                end,
+                desc = 'Swap with sibling to the left including operator (`5 > _3_` becomes `_3_ < 5`)',
+            },
+            {
+                '<Leader>.',
+                function()
+                    require('sibling-swap').swap_with_right()
+                end,
+                desc = 'Swap with sibling to the right (`a, _b_, c` becomes `a, c, _b_`, `_5_ > 3` becomes `3 > _5_`)',
+            },
+            {
+                '<Leader><M-.>',
+                function()
+                    require('sibling-swap').swap_with_right_with_opp()
+                end,
+                desc = 'Swap with sibling to the right including operator (`_5_ > 3` becomes `3 < _5_)',
             },
         },
     },
