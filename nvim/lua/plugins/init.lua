@@ -10,36 +10,28 @@ return {
     'gpanders/editorconfig.nvim',
     'vim-scripts/SearchComplete',
     {'chrisgrieser/nvim-spider',
-        keys = {
+        keys = { -- Note cmd must be used instead of lua functions for dot-repeat to work
             {
                 'w',
-                function ()
-                    require('spider').motion('w')
-                end,
+                [[<cmd>lua require('spider').motion('w')<CR>]],
                 desc = 'Move to next word',
                 mode = {'n', 'o', 'x'},
             },
             {
                 'e',
-                function ()
-                    require('spider').motion('e')
-                end,
+                [[<cmd>lua require('spider').motion('e')<CR>]],
                 desc = 'Move to end of word',
                 mode = {'n', 'o', 'x'},
             },
             {
                 'b',
-                function ()
-                    require('spider').motion('b')
-                end,
+                [[<cmd>lua require('spider').motion('b')<CR>]],
                 desc = 'Move to previous word',
                 mode = {'n', 'o', 'x'},
             },
             {
                 'ge',
-                function ()
-                    require('spider').motion('ge')
-                end,
+                [[<cmd>lua require('spider').motion('geCR>]],
                 desc = 'Move to end of previous word',
                 mode = {'n', 'o', 'x'},
             },
