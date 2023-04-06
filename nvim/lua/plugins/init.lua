@@ -31,7 +31,7 @@ return {
             },
             {
                 'ge',
-                [[<cmd>lua require('spider').motion('geCR>]],
+                [[<cmd>lua require('spider').motion('ge')<CR>]],
                 desc = 'Move to end of previous word',
                 mode = {'n', 'o', 'x'},
             },
