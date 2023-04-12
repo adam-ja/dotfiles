@@ -19,6 +19,7 @@ return {
             'fannheyward/telescope-coc.nvim',
             'TENMAJKL/phpactor-telescope',
         },
+        branch = '0.1.x',
         lazy = false,
         opts = {
             defaults = {
@@ -44,6 +45,11 @@ return {
                 },
                 dynamic_preview_title = true, -- use the picker result (e.g. file name) as the preview window title
                 path_display = {'truncate'}, -- truncate the start of file paths if they are too long to display
+                vimgrep_arguments = {
+                    'rg',
+                    '--vimgrep',
+                    '--color=never',
+                },
             },
             pickers = {
                 buffers = {
