@@ -85,7 +85,7 @@ return {
             {
                 '<Leader>ff',
                 function()
-                    require('telescope.builtin').find_files({hidden = true})
+                    require('telescope.builtin').find_files({hidden = true, no_ignore = true})
                 end,
                 desc = 'Find files in working directory',
             },
@@ -95,7 +95,7 @@ return {
                     local builtin = require('telescope.builtin')
                     if not pcall(builtin.git_files, {show_untracked = true}) then
                         -- If not in a git repository, fall back to find_files
-                        builtin.find_files({hidden = true})
+                        builtin.find_files({hidden = true, no_ignore = true})
                     end
                 end,
                 desc = 'Find git files in current repository (including untracked)',
@@ -122,18 +122,36 @@ return {
                 desc = 'Lines in the current buffer',
             },
             {
-                '<Leader>fr',
+                '<Leader>frg',
                 function()
                     require('telescope.builtin').live_grep()
                 end,
-                desc = 'Search within files in working directory',
+                desc = 'Search within git files in working directory',
             },
             {
-                '<Leader>fR',
+                '<Leader>frf',
+                function()
+                    require('telescope.builtin').live_grep({
+                        additional_args = {'--no-ignore-vcs', '--hidden'},
+                    })
+                end,
+                desc = 'Search within all files in working directory',
+            },
+            {
+                '<Leader>fRg',
                 function()
                     require('telescope.builtin').grep_string()
                 end,
-                desc = 'Search for the string under the cursor within files in working directory',
+                desc = 'Search for the string under the cursor within git files in working directory',
+            },
+            {
+                '<Leader>fRf',
+                function()
+                    require('telescope.builtin').grep_string({
+                        additional_args = {'--no-ignore-vcs', '--hidden'},
+                    })
+                end,
+                desc = 'Search for the string under the cursor within all files in working directory',
             },
             {
                 '<Leader>fc',
