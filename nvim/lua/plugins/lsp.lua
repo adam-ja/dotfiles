@@ -30,7 +30,8 @@ return {
                 'coc-tsserver',
                 'coc-vetur',
                 'coc-yaml',
-                '@yaegassy/coc-intelephense'
+                '@yaegassy/coc-intelephense',
+                '@yaegassy/coc-tailwindcss3',
             }
 
             -- Stop the cursor disappearing after running some coc commands
