@@ -58,7 +58,17 @@ return {
                 '<Leader>la',
                 vim.lsp.buf.code_action,
                 desc = 'Show code actions',
-            }
+            },
+            {
+                '<Leader>j',
+                vim.diagnostic.goto_next,
+                desc = 'Go to next diagnostic',
+            },
+            {
+                '<Leader>k',
+                vim.diagnostic.goto_prev,
+                desc = 'Go to previous diagnostic',
+            },
         },
         init = function ()
             vim.diagnostic.config({
@@ -89,6 +99,56 @@ return {
                 end
             })
         end
+    },
+    {'jose-elias-alvarez/null-ls.nvim',
+        dependencies = {
+            'williamboman/mason.nvim',
+            'davidmh/cspell.nvim',
+        },
+        opts = function ()
+            local builtins = require('null-ls').builtins
+            local cspell = require('cspell')
+
+            return {
+                sources = {
+                    -- .env files
+                    builtins.diagnostics.dotenv_linter.with({
+                        extra_args = { '--skip', 'UnorderedKey' },
+                    }),
+                    -- JavaScript/TypeScript
+                    builtins.code_actions.eslint,
+                    builtins.diagnostics.eslint,
+                    -- builtins.formatting.eslint,
+                    -- PHP
+                    builtins.diagnostics.phpstan,
+                    -- builtins.formatting.phpcsfixer,
+                    -- shell
+                    builtins.hover.printenv,
+                    -- spellcheck
+                    cspell.code_actions,
+                    cspell.diagnostics.with({
+                        diagnostic_config = {
+                            underline = true,
+                            signs = false,
+                        },
+                    }),
+                },
+                -- Format on save
+                on_attach = function(client, bufnr)
+                    local augroup = vim.api.nvim_create_augroup('LspFormatting', {})
+                    if client.supports_method('textDocument/formatting') then
+                        vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+                        vim.api.nvim_create_autocmd('BufWritePre', {
+                            group = augroup,
+                            buffer = bufnr,
+                            callback = function()
+                                vim.lsp.buf.format({ bufnr = bufnr })
+                            end,
+                        })
+                    end
+                end,
+            }
+        end,
     },
     {'hrsh7th/nvim-cmp',
         dependencies = {
