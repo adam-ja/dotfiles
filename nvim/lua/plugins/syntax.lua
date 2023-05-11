@@ -22,6 +22,9 @@ return {
                     html = 'rainbow-tags',
                 },
             },
+            endwise = {
+                enable = true,
+            },
         },
         config = function(_, opts)
             require('nvim-treesitter.configs').setup(opts)
@@ -47,6 +50,11 @@ return {
         },
     },
     {'HiPhish/nvim-ts-rainbow2',
+        dependencies = {
+            'nvim-treesitter/nvim-treesitter',
+        },
+    },
+    {'RRethy/nvim-treesitter-endwise',
         dependencies = {
             'nvim-treesitter/nvim-treesitter',
         },
@@ -121,4 +129,28 @@ return {
         config = true,
     },
     'jwalton512/vim-blade', -- No treesitter support for blade yet
+    {'windwp/nvim-autopairs',
+        dependencies = {
+            'nvim-treesitter/nvim-treesitter',
+            'hrsh7th/nvim-cmp',
+        },
+        config = function()
+            require('nvim-autopairs').setup({
+                check_ts = true,
+            })
+
+            -- Insert `(` after selecting a function/method from the completion menu
+            local cpm_autopairs = require('nvim-autopairs.completion.cmp')
+            local cmp = require('cmp')
+            cmp.event:on('confirm_done', cpm_autopairs.on_confirm_done())
+        end,
+        event = 'InsertEnter',
+    },
+    {'windwp/nvim-ts-autotag',
+        dependencies = {
+            'nvim-treesitter/nvim-treesitter',
+        },
+        config = true,
+        event = 'InsertEnter',
+    },
 }
