@@ -54,7 +54,7 @@ return {
                 lualine_x = {
                     {
                         'diagnostics',
-                        sources = {'nvim_diagnostic', 'ale'},
+                        sources = {'nvim_diagnostic'},
                     },
                 },
                 lualine_y = {
