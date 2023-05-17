@@ -18,6 +18,7 @@ return {
                     'bashls',
                     'cssls',
                     'dockerls',
+                    'eslint',
                     -- TODO: change from emmet.vim to emmet-ls?
                     'html',
                     'jsonls',
@@ -111,14 +112,6 @@ return {
 
             return {
                 sources = {
-                    -- .env files
-                    builtins.diagnostics.dotenv_linter.with({
-                        extra_args = { '--skip', 'UnorderedKey' },
-                    }),
-                    -- JavaScript/TypeScript
-                    builtins.code_actions.eslint,
-                    builtins.diagnostics.eslint,
-                    -- builtins.formatting.eslint,
                     -- PHP
                     builtins.diagnostics.phpstan,
                     -- builtins.formatting.phpcsfixer,
