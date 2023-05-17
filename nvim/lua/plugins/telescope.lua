@@ -83,6 +83,13 @@ return {
                 desc = 'See all available Telescope pickers',
             },
             {
+                '<Leader>fk',
+                function()
+                    require('telescope.builtin').keymaps()
+                end,
+                desc = 'Find key mappings',
+            },
+            {
                 '<Leader>ff',
                 function()
                     require('telescope.builtin').find_files({hidden = true, no_ignore = true})
