@@ -100,6 +100,13 @@ return {
                 end,
                 desc = 'Reset all hunks in buffer [gitsigns]',
             },
+            {
+                '<Leader>gd',
+                function ()
+                    require('gitsigns').diffthis()
+                end,
+                desc = 'Diff current file [gitsigns]',
+            },
         }
     },
 }
