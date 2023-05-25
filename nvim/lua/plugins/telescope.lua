@@ -163,14 +163,32 @@ return {
             {
                 '<Leader>fc',
                 function()
-                    require('telescope.builtin').git_bcommits()
+                    require('telescope.builtin').git_bcommits({
+                        wrap_results = true,
+                        git_command = {
+                            'git',
+                            'log',
+                            '--format=%h [%an, %ah] %s',
+                            '--abbrev-commit',
+                        },
+                    })
                 end,
                 desc = 'Commits affecting current buffer',
             },
             {
                 '<Leader>fC',
                 function()
-                    require('telescope.builtin').git_commits()
+                    require('telescope.builtin').git_commits({
+                        wrap_results = true,
+                        git_command = {
+                            'git',
+                            'log',
+                            '--format=%h [%an, %ah] %s',
+                            '--abbrev-commit',
+                            '--',
+                            '.',
+                        },
+                    })
                 end,
                 desc = 'All commits',
             },
