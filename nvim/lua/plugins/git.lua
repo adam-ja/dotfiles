@@ -14,14 +14,14 @@ return {
         event = 'BufRead',
         keys = {
             {
-                '<Leader>gn',
+                '<Leader>gj',
                 function()
                     require('gitsigns').next_hunk()
                 end,
                 desc = 'Go to next hunk [gitsigns]',
             },
             {
-                '<Leader>gp',
+                '<Leader>gk',
                 function ()
                     require('gitsigns').prev_hunk()
                 end,
