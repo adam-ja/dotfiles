@@ -15,13 +15,13 @@ return {
                     link = 'Comment',
                 },
                 htmlBold = {
-                    cterm = 'bold',
+                    bold = true,
                 },
                 htmlItalic = {
-                    cterm = 'italic',
+                    italic = true,
                 },
                 htmlLink = {
-                    cterm = 'underline',
+                    underline = true,
                 },
             },
         },
