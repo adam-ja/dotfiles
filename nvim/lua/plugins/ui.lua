@@ -140,7 +140,6 @@ return {
         },
     },
     {'declancm/cinnamon.nvim',
-        enabled = false, -- currently broken with latest neovim nightly. Try again when cinnamon is updated.
         opts = {
             extra_keymaps = true,
             extended_keymaps = true,
