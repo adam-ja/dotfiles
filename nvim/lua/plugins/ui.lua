@@ -149,4 +149,7 @@ return {
     {'cpea2506/relative-toggle.nvim',
         event = 'BufEnter',
     },
+    {'tzachar/highlight-undo.nvim',
+        config = true,
+    },
 }
