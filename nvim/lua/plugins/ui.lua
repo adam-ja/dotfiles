@@ -104,32 +104,6 @@ return {
             vim.g.indent_guides_start_level = 2
         end
     },
-    {'nvim-tree/nvim-tree.lua',
-        dependencies = {
-            'nvim-tree/nvim-web-devicons',
-        },
-        opts = {
-            view = {
-                width = {
-                    max = '40%',
-                },
-                number = true,
-                relativenumber = true,
-            },
-        },
-        keys = {
-            {
-                '<Leader>n',
-                function ()
-                    require('nvim-tree.api').tree.find_file({
-                        open = true,
-                        focus = true,
-                    })
-                end,
-                desc = 'Open nvim-tree at the location of the current buffer',
-            },
-        },
-    },
     {'NvChad/nvim-colorizer.lua',
         opts = {
             user_default_options = {
@@ -152,4 +126,5 @@ return {
     {'tzachar/highlight-undo.nvim',
         config = true,
     },
+    'Bekaboo/dropbar.nvim',
 }
