@@ -52,6 +52,7 @@ export KEYTIMEOUT=1
 export LANG=en_GB.UTF-8
 
 # Make neovim the default editor
+export EDITOR='nvim'
 export VISUAL='nvim'
 
 # Set a global config file for ripgrep (rg)
