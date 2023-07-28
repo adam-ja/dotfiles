@@ -15,13 +15,6 @@ return {
                 enable = true,
                 enable_autocmd = false,
             },
-            rainbow = {
-                enable = true,
-                query = {
-                    'rainbow-parens',
-                    html = 'rainbow-tags',
-                },
-            },
             endwise = {
                 enable = true,
             },
@@ -49,7 +42,7 @@ return {
             end,
         },
     },
-    {'HiPhish/nvim-ts-rainbow2',
+    {'HiPhish/rainbow-delimiters.nvim',
         dependencies = {
             'nvim-treesitter/nvim-treesitter',
         },
