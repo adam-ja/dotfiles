@@ -72,6 +72,12 @@ export FZF_DEFAULT_OPTS="--layout=reverse --bind ctrl-alt-k:preview-up,ctrl-alt-
 # Set up fnm (--use-on-cd auto-switches to the right version when a directory contains a .node-version or .nvmrc file)
 eval "$(fnm env --use-on-cd)"
 
+ # Bind Ctrl+Backspace to delete the previous word
+# (use `showkey -a` to find the correct escape sequence for a key combination, which may vary by terminal)
+bindkey '^H' backward-kill-word
+# Bind Ctrl+Delete to delete the next word
+bindkey '^[[3;5~' kill-word
+
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
