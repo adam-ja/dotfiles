@@ -195,8 +195,9 @@ return {
                     -- https://github.com/hrsh7th/nvim-cmp/wiki/Example-mappings#luasnip
                     ['<Tab>'] = cmp.mapping(function (fallback)
                         if cmp.visible() then
-                            -- fallback here rather than cmp.select_next_item() because I use tab for copilot
-                            fallback()
+                            cmp.select_next_item()
+                        elseif require('copilot.suggestion').is_visible() then
+                            require('copilot.suggestion').accept()
                         elseif luasnip.expand_or_jumpable() then
                             luasnip.expand_or_jump()
                         elseif has_words_before() then
@@ -208,8 +209,7 @@ return {
 
                     ['<S-Tab>'] = cmp.mapping(function (fallback)
                         if cmp.visible() then
-                            -- fallback here rather than cmp.select_prev_item() because I use tab for copilot
-                            fallback()
+                            cmp.select_prev_item()
                         elseif luasnip.jumpable(-1) then
                             luasnip.jump(-1)
                         else
@@ -255,6 +255,14 @@ return {
                     { name = 'cmdline' },
                 },
             })
+
+            cmp.event:on('menu_opened', function ()
+                vim.b.copilot_suggestion_hidden = true
+            end)
+
+            cmp.event:on('menu_closed', function ()
+                vim.b.copilot_suggestion_hidden = false
+            end)
 
             require('luasnip.loaders.from_vscode').lazy_load()
         end,
