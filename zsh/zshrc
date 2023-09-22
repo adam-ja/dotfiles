@@ -90,5 +90,7 @@ alias fzfp="fzf --preview '(bat --color=always {} || cat {})'"
 alias vi='nvim'
 alias vim='nvim'
 alias gcf='git status --porcelain | cut -c 1-3 --complement | xargs' # List all changed files (staged and unstaged) on a single line
+alias gitgone="git fetch --prune && git branch -vv | grep ': gone] '" # List all local branches that have been deleted on the remote
+alias gitgoned="gcm && gitgone | grep -v '\*' | awk '{print \$1}' | xargs git branch -D" # Delete all local branches that have been deleted on the remote
 # Makes all aliases also work when running as root
 alias sudo='sudo '
