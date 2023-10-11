@@ -19,6 +19,7 @@ return {
                     'cssls',
                     'dockerls',
                     'eslint',
+                    'gopls',
                     -- TODO: change from emmet.vim to emmet-ls?
                     'html',
                     'jsonls',
