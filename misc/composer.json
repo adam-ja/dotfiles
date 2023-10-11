@@ -10,6 +10,9 @@
         "squizlabs/php_codesniffer": "@stable"
     },
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "phpstan/extension-installer": true
+        }
     }
 }
