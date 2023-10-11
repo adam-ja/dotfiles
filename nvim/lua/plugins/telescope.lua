@@ -63,7 +63,8 @@ return {
             require('telescope').load_extension('fzf')
             require('telescope').load_extension('ui-select')
 
-            vim.api.nvim_create_autocmd('User TelescopePreviewerLoaded', {
+            vim.api.nvim_create_autocmd('User', {
+                pattern = 'TelescopePreviewerLoaded',
                 command = 'setlocal wrap | setlocal number',
             })
         end,
