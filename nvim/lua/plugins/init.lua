@@ -5,7 +5,8 @@ return {
     },
     {'iamcco/markdown-preview.nvim',
         ft = 'markdown',
-        build = 'cd app && npm install',
+        -- https://github.com/iamcco/markdown-preview.nvim/issues/612#issuecomment-1807828452
+        build = 'cd app && npm install && git restore .',
     },
     'gpanders/editorconfig.nvim',
     'vim-scripts/SearchComplete',
