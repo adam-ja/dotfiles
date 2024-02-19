@@ -11,10 +11,6 @@ return {
             indent = {
                 enable = true,
             },
-            context_commentstring = {
-                enable = true,
-                enable_autocmd = false,
-            },
             endwise = {
                 enable = true,
             },
@@ -28,9 +24,9 @@ return {
         end,
     },
     {'JoosepAlviste/nvim-ts-context-commentstring',
-        dependencies = {
-            'nvim-treesitter/nvim-treesitter',
-        },
+        opts = {
+            enable_autocmd = false,
+        }
     },
     {'numToStr/Comment.nvim',
         dependencies = {
