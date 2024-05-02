@@ -22,11 +22,12 @@ return {
                     'gopls',
                     -- TODO: change from emmet.vim to emmet-ls?
                     'html',
+                    'intelephense',
                     'jsonls',
                     'lua_ls',
-                    'intelephense',
-                    'tailwindcss',
+                    -- 'tailwindcss', - TODO: this causes freezes when opening files that don't even have any CSS?!
                     'tsserver',
+                    -- 'typos_lsp', - TODO: Try to get this working to replace cspell
                     'vimls',
                     'yamlls',
                 },
