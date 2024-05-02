@@ -238,4 +238,46 @@ return {
             },
         },
     },
+    {'axkirillov/easypick.nvim',
+        dependencies = {
+            'nvim-telescope/telescope.nvim',
+        },
+        config = function()
+            local easypick = require('easypick')
+
+            local pickers = {
+                {
+                    name = 'Conflicts',
+                    command = 'git diff --name-only --diff-filter=U --relative',
+                    previewer = easypick.previewers.file_diff(),
+                },
+                {
+                    name = 'Changes in the last commit',
+                    command = 'git diff --name-only HEAD~1..HEAD',
+                    previewer = easypick.previewers.branch_diff({base_branch = 'HEAD~1'}),
+                },
+            }
+
+            local branches = vim.fn.system("git branch -rl origin/develop origin/master origin/main --format '%(refname:short)'")
+
+            for _, branch in ipairs(vim.fn.split(branches, '\n')) do
+                table.insert(pickers, {
+                    name = 'Changes between ' .. branch .. ' and the last commit',
+                    command = 'git diff --name-only ' .. branch .. '..HEAD',
+                    previewer = easypick.previewers.branch_diff({base_branch = branch}),
+                })
+            end
+
+            easypick.setup({
+                pickers = pickers,
+            })
+        end,
+        keys = {
+            {
+                '<Leader>fe',
+                '<cmd>Easypick<CR>',
+                'Open the list of Easypick pickers in telescope'
+            }
+        }
+    }
 }
