@@ -103,7 +103,8 @@ return {
             })
         end
     },
-    {'jose-elias-alvarez/null-ls.nvim',
+     -- Community maintained fork of null-ls - only the repo name has changed, the plugin is still called null-ls
+    {'nvimtools/none-ls.nvim',
         dependencies = {
             'williamboman/mason.nvim',
             'davidmh/cspell.nvim',
