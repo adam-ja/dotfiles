@@ -20,7 +20,7 @@ return {
             })
         end
     },
-    {'janko/vim-test',
+    {'vim-test/vim-test',
         keys = {
             {
                 '<Leader>ta',
