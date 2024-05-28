@@ -1,4 +1,4 @@
-.lvimrc
+.lazy.lua
 .vim/
 .DS_Store
 .ignore

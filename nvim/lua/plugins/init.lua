@@ -53,18 +53,6 @@ return {
     'tpope/vim-surround',
     'tpope/vim-speeddating',
     'tpope/vim-abolish',
-    {'embear/vim-localvimrc',
-        init = function()
-            -- Make the decisions given when asked before sourcing local vimrc files persistent over multiple vim runs
-            -- and instances (only if the answer was given in upper case (Y/N/A))
-            vim.g.localvimrc_persistent = 1
-            -- Disable lvimrc sandbox so that lvimrc files can include potentially risky commands.
-            -- This is safe so long as you trust the source of any repos with a lvimrc file.
-            vim.g.localvimrc_sandbox = 0
-            -- Search for local config files with these names
-            vim.g.localvimrc_name = { '.lvimrc', '.local_init.lua' }
-        end,
-    },
     'arp242/auto_mkdir2.vim',
     {'jremmen/vim-ripgrep',
         config = function()
