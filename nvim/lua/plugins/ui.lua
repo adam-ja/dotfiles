@@ -121,9 +121,13 @@ return {
     },
     {'declancm/cinnamon.nvim',
         opts = {
-            extra_keymaps = true,
-            extended_keymaps = true,
-            default_delay = 1,
+            keymaps = {
+                basic = true,
+                extra = true,
+            },
+            options = {
+                delay = 1,
+            },
         },
     },
     {'cpea2506/relative-toggle.nvim',
