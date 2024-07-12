@@ -98,7 +98,7 @@ return {
                         focusable = false,
                         close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
                         border = 'rounded',
-                        source = 'if_many',
+                        source = true,
                         prefix = ' ',
                     })
                 end
