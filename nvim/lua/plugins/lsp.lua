@@ -18,9 +18,9 @@ return {
                     'bashls',
                     'cssls',
                     'dockerls',
+                    'emmet_language_server',
                     'eslint',
                     'gopls',
-                    -- TODO: change from emmet.vim to emmet-ls?
                     'html',
                     'intelephense',
                     'jsonls',
@@ -36,6 +36,20 @@ return {
             mason_lspconfig.setup_handlers({
                 function (server_name)
                     require('lspconfig')[server_name].setup({})
+                end,
+                ['emmet_language_server'] = function ()
+                    require('lspconfig').emmet_language_server.setup({
+                        filetypes = {
+                            'blade',
+                            'css',
+                            'html',
+                            'javascript',
+                            'javascriptreact',
+                            'scss',
+                            'typescript',
+                            'typescriptreact',
+                        },
+                    })
                 end
             })
         end,

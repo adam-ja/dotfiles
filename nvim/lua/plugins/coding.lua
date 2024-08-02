@@ -1,6 +1,5 @@
 -- "Coding" related plugins that don't fit neatly into syntax, LSP, etc
 return {
-    'mattn/emmet-vim',
     {'zbirenbaum/copilot.lua',
         cmd = 'Copilot',
         event = 'InsertEnter',
