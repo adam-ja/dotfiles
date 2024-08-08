@@ -17,7 +17,7 @@ if not vim.loop.fs_stat(lazypath) then
     '--branch=stable', -- latest stable release
     lazypath,
   })
-  
+
   if vim.v.shell_error ~= 0 then
     vim.api.nvim_echo({
       { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
@@ -96,13 +96,21 @@ utils.nmap('<C-l>', '<C-w>l')
 utils.nmap('<Leader>al', '<C-v>apb:sort i<CR>')
 -- Sort the selected lines alphabetically
 utils.vmap('<Leader>al', ':sort<CR>')
+-- Press Ctrl-q to get back to Normal mode from Terminal mode
+utils.tmap('<C-q>', '<C-\\><C-n>')
+
+
+-- Custom commands
+------------------
+
 -- Write/quit even if I accidentally hold down shift on :w/:q/:wq
 vim.api.nvim_create_user_command('W', ':w<bang>', {})
 vim.api.nvim_create_user_command('Q', ':q<bang>', {})
 vim.api.nvim_create_user_command('WQ', ':wq<bang>', {})
 vim.api.nvim_create_user_command('Wq', ':wq<bang>', {})
--- Press Ctrl-q to get back to Normal mode from Terminal mode
-utils.tmap('<C-q>', '<C-\\><C-n>')
+
+-- Delete current file and close the buffer
+vim.api.nvim_create_user_command('Rm', ':call delete(expand("%")) | bwipeout!', {})
 
 
 -- UI / styling
