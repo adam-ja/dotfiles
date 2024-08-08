@@ -40,7 +40,7 @@ return {
                 lualine_a = {
                     {
                         'mode',
-                        icon = '',
+                        icon = '',
                     },
                 },
                 lualine_b = {'branch', 'diff'},
@@ -71,6 +71,10 @@ return {
                     },
                 },
                 lualine_z = {
+                    {
+                        'searchcount',
+                        icon = '',
+                    },
                     {
                         '%c/%{strwidth(getline("."))}', -- column number
                         icon = '',
