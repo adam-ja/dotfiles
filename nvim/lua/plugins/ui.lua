@@ -72,7 +72,21 @@ return {
                 },
                 lualine_z = {
                     {
-                        'searchcount',
+                        function ()
+                            local search_term = vim.fn.getreg('/')
+
+                            if vim.v.hlsearch == 0 or search_term == '' then
+                                return ''
+                            end
+
+                            local ok, result = pcall(vim.fn.searchcount)
+
+                            if not ok or next(result) == nil then
+                                return ''
+                            end
+
+                            return string.format('%s [%d/%d]', search_term, result.current, result.total)
+                        end,
                         icon = '',
                     },
                     {
