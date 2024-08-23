@@ -73,6 +73,10 @@ vim.opt.listchars = { tab = '|·', trail = '`' }
 vim.api.nvim_create_autocmd('BufWritePre', {
     command = [[lua require('utils').preserve_cursor_position('%s/\\s\\+$//e')]]
 })
+-- Configure auto-formatting (see `:h fo-table`)
+vim.opt.formatoptions:append('croqwanblj')
+-- Consider lines that start with `- ` or `* ` as list characters for auto-formatting
+vim.opt.formatlistpat:append([[\|^\s*[\*-]\s\+]])
 
 
 -- Key mapping
