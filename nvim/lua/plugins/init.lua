@@ -53,7 +53,6 @@ return {
     'tpope/vim-surround',
     'tpope/vim-speeddating',
     'tpope/vim-abolish',
-    'arp242/auto_mkdir2.vim',
     {'jremmen/vim-ripgrep',
         config = function()
             -- Configure options to pass to ripgrep when using the :Rg command

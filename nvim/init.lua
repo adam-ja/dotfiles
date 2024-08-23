@@ -160,3 +160,14 @@ vim.opt.wildmode = 'list:longest,full'
 
 -- Use system clipboard by default
 vim.opt.clipboard = 'unnamedplus'
+
+-- Create missing parent directories when saving a file
+vim.api.nvim_create_autocmd({'BufWritePre', 'FileWritePre'}, {
+    callback = function(args)
+        local dir = vim.fn.fnamemodify(args.file, ':p:h')
+
+        if vim.fn.isdirectory(dir) == 0 then
+            vim.fn.mkdir(dir, 'p')
+        end
+    end,
+})
