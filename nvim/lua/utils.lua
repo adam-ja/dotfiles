@@ -58,15 +58,37 @@ function M.preserve_cursor_position(command)
     vim.api.nvim_win_set_cursor(0, { line, col })
 end
 
--- Close all floating windows but leave other windows open
--- https://www.reddit.com/r/neovim/comments/nrz9hp/comment/h0lg5m1
-function M.close_floating_windows()
+
+-- Open a floating window (triggered by the show_float function) without any other floating windows open
+function M.exclusive_float(show_float)
+    assert(type(show_float) == 'function', 'show_float must be a function')
+
+    -- Prevent diagnostics from being displayed when hovering on a line with LSP diagnostic issues
+    -- https://www.reddit.com/r/neovim/comments/pg1o6k/neovim_lsp_hover_window_is_hidden_behind_line
+    vim.api.nvim_command('set eventignore=CursorHold')
+
+    -- Close any existing floating windos
+    -- https://www.reddit.com/r/neovim/comments/nrz9hp/comment/h0lg5m1
     for _, window_id in ipairs(vim.api.nvim_list_wins()) do
         local config = vim.api.nvim_win_get_config(window_id)
         if config.relative ~= '' then
             vim.api.nvim_win_close(window_id, false)
         end
     end
+
+    show_float()
+
+    -- Re-enable diagnostics display
+    vim.api.nvim_command('autocmd CursorMoved <buffer> ++once set eventignore=""')
+end
+
+-- Get the current selection in visual mode
+function M.get_selection()
+    return vim.fn.getregion(
+        vim.fn.getpos('v'),
+        vim.fn.getpos('.'),
+        { type = vim.fn.mode() }
+    )
 end
 
 return M

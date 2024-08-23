@@ -69,6 +69,14 @@ return {
             })
         end,
         keys = {
+            {
+                '<Leader>tr',
+                function()
+                    require('telescope.builtin').resume()
+                end,
+                desc = 'List the results (including multi-selections) of the last used telescope picker',
+            },
+
             -- Find
             {
                 '<Leader>ft',
@@ -140,11 +148,40 @@ return {
                 desc = 'Search within all files in working directory',
             },
             {
+                '<Leader>frb',
+                function()
+                    require('telescope.builtin').live_grep({
+                        additional_args = {'--no-ignore-vcs', '--hidden'},
+                        grep_open_files = true,
+                    })
+                end,
+                desc = 'Search within all open buffers',
+            },
+            {
                 '<Leader>fRg',
                 function()
                     require('telescope.builtin').grep_string()
                 end,
                 desc = 'Search for the string under the cursor within git files in working directory',
+            },
+            {
+                '<Leader>fRg',
+                function()
+                    local selection = require('utils').get_selection()
+
+                    if #selection > 1 then
+                        vim.notify('Cannot search for multiline visual selection')
+
+                        return
+                    end
+
+                    require('telescope.builtin').grep_string({
+                        search = selection[1],
+                        additional_args = {'--fixed-strings'},
+                    })
+                end,
+                desc = 'Search for the selected string within git files in working directory',
+                mode = 'v',
             },
             {
                 '<Leader>fRf',
@@ -154,6 +191,55 @@ return {
                     })
                 end,
                 desc = 'Search for the string under the cursor within all files in working directory',
+            },
+            {
+                '<Leader>fRf',
+                function()
+                    local selection = require('utils').get_selection()
+
+                    if #selection > 1 then
+                        vim.notify('Cannot search for multiline visual selection')
+
+                        return
+                    end
+
+                    require('telescope.builtin').grep_string({
+                        search = selection[1],
+                        additional_args = {'--fixed-strings', '--no-ignore-vcs', '--hidden'},
+                    })
+                end,
+                desc = 'Search for the selected string within all files in working directory',
+                mode = 'v',
+            },
+            {
+                '<Leader>fRb',
+                function()
+                    require('telescope.builtin').grep_string({
+                        additional_args = {'--no-ignore-vcs', '--hidden'},
+                        grep_open_files = true,
+                    })
+                end,
+                desc = 'Search for the string under the cursor within all open buffers',
+            },
+            {
+                '<Leader>fRb',
+                function()
+                    local selection = require('utils').get_selection()
+
+                    if #selection > 1 then
+                        vim.notify('Cannot search for multiline visual selection')
+
+                        return
+                    end
+
+                    require('telescope.builtin').grep_string({
+                        search = selection[1],
+                        additional_args = {'--fixed-strings', '--no-ignore-vcs', '--hidden'},
+                        grep_open_files = true,
+                    })
+                end,
+                desc = 'Search for the selected string within all open buffers',
+                mode = 'v',
             },
             {
                 '<Leader>fc',
@@ -186,6 +272,13 @@ return {
                     })
                 end,
                 desc = 'All commits',
+            },
+            {
+                '<Leader>fn',
+                function()
+                    require('telescope').extensions.notify.notify()
+                end,
+                desc = 'Notification history'
             },
 
             -- LSP
@@ -230,6 +323,38 @@ return {
                     require('telescope.builtin').diagnostics({bufnr = 0})
                 end,
                 desc = 'LSP diagnostics in the buffer (e for errors)',
+            },
+            {
+                '<Leader>lc',
+                function ()
+                    local pickers = require('telescope.pickers')
+                    local finders = require('telescope.finders')
+                    local conf = require('telescope.config').values
+
+                    local commands = function()
+                        local opts = {}
+                        pickers.new(opts, {
+                            prompt_title = 'LSP commands',
+                            finder = finders.new_table(vim.lsp.commands),
+                            sorter = conf.generic_sorter(opts),
+                            attach_mappings = function(prompt_bufnr, map)
+                                local execute = function()
+                                    local selection = require('telescope.actions.state').get_selected_entry()
+                                    require('telescope.actions').close(prompt_bufnr)
+                                    vim.lsp.buf.execute_command(selection.value)
+                                end
+
+                                map('i', '<CR>', execute)
+                                map('n', '<CR>', execute)
+
+                                return true
+                            end,
+                        }):find()
+                    end
+
+                    commands()
+                end,
+                desc = 'Show LSP commands',
             },
             {
                 '<Leader>p',

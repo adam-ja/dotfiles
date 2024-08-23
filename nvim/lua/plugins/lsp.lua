@@ -63,11 +63,7 @@ return {
             {
                 '<Leader>d',
                 function ()
-                    -- Prevent diagnostics from showing up when the hover window is open
-                    -- https://www.reddit.com/r/neovim/comments/pg1o6k/neovim_lsp_hover_window_is_hidden_behind_line
-                    vim.api.nvim_command('set eventignore=CursorHold')
-                    vim.lsp.buf.hover()
-                    vim.api.nvim_command('autocmd CursorMoved <buffer> ++once set eventignore=""')
+                    require('utils').exclusive_float(vim.lsp.buf.hover)
                 end,
                 desc = 'Show documentation',
             },
@@ -78,12 +74,16 @@ return {
             },
             {
                 '<Leader>j',
-                vim.diagnostic.goto_next,
+                function ()
+                    vim.diagnostic.jump({count = 1, float = true})
+                end,
                 desc = 'Go to next diagnostic',
             },
             {
                 '<Leader>k',
-                vim.diagnostic.goto_prev,
+                function ()
+                    vim.diagnostic.jump({count = -1, float = true})
+                end,
                 desc = 'Go to previous diagnostic',
             },
         },

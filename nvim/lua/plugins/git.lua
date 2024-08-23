@@ -16,22 +16,21 @@ return {
             {
                 '<Leader>gj',
                 function()
-                    require('gitsigns').next_hunk()
+                    require('gitsigns').nav_hunk('next', {target = 'all'})
                 end,
                 desc = 'Go to next hunk [gitsigns]',
             },
             {
                 '<Leader>gk',
                 function ()
-                    require('gitsigns').prev_hunk()
+                    require('gitsigns').nav_hunk('prev', {target = 'all'})
                 end,
                 desc = 'Go to previous hunk [gitsigns]',
             },
             {
                 '<Leader>gp',
-                -- TODO: make util function for pausing diagnostics hover (see lsp documentation keymap)
                 function ()
-                    require('gitsigns').preview_hunk()
+                    require('utils').exclusive_float(require('gitsigns').preview_hunk)
                 end,
                 desc = 'Preview hunk [gitsigns]',
             },
