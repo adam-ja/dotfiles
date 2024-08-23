@@ -135,6 +135,7 @@ return {
                     builtins.diagnostics.phpstan,
                     -- builtins.formatting.phpcsfixer,
                     -- shell
+                    builtins.hover.dictionary,
                     builtins.hover.printenv,
                     -- spellcheck
                     cspell.code_actions,
