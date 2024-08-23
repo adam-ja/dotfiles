@@ -13,7 +13,7 @@ ENABLE_CORRECTION=true
 # Add wisely, as too many plugins slow down shell startup.
 #
 # vi-mode goes first as it can otherwise override things that break other plugins
-plugins=(vi-mode command-not-found composer docker docker-compose fzf git history-substring-search last-working-dir tmux fzf-tab zsh-autosuggestions)
+plugins=(vi-mode command-not-found composer docker docker-compose fzf git git-extras history-substring-search last-working-dir tmux fzf-tab zsh-autosuggestions)
 
 export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
@@ -89,6 +89,9 @@ alias rmswp='rm ~/.local/state/nvim/swap/*'
 alias fzfp="fzf --preview '(bat --color=always {} || cat {})'"
 alias vi='nvim'
 alias vim='nvim'
+# https://git-scm.com/docs/git-diff#Documentation/git-diff.txt---compact-summary
+# (overrides the `gcs` alias `git diff --staged` provided by the git plugin. `--staged` is the same as `--cached` which is covered by `gdca`)
+alias gds='git diff --compact-summary'
 alias gcf='git status --porcelain | cut -c 1-3 --complement | xargs' # List all changed files (staged and unstaged) on a single line
 alias gitgone="git fetch --prune && git branch -vv | grep ': gone] '" # List all local branches that have been deleted on the remote
 alias gitgoned="gcm && gitgone | grep -v '\*' | awk '{print \$1}' | xargs git branch -D" # Delete all local branches that have been deleted on the remote
