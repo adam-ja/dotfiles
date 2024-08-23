@@ -12,7 +12,8 @@ return {
                 dependencies = {
                     'phpactor/phpactor',
                 },
-            }
+            },
+            'adoyle-h/telescope-extension-maker.nvim',
         },
         branch = '0.1.x',
         lazy = false,
@@ -63,6 +64,40 @@ return {
             require('telescope').load_extension('fzf')
             require('telescope').load_extension('ui-select')
 
+            local maker = require('telescope-extension-maker')
+
+            maker.register({
+                name = 'genghis',
+                command = function ()
+                    local availableOps = {}
+
+                    vim.list_extend(availableOps, vim.tbl_keys(require('genghis.operations.file')))
+                    vim.list_extend(availableOps, vim.tbl_keys(require('genghis.operations.copy')))
+                    vim.list_extend(availableOps, vim.tbl_keys(require('genghis.operations.file')))
+
+                    return availableOps
+                end,
+                onSubmit = function (selection)
+                    vim.cmd('Genghis ' .. selection)
+                end,
+                picker = {
+                    prompt_title = 'Genghis file operations',
+                },
+            })
+
+            maker.register({
+                name = 'lsp_commands',
+                command = function ()
+                    return vim.tbl_keys(vim.lsp.commands)
+                end,
+                onSubmit = function (selection)
+                    vim.lsp.buf.execute_command(selection)
+                end,
+                picker = {
+                    prompt_title = 'LSP commands',
+                },
+            })
+
             vim.api.nvim_create_autocmd('User', {
                 pattern = 'TelescopePreviewerLoaded',
                 command = 'setlocal wrap | setlocal number',
@@ -81,7 +116,7 @@ return {
             {
                 '<Leader>ft',
                 function()
-                    require('telescope.builtin').builtin()
+                    require('telescope.builtin').builtin({ include_extensions = true })
                 end,
                 desc = 'See all available Telescope pickers',
             },
@@ -280,6 +315,13 @@ return {
                 end,
                 desc = 'Notification history'
             },
+            {
+                '<Leader>fo',
+                function ()
+                    require('telescope').extensions.genghis.genghis()
+                end,
+                desc = 'Show available file operations [Genghis]',
+            },
 
             -- LSP
             {
@@ -327,32 +369,7 @@ return {
             {
                 '<Leader>lc',
                 function ()
-                    local pickers = require('telescope.pickers')
-                    local finders = require('telescope.finders')
-                    local conf = require('telescope.config').values
-
-                    local commands = function()
-                        local opts = {}
-                        pickers.new(opts, {
-                            prompt_title = 'LSP commands',
-                            finder = finders.new_table(vim.lsp.commands),
-                            sorter = conf.generic_sorter(opts),
-                            attach_mappings = function(prompt_bufnr, map)
-                                local execute = function()
-                                    local selection = require('telescope.actions.state').get_selected_entry()
-                                    require('telescope.actions').close(prompt_bufnr)
-                                    vim.lsp.buf.execute_command(selection.value)
-                                end
-
-                                map('i', '<CR>', execute)
-                                map('n', '<CR>', execute)
-
-                                return true
-                            end,
-                        }):find()
-                    end
-
-                    commands()
+                    require('telescope').extensions.lsp_commands.lsp_commands()
                 end,
                 desc = 'Show LSP commands',
             },
@@ -401,7 +418,7 @@ return {
             {
                 '<Leader>fe',
                 '<cmd>Easypick<CR>',
-                'Open the list of Easypick pickers in telescope'
+                desc = 'Open the list of Easypick pickers in telescope',
             }
         }
     }
