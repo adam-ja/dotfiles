@@ -5,8 +5,8 @@ return {
             {'williamboman/mason.nvim',
                 config = true,
             },
-            {'folke/neodev.nvim',
-                config = true,
+            {'folke/lazydev.nvim',
+                ft = 'lua',
             },
         },
         build = ':MasonUpdate',
@@ -251,6 +251,10 @@ return {
                     },
                     { name = 'path' },
                     { name = 'calc' },
+                    {
+                        name = 'lazydev',
+                        group_index = 0,
+                    },
                 },
 
                 snippet = {
