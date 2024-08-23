@@ -294,7 +294,12 @@ return {
         build = 'composer install --no-dev -o',
         ft = 'php',
     },
-    {'j-hui/fidget.nvim',
-        config = true,
+    {'mrded/nvim-lsp-notify',
+        dependencies = { 'rcarriga/nvim-notify' },
+        opts = {
+            excludes = {
+                'null-ls', -- Spams notifications
+            },
+        }
     }
 }
