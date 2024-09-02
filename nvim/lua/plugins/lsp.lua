@@ -73,6 +73,16 @@ return {
                 desc = 'Show code actions',
             },
             {
+                '<Leader>ln', -- n for name because r is used for references
+                vim.lsp.buf.rename,
+                desc = 'Rename the LSP symbol under the cursor'
+            },
+            {
+                '<Leader>lD', -- ld for definition, lD for declaration
+                vim.lsp.buf.declaration,
+                desc = 'Go to declaration of the symbol under the cursor (e.g. interface or abstract method rather than concrete implementation)',
+            },
+            {
                 '<Leader>j',
                 function ()
                     vim.diagnostic.jump({count = 1, float = true})
