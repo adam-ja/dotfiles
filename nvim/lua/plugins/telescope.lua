@@ -201,6 +201,19 @@ return {
                 desc = 'Search within all open buffers',
             },
             {
+                '<Leader>frm',
+                function ()
+                    -- Relies on git-extras being installed for git delta
+                    local files = vim.fn.split(vim.fn.system('git delta ' .. require('utils').git_main_branch()), '\n')
+
+                    require('telescope.builtin').live_grep({
+                        prompt_title = 'Search within files that differ from the main branch',
+                        search_dirs = files,
+                    })
+                end,
+                desc = 'Search within files that differ from the main branch'
+            },
+            {
                 '<Leader>fRg',
                 function()
                     require('telescope.builtin').grep_string()
@@ -408,9 +421,10 @@ return {
                 },
             }
 
-            local branches = vim.fn.system("git branch -rl origin/develop origin/master origin/main --format '%(refname:short)'")
+            local main_branch = require('utils').git_main_branch()
+            local develop_branch = require('utils').git_develop_branch()
 
-            for _, branch in ipairs(vim.fn.split(branches, '\n')) do
+            for _, branch in ipairs({main_branch, develop_branch}) do
                 table.insert(pickers, {
                     name = 'Changes between ' .. branch .. ' and the last commit',
                     command = 'git diff --name-only ' .. branch .. '..HEAD',

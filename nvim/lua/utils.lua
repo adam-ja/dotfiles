@@ -91,4 +91,20 @@ function M.get_selection()
     )
 end
 
+-- Get the name of the main branch for the current git repository
+function M.git_main_branch()
+    return vim.fn.split(
+        vim.fn.system("git branch -rl origin/master origin/main --format '%(refname:short)'"),
+        '\n'
+    )[1]
+end
+
+-- Get the name of the develop branch for the current git repository
+function M.git_develop_branch()
+    return vim.fn.split(
+        vim.fn.system("git branch -rl origin/develop origin/dev origin/development --format '%(refname:short)'"),
+        '\n'
+    )[1]
+end
+
 return M
