@@ -160,5 +160,8 @@ return {
         config = function ()
             vim.notify = require('notify')
         end,
-    }
+    },
+    {'yorickpeterse/nvim-pqf',
+        config = true,
+    },
 }
