@@ -81,12 +81,12 @@ return {
 
                     vim.list_extend(availableOps, vim.tbl_keys(require('genghis.operations.file')))
                     vim.list_extend(availableOps, vim.tbl_keys(require('genghis.operations.copy')))
-                    vim.list_extend(availableOps, vim.tbl_keys(require('genghis.operations.file')))
+                    vim.list_extend(availableOps, vim.tbl_keys(require('genghis.operations.other')))
 
                     return availableOps
                 end,
                 onSubmit = function (selection)
-                    vim.cmd('Genghis ' .. selection)
+                    vim.cmd('Genghis ' .. selection.text)
                 end,
                 picker = {
                     prompt_title = 'Genghis file operations',
