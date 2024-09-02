@@ -33,11 +33,19 @@ return {
                 scroll_strategy = 'limit',
                 prompt_prefix = ' 🔭 ',
                 layout_config = {
+                    -- Shared between all layouts
                     prompt_position = 'top',
                     width = 0.95,
                     height = 0.95,
-                    preview_width = 0.5,
                     scroll_speed = 5, -- number of lines to scroll through the previewer
+
+                    -- Layout specific
+                    horizontal = {
+                        preview_width = 0.5,
+                    },
+                    cursor = {
+                        preview_width = 0.5,
+                    },
                 },
                 dynamic_preview_title = true, -- use the picker result (e.g. file name) as the preview window title
                 path_display = {'truncate'}, -- truncate the start of file paths if they are too long to display
