@@ -65,6 +65,12 @@ return {
                         },
                     },
                 },
+                live_grep = {
+                    additional_args = {'--hidden'},
+                },
+                grep_open_files = {
+                    additional_args = {'--hidden'},
+                },
             },
         },
         config = function(_, opts)
@@ -185,7 +191,7 @@ return {
                 '<Leader>frf',
                 function()
                     require('telescope.builtin').live_grep({
-                        additional_args = {'--no-ignore-vcs', '--hidden'},
+                        additional_args = {'--no-ignore-vcs'},
                     })
                 end,
                 desc = 'Search within all files in working directory',
@@ -194,7 +200,7 @@ return {
                 '<Leader>frb',
                 function()
                     require('telescope.builtin').live_grep({
-                        additional_args = {'--no-ignore-vcs', '--hidden'},
+                        additional_args = {'--no-ignore-vcs'},
                         grep_open_files = true,
                     })
                 end,
@@ -243,7 +249,7 @@ return {
                 '<Leader>fRf',
                 function()
                     require('telescope.builtin').grep_string({
-                        additional_args = {'--no-ignore-vcs', '--hidden'},
+                        additional_args = {'--no-ignore-vcs'},
                     })
                 end,
                 desc = 'Search for the string under the cursor within all files in working directory',
@@ -261,7 +267,7 @@ return {
 
                     require('telescope.builtin').grep_string({
                         search = selection[1],
-                        additional_args = {'--fixed-strings', '--no-ignore-vcs', '--hidden'},
+                        additional_args = {'--fixed-strings', '--no-ignore-vcs'},
                     })
                 end,
                 desc = 'Search for the selected string within all files in working directory',
@@ -271,7 +277,7 @@ return {
                 '<Leader>fRb',
                 function()
                     require('telescope.builtin').grep_string({
-                        additional_args = {'--no-ignore-vcs', '--hidden'},
+                        additional_args = {'--no-ignore-vcs'},
                         grep_open_files = true,
                     })
                 end,
@@ -290,7 +296,7 @@ return {
 
                     require('telescope.builtin').grep_string({
                         search = selection[1],
-                        additional_args = {'--fixed-strings', '--no-ignore-vcs', '--hidden'},
+                        additional_args = {'--fixed-strings', '--no-ignore-vcs'},
                         grep_open_files = true,
                     })
                 end,
