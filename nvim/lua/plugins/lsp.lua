@@ -50,7 +50,19 @@ return {
                             'typescriptreact',
                         },
                     })
-                end
+                end,
+                ['intelephense'] = function ()
+                    require('lspconfig').intelephense.setup({
+                        settings = {
+                            intelephense = {
+                                references = {
+                                    -- Don't exclude the vendor directory from references search
+                                    exclude = {}
+                                }
+                            }
+                        }
+                    })
+                end,
             })
         end,
     },
