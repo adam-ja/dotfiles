@@ -26,7 +26,7 @@ return {
                     'jsonls',
                     'lua_ls',
                     -- 'tailwindcss', - TODO: this causes freezes when opening files that don't even have any CSS?!
-                    'tsserver',
+                    'ts_ls',
                     -- 'typos_lsp', - TODO: Try to get this working to replace cspell
                     'vimls',
                     'yamlls',
