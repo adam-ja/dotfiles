@@ -113,10 +113,53 @@ return {
     },
     'edkolev/tmuxline.vim',
     {'luukvbaal/statuscol.nvim',
-        opts = {
-            setopt = true,
-            separator = ' ',
-        },
+        opts = function ()
+            local builtin = require('statuscol.builtin')
+            return {
+                setopt = true,
+                relculright = true,
+                segments = {
+                    {-- folds
+                        text = {
+                            builtin.foldfunc,
+                            ' '
+                        },
+                        condition = {
+                            true, -- always show the output of foldfund
+                            builtin.not_empty -- if the rest of the column isn't empty (i.e there are folds) add the separator
+                        },
+                        click = 'v:lua.ScFa',
+                    },
+                    {-- diagnostics
+                        sign = {
+                            namespace = {'diagnostic/signs'},
+                            auto = true,
+                            foldcolsed = true,
+                        },
+                        click = 'v:lua.ScSa',
+                    },
+                    {-- anything else
+                        sign = {
+                            name = {'.*'},
+                            namespace = {'.*'},
+                            text = {'.*'},
+                            auto = true,
+                        },
+                    },
+                    {-- line number
+                        text = {builtin.lnumfunc},
+                        click = 'v:lua.ScLa',
+                    },
+                    {-- gitsigns
+                        sign = {
+                            namespace = {'gitsigns'},
+                            foldclosed = true,
+                        },
+                        click = 'v:lua.ScSa',
+                    },
+                },
+            }
+        end,
     },
     {'nathanaelkane/vim-indent-guides',
         init = function ()
