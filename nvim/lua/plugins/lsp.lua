@@ -83,6 +83,7 @@ return {
                 '<Leader>la',
                 vim.lsp.buf.code_action,
                 desc = 'Show code actions',
+                mode = {'n', 'v'},
             },
             {
                 '<Leader>ln', -- n for name because r is used for references
@@ -324,5 +325,5 @@ return {
                 'null-ls', -- Spams notifications
             },
         }
-    }
+    },
 }
