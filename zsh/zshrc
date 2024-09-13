@@ -82,6 +82,7 @@ bindkey '^[[3;5~' kill-word
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
+alias bat='batcat'
 alias grep='grep --color=always' # Always colour highlight matching strings with grep
 alias lesss='less -r' # Output raw control characters (maintains colours etc when piping through less)
 alias sedhelp='echo "rg --files-with-matches --color=never SEARCH_TERM [PATHS] | xargs sed -i '\''s/SEARCH_TERM/REPLACEMENT/g'\''"'
