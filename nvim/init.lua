@@ -1,7 +1,3 @@
--- Disable netrw straight away (advised by nvim-tree)
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
-
 -- Make <Space> the <Leader> key instead of the default \
 -- lazy.nvim advises doing this at the top so that mappings are correct
 vim.g.mapleader = ' '

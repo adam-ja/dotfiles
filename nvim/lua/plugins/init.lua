@@ -10,15 +10,6 @@ return {
     },
     'gpanders/editorconfig.nvim',
     'vim-scripts/SearchComplete',
-    {'chrisgrieser/nvim-genghis',
-        dependencies = {
-            'famiu/bufdelete.nvim',
-            'stevearc/dressing.nvim',
-        },
-        opts = {
-            trashCmd = 'rm',
-        }
-    },
     {'chrisgrieser/nvim-spider',
         keys = { -- Note cmd must be used instead of lua functions for dot-repeat to work
             {

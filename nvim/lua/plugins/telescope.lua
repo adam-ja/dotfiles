@@ -14,6 +14,7 @@ return {
                 },
             },
             'adoyle-h/telescope-extension-maker.nvim',
+            'nvim-telescope/telescope-file-browser.nvim',
         },
         branch = '0.1.x',
         lazy = false,
@@ -72,32 +73,23 @@ return {
                     additional_args = {'--hidden'},
                 },
             },
+            extensions = {
+                file_browser = {
+                    hijack_netrw = true,
+                    path = '%:p:h',
+                    cwd_to_path = true,
+                    select_buffer = true,
+                    hidden = true,
+                },
+            },
         },
         config = function(_, opts)
             require('telescope').setup(opts)
             require('telescope').load_extension('fzf')
             require('telescope').load_extension('ui-select')
+            require('telescope').load_extension('file_browser')
 
             local maker = require('telescope-extension-maker')
-
-            maker.register({
-                name = 'genghis',
-                command = function ()
-                    local availableOps = {}
-
-                    vim.list_extend(availableOps, vim.tbl_keys(require('genghis.operations.file')))
-                    vim.list_extend(availableOps, vim.tbl_keys(require('genghis.operations.copy')))
-                    vim.list_extend(availableOps, vim.tbl_keys(require('genghis.operations.other')))
-
-                    return availableOps
-                end,
-                onSubmit = function (selection)
-                    vim.cmd('Genghis ' .. selection.text)
-                end,
-                picker = {
-                    prompt_title = 'Genghis file operations',
-                },
-            })
 
             maker.register({
                 name = 'lsp_commands',
@@ -127,6 +119,13 @@ return {
             },
 
             -- Find
+            {
+                '<Leader>F',
+                function ()
+                    require('telescope').extensions.file_browser.file_browser()
+                end,
+                desc = 'Open telescope file browser',
+            },
             {
                 '<Leader>ft',
                 function()
@@ -341,13 +340,6 @@ return {
                     require('telescope').extensions.notify.notify()
                 end,
                 desc = 'Notification history'
-            },
-            {
-                '<Leader>fo',
-                function ()
-                    require('telescope').extensions.genghis.genghis()
-                end,
-                desc = 'Show available file operations [Genghis]',
             },
 
             -- LSP
