@@ -128,4 +128,19 @@ return {
         config = true,
         event = 'InsertEnter',
     },
+    {'folke/todo-comments.nvim',
+        dependencies = {
+            'nvim-lua/plenary.nvim',
+        },
+        event = 'BufReadPost',
+        opts = {
+            highlight = {
+                keyword = "bg",
+                pattern = [[.*<(KEYWORDS)>]],
+            },
+            search = {
+                pattern = [[\b(KEYWORDS)\b]],
+            },
+        },
+    },
 }
