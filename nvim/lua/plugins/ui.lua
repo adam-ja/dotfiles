@@ -198,11 +198,83 @@ return {
         config = true,
     },
     'Bekaboo/dropbar.nvim',
-    { 'rcarriga/nvim-notify',
-        lazy = false,
-        config = function ()
-            vim.notify = require('notify')
+    {'folke/noice.nvim',
+        event = 'VeryLazy',
+        dependencies = {
+            'MunifTanjim/nui.nvim',
+            'rcarriga/nvim-notify',
+        },
+        init = function ()
+            vim.opt.shortmess:remove('t')
+            vim.opt.shortmess:remove('T')
+            vim.opt.shortmess:append('sW')
         end,
+        opts = {
+            lsp = {
+                override = {
+                    ['vim.lsp.util.convert_input_to_markdown_lines' ] = true,
+                    ['vim.lsp.util.stylize_markdown' ] = true,
+                    ['cmp.entry.get_documentation'] = true,
+                },
+            },
+            presets = {
+                command_palette = true,
+                lsp_doc_border = true,
+            },
+            views = {
+                cmdline_popup = {
+                    size = {
+                        width = '75%',
+                        height = 'auto',
+                    },
+                },
+            },
+            messages = {
+                view_search = false,
+            },
+            routes = {
+                -- https://github.com/folke/noice.nvim/wiki/Configuration-Recipes#ignore-certain-lsp-servers-for-progress-messages
+                {
+                    filter = {
+                        event = 'lsp',
+                        kind = 'progress',
+                        cond = function (message)
+                            local client = vim.tbl_get(message.opts, 'progress', 'client')
+                            return client == 'null-ls'
+                        end,
+                    },
+                    opts = { skip = true },
+                },
+            },
+        },
+        keys = {
+            {
+                '<C-d>',
+                function ()
+                    -- If noice is showing lsp docs, scroll those, otherwise fallback to whatever else <C-d> does
+                    if not require('noice.lsp').scroll(4) then
+                        return '<C-d>'
+                    end
+                end,
+                mode = {'n', 'i', 's'},
+                desc = 'Scroll down in LSP documentation',
+                silent = true,
+                expr = true,
+            },
+            {
+                '<C-u>',
+                function ()
+                    -- If noice is showing lsp docs, scroll those, otherwise fallback to whatever else <C-u> does
+                    if not require('noice.lsp').scroll(-4) then
+                        return '<C-u>'
+                    end
+                end,
+                mode = {'n', 'i', 's'},
+                desc = 'Scroll up in LSP documentation',
+                silent = true,
+                expr = true,
+            },
+        },
     },
     {'yorickpeterse/nvim-pqf',
         config = true,

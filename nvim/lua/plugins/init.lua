@@ -9,7 +9,6 @@ return {
         build = 'cd app && npm install && git restore .',
     },
     'gpanders/editorconfig.nvim',
-    'vim-scripts/SearchComplete',
     {'chrisgrieser/nvim-spider',
         keys = { -- Note cmd must be used instead of lua functions for dot-repeat to work
             {

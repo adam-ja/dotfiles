@@ -141,9 +141,6 @@ vim.opt.fillchars:append('foldopen:,foldsep:│,foldclose:')
 -- Other
 --------
 
--- Attempt to improve performance
-vim.opt.lazyredraw = true
-
 -- Lower values allow plugins to respond quicker to changes, but can cause performance issues
 vim.opt.updatetime = 300
 

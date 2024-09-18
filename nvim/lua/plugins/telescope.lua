@@ -81,6 +81,13 @@ return {
                     select_buffer = true,
                     hidden = true,
                 },
+                ["ui-select"] = {
+                    layout_strategy = 'cursor',
+                    layout_config = {
+                        width = 0.5,
+                        height = 0.5,
+                    },
+                }
             },
         },
         config = function(_, opts)
