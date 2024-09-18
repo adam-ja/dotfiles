@@ -11,9 +11,6 @@ return {
             indent = {
                 enable = true,
             },
-            endwise = {
-                enable = true,
-            },
         },
         config = function(_, opts)
             require('nvim-treesitter.configs').setup(opts)
@@ -39,11 +36,6 @@ return {
         },
     },
     {'HiPhish/rainbow-delimiters.nvim',
-        dependencies = {
-            'nvim-treesitter/nvim-treesitter',
-        },
-    },
-    {'RRethy/nvim-treesitter-endwise',
         dependencies = {
             'nvim-treesitter/nvim-treesitter',
         },
