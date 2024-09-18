@@ -171,14 +171,40 @@ return {
             vim.g.indent_guides_start_level = 2
         end
     },
-    {'NvChad/nvim-colorizer.lua',
-        opts = {
-            user_default_options = {
-                css = true,
-                tailwind = true,
-                mode = 'background',
-            },
-        },
+    {'uga-rosa/ccc.nvim',
+        config = function ()
+            local ccc = require('ccc')
+            local pickers = require('ccc.config.default').pickers
+            vim.list_extend(pickers, {
+                ccc.picker.css_name,
+                ccc.picker.defaults,
+                ccc.picker.ansi_escape({
+                    black = '#0c0c0c',
+                    red = '#c50f1f',
+                    green = '#13a10e',
+                    yellow = '#c19c00',
+                    blue = '#0037da',
+                    magenta = '#881798',
+                    cyan = '#3a96dd',
+                    white = '#cccccc',
+                    bright_black = '#767676',
+                    bright_red = '#e74856',
+                    bright_green = '#16c60c',
+                    bright_yellow = '#f9f1a5',
+                    bright_blue = '#3b78ff',
+                    bright_magenta = '#b4009e',
+                    bright_cyan = '#61d6d6',
+                    bright_white = '#f2f2f2',
+                }),
+            })
+            ccc.setup({
+                highlight_mode = 'virtual',
+                highlighter = {
+                    auto_enable = true,
+                },
+                pickers = pickers
+            })
+        end,
     },
     {'declancm/cinnamon.nvim',
         opts = {
