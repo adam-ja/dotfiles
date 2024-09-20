@@ -228,7 +228,22 @@ return {
         event = 'VeryLazy',
         dependencies = {
             'MunifTanjim/nui.nvim',
-            'rcarriga/nvim-notify',
+            {'rcarriga/nvim-notify',
+                opts = {
+                    on_open = function(win)
+                        vim.api.nvim_win_set_config(win, { focusable = false })
+                    end,
+                },
+                keys = {
+                    {
+                        '<Leader>nd',
+                        function ()
+                            require('notify').dismiss()
+                        end,
+                        desc = 'Dismiss all notification windows currently displayed',
+                    },
+                },
+            },
         },
         init = function ()
             vim.opt.shortmess:remove('t')

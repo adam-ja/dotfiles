@@ -67,7 +67,7 @@ function M.exclusive_float(show_float)
     -- https://www.reddit.com/r/neovim/comments/pg1o6k/neovim_lsp_hover_window_is_hidden_behind_line
     vim.api.nvim_command('set eventignore=CursorHold')
 
-    -- Close any existing floating windos
+    -- Close any existing floating windows
     -- https://www.reddit.com/r/neovim/comments/nrz9hp/comment/h0lg5m1
     for _, window_id in ipairs(vim.api.nvim_list_wins()) do
         local config = vim.api.nvim_win_get_config(window_id)
