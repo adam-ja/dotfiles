@@ -161,15 +161,22 @@ return {
             }
         end,
     },
-    {'nathanaelkane/vim-indent-guides',
-        init = function ()
-            -- Enable indent guides by default
-            vim.g.indent_guides_enable_on_vim_startup = 1
-            -- Just use one character to highlight indent level rather than highlighting the full indent block
-            vim.g.indent_guides_guide_size = 1
-            -- Start indent guides from level 2 - no need to see it on column 1
-            vim.g.indent_guides_start_level = 2
-        end
+    {'lukas-reineke/indent-blankline.nvim',
+        main = 'ibl',
+        config = function ()
+            require('ibl').setup({
+                indent = {
+                    char = '',
+                },
+                scope = {
+                    enabled = false,
+                },
+            })
+
+            local hooks = require('ibl.hooks')
+            hooks.register(hooks.type.WHITESPACE, hooks.builtin.hide_first_space_indent_level)
+            hooks.register(hooks.type.WHITESPACE, hooks.builtin.hide_first_tab_indent_level)
+        end,
     },
     {'uga-rosa/ccc.nvim',
         config = function ()
