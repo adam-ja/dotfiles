@@ -13,7 +13,7 @@ ENABLE_CORRECTION=true
 # Add wisely, as too many plugins slow down shell startup.
 #
 # vi-mode goes first as it can otherwise override things that break other plugins
-plugins=(vi-mode command-not-found composer docker docker-compose fzf git git-extras history-substring-search last-working-dir tmux fzf-tab zsh-autosuggestions)
+plugins=(vi-mode spaceship-vi-mode command-not-found composer docker docker-compose fzf git git-extras history-substring-search last-working-dir tmux fzf-tab zsh-autosuggestions)
 
 export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
@@ -30,6 +30,13 @@ ZSH_CUSTOM=$HOME/dotfiles/zsh_custom
 # Use spaceship prompt
 SPACESHIP_TIME_SHOW=true
 SPACESHIP_BATTERY_SHOW=false
+SPACESHIP_PROMPT_ADD_NEWLINE=false
+SPACESHIP_CHAR_PREFIX=" "
+SPACESHIP_CHAR_SYMBOL=""
+SPACESHIP_CHAR_SUFFIX=" "
+# Async makes the prompt faster but is all kinds of broken
+# https://github.com/spaceship-prompt/spaceship-prompt/issues/1193
+SPACESHIP_PROMPT_ASYNC=false
 ZSH_THEME="spaceship"
 
 # Automatically start tmux when opening a new terminal window (window will also automatically close when exiting tmux)
@@ -44,6 +51,7 @@ setopt HIST_FIND_NO_DUPS
 source $ZSH/oh-my-zsh.sh
 
 # Fix vi-mode indicator not updating
+spaceship add --before char vi_mode
 eval spaceship_vi_mode_enable
 
 # Make Vi mode transitions faster (KEYTIMEOUT is in hundredths of a second, default is 40 so 0.4 seconds)
@@ -72,7 +80,7 @@ export FZF_DEFAULT_OPTS="--layout=reverse --bind ctrl-alt-k:preview-up,ctrl-alt-
 # Set up fnm (--use-on-cd auto-switches to the right version when a directory contains a .node-version or .nvmrc file)
 eval "$(fnm env --use-on-cd)"
 
- # Bind Ctrl+Backspace to delete the previous word
+# Bind Ctrl+Backspace to delete the previous word
 # (use `showkey -a` to find the correct escape sequence for a key combination, which may vary by terminal)
 bindkey '^H' backward-kill-word
 # Bind Ctrl+Delete to delete the next word

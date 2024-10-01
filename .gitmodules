@@ -17,3 +17,6 @@
 [submodule "/home/adam/dotfiles/zsh_custom/plugins/zsh-autosuggestions"]
 	path = /home/adam/dotfiles/zsh_custom/plugins/zsh-autosuggestions
 	url = https://github.com/zsh-users/zsh-autosuggestions
+[submodule "/home/adam/dotfiles/zsh_custom/plugins/spaceship-vi-mode"]
+	path = /home/adam/dotfiles/zsh_custom/plugins/spaceship-vi-mode
+	url = https://github.com/spaceship-prompt/spaceship-vi-mode.git
