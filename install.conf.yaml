@@ -9,6 +9,7 @@
     ~/.config/git/config: git/config
     ~/.config/kitty/kitty.conf: misc/kitty.conf
     ~/.config/nvim: nvim/
+    ~/.config/spaceship.zsh: zsh/spaceship.zsh
     ~/.tmux.conf: tmux/tmux.conf # tmux is supposed to search in ~/.config/tmux/ but for some reason doesn't work
     zsh_custom/themes/spaceship.zsh-theme: zsh_custom/themes/spaceship-prompt/spaceship.zsh-theme
 - shell:

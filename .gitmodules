@@ -20,3 +20,6 @@
 [submodule "/home/adam/dotfiles/zsh_custom/plugins/spaceship-vi-mode"]
 	path = /home/adam/dotfiles/zsh_custom/plugins/spaceship-vi-mode
 	url = https://github.com/spaceship-prompt/spaceship-vi-mode.git
+[submodule "/home/adam/dotfiles/zsh_custom/plugins/spaceship-react"]
+	path = /home/adam/dotfiles/zsh_custom/plugins/spaceship-react
+	url = https://github.com/spaceship-prompt/spaceship-react.git

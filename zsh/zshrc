@@ -13,7 +13,17 @@ ENABLE_CORRECTION=true
 # Add wisely, as too many plugins slow down shell startup.
 #
 # vi-mode goes first as it can otherwise override things that break other plugins
-plugins=(vi-mode spaceship-vi-mode command-not-found composer docker docker-compose fzf git git-extras history-substring-search last-working-dir tmux fzf-tab zsh-autosuggestions)
+plugins=($plugins vi-mode)
+plugins=($plugins command-not-found)
+plugins=($plugins composer)
+plugins=($plugins docker docker-compose)
+plugins=($plugins fzf fzf-tab)
+plugins=($plugins git git-extras)
+plugins=($plugins history-substring-search)
+plugins=($plugins last-working-dir)
+plugins=($plugins spaceship-react spaceship-vi-mode)
+plugins=($plugins tmux)
+plugins=($plugins zsh-autosuggestions)
 
 export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
@@ -28,16 +38,9 @@ fpath=($HOME/dotfiles/zsh/completions/ $fpath)
 ZSH_CUSTOM=$HOME/dotfiles/zsh_custom
 
 # Use spaceship prompt
-SPACESHIP_TIME_SHOW=true
-SPACESHIP_BATTERY_SHOW=false
-SPACESHIP_PROMPT_ADD_NEWLINE=false
-SPACESHIP_CHAR_PREFIX=" "
-SPACESHIP_CHAR_SYMBOL=""
-SPACESHIP_CHAR_SUFFIX=" "
-# Async makes the prompt faster but is all kinds of broken
-# https://github.com/spaceship-prompt/spaceship-prompt/issues/1193
-SPACESHIP_PROMPT_ASYNC=false
 ZSH_THEME="spaceship"
+# This doesn't work if set in spaceship.zsh so set it here
+SPACESHIP_PROMPT_DEFAULT_SUFFIX=" "
 
 # Automatically start tmux when opening a new terminal window (window will also automatically close when exiting tmux)
 ZSH_TMUX_AUTOSTART=true
@@ -49,10 +52,6 @@ ZSH_TMUX_AUTOCONNECT=false
 setopt HIST_FIND_NO_DUPS
 
 source $ZSH/oh-my-zsh.sh
-
-# Fix vi-mode indicator not updating
-spaceship add --before char vi_mode
-eval spaceship_vi_mode_enable
 
 # Make Vi mode transitions faster (KEYTIMEOUT is in hundredths of a second, default is 40 so 0.4 seconds)
 export KEYTIMEOUT=1
