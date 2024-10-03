@@ -1,34 +1,23 @@
 return {
-    {'olimorris/onedarkpro.nvim',
+    {'folke/tokyonight.nvim',
+        lazy = false,
         priority = 1000, -- make sure this is loaded first
         opts = {
-            options = {
-                cursorline = true,
-            },
             styles = {
-                comments = 'italic',
-                virtual_text = 'italic',
+                comments = { italic = true },
+                virtual_text = { italic = true },
             },
-            highlights = {
-                GitSignsCurrentLineBlame = {
-                    -- Highlight the current line blame virtual text as a comment (required to make it italic)
-                    link = 'Comment',
-                },
-                htmlBold = {
-                    bold = true,
-                },
-                htmlItalic = {
-                    italic = true,
-                },
-                htmlLink = {
-                    underline = true,
-                },
-            },
+            on_highlights = function (highlights, colours)
+                -- Highlight the current line blame virtual text as a comment (required to make it italic)
+                highlights.GitSignsCurrentLineBlame = highlights.Comment
+            end,
+            dim_inactive = true,
         },
         config = function (_, opts)
-            require('onedarkpro').setup(opts)
+            require('tokyonight').setup(opts)
 
-            vim.cmd('colorscheme onedark')
+            vim.cmd('colorscheme tokyonight-storm')
+            vim.opt.cursorline = true
         end,
     },
     {'nvim-lualine/lualine.nvim',
@@ -101,12 +90,12 @@ return {
             },
             options = {
                 section_separators = {
-                    left = '',
-                    right = '',
+                    left = '',
+                    right = '',
                 },
                 component_separators = {
-                    left = '',
-                    right = '',
+                    left = '',
+                    right = '',
                 },
             },
         },

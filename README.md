@@ -26,9 +26,9 @@ source $HOME/dotfiles/zsh/zshrc
 ### Extras
 
 - A [Nerd Font][nerdfonts] is required to see fancy symbols. The popular JetBrains Mono Nerd Font is installed as part of the process above, and this also includes ligatures where supported.
-- The kitty terminal emulator is also installed and configured to use the JetBrains font (kitty supports ligatures) and the matching theme from the onedarkpro neovim theme. If using kitty, it's worth changing the default terminal app in the OS to this, and updating any keyboard shortcuts (e.g. Ctrl-Alt-T in Ubuntu).
+- The kitty terminal emulator is also installed and configured to use the JetBrains font (kitty supports ligatures) and the matching theme from the tokyonight neovim theme. If using kitty, it's worth changing the default terminal app in the OS to this, and updating any keyboard shortcuts (e.g. Ctrl-Alt-T in Ubuntu).
 - If not using kitty, you'll need to set the font and theme in your terminal emulator of choice.
-    - Some themes are provided by the onedarkpro.nvim plugin (use the commands `:OnedarkproExportTo[Kitty|Alacritty|WindowsTerminal]`). GNOME Terminal doesn't support theme imports, but you can use [One for GNOME Terminal][one-gnome-terminal] instead.
+    - Some themes are provided by the tokyonight.nvim plugin.
     - Not all terminal emulators support ligatures (including GNOME Terminal).
 
 ## License
@@ -41,4 +41,3 @@ If you like what you see, feel free to fork it (or just copy any bits you like) 
 [dotbot]: https://github.com/anishathalye/dotbot
 [fork]: https://github.com/anishathalye/dotfiles_template/fork
 [nerdfonts]: https://github.com/ryanoasis/nerd-fonts
-[one-gnome-terminal]: https://github.com/denysdovhan/one-gnome-terminal
