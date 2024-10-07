@@ -99,12 +99,16 @@ return {
                 end,
                 desc = 'Reset all hunks in buffer [gitsigns]',
             },
+        }
+    },
+    {'sindrets/diffview.nvim',
+        keys = {
             {
                 '<Leader>gd',
                 function ()
-                    require('gitsigns').diffthis()
+                    require('diffview').open()
                 end,
-                desc = 'Diff current file [gitsigns]',
+                desc = 'Diff current file [diffview]',
             },
         }
     },
