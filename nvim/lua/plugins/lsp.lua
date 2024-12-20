@@ -125,7 +125,7 @@ return {
 
             local severities = {
                 Error = '',
-                Warning = '',
+                Warn = '',
                 Info = '',
                 Hint = '',
                 Ok = ''
