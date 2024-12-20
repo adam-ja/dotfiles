@@ -30,6 +30,7 @@ return {
                         ['<C-j>'] = 'move_selection_next',
                     },
                 },
+                wrap_results = true,
                 sorting_strategy = 'ascending',
                 scroll_strategy = 'limit',
                 prompt_prefix = ' 🔭 ',
@@ -49,7 +50,6 @@ return {
                     },
                 },
                 dynamic_preview_title = true, -- use the picker result (e.g. file name) as the preview window title
-                path_display = {'truncate'}, -- truncate the start of file paths if they are too long to display
                 vimgrep_arguments = {
                     'rg',
                     '--vimgrep',
@@ -313,7 +313,6 @@ return {
                 '<Leader>fc',
                 function()
                     require('telescope.builtin').git_bcommits({
-                        wrap_results = true,
                         git_command = {
                             'git',
                             'log',
@@ -328,7 +327,6 @@ return {
                 '<Leader>fC',
                 function()
                     require('telescope.builtin').git_commits({
-                        wrap_results = true,
                         git_command = {
                             'git',
                             'log',
