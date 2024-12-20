@@ -58,7 +58,6 @@ function M.preserve_cursor_position(command)
     vim.api.nvim_win_set_cursor(0, { line, col })
 end
 
-
 -- Open a floating window (triggered by the show_float function) without any other floating windows open
 function M.exclusive_float(show_float)
     assert(type(show_float) == 'function', 'show_float must be a function')

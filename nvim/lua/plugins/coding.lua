@@ -1,9 +1,10 @@
 -- "Coding" related plugins that don't fit neatly into syntax, LSP, etc
 return {
-    {'zbirenbaum/copilot.lua',
+    {
+        'zbirenbaum/copilot.lua',
         cmd = 'Copilot',
         event = 'InsertEnter',
-        config = function ()
+        config = function()
             require('copilot').setup({
                 panel = {
                     enabled = false,
@@ -19,7 +20,8 @@ return {
             })
         end
     },
-    {'vim-test/vim-test',
+    {
+        'vim-test/vim-test',
         keys = {
             {
                 '<Leader>ta',

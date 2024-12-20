@@ -1,43 +1,47 @@
 -- Core and miscelaneous plugins that don't fit in any other category
 return {
-    {'folke/lazy.nvim', -- let lazy.nvim manage itself
+    {
+        'folke/lazy.nvim', -- let lazy.nvim manage itself
         version = '*',
     },
-    {'iamcco/markdown-preview.nvim',
+    {
+        'iamcco/markdown-preview.nvim',
         ft = 'markdown',
         -- https://github.com/iamcco/markdown-preview.nvim/issues/612#issuecomment-1807828452
         build = 'cd app && npm install && git restore .',
     },
     'gpanders/editorconfig.nvim',
-    {'chrisgrieser/nvim-spider',
+    {
+        'chrisgrieser/nvim-spider',
         keys = { -- Note cmd must be used instead of lua functions for dot-repeat to work
             {
                 'w',
                 [[<cmd>lua require('spider').motion('w')<CR>]],
                 desc = 'Move to next word',
-                mode = {'n', 'o', 'x'},
+                mode = { 'n', 'o', 'x' },
             },
             {
                 'e',
                 [[<cmd>lua require('spider').motion('e')<CR>]],
                 desc = 'Move to end of word',
-                mode = {'n', 'o', 'x'},
+                mode = { 'n', 'o', 'x' },
             },
             {
                 'b',
                 [[<cmd>lua require('spider').motion('b')<CR>]],
                 desc = 'Move to previous word',
-                mode = {'n', 'o', 'x'},
+                mode = { 'n', 'o', 'x' },
             },
             {
                 'ge',
                 [[<cmd>lua require('spider').motion('ge')<CR>]],
                 desc = 'Move to end of previous word',
-                mode = {'n', 'o', 'x'},
+                mode = { 'n', 'o', 'x' },
             },
         },
     },
-    {'junegunn/vim-easy-align',
+    {
+        'junegunn/vim-easy-align',
         keys = {
             {
                 '<F2>',
@@ -52,7 +56,8 @@ return {
     'tpope/vim-surround',
     'tpope/vim-speeddating',
     'tpope/vim-abolish',
-    {'jremmen/vim-ripgrep',
+    {
+        'jremmen/vim-ripgrep',
         config = function()
             -- Configure options to pass to ripgrep when using the :Rg command
             vim.g.rg_command = 'rg --vimgrep --smart-case --follow --ignore-vcs --color=never'
@@ -74,10 +79,12 @@ return {
         },
     },
     'stefandtw/quickfix-reflector.vim',
-    {'nacro90/numb.nvim',
+    {
+        'nacro90/numb.nvim',
         config = true,
     },
-    {'ziontee113/icon-picker.nvim',
+    {
+        'ziontee113/icon-picker.nvim',
         dependencies = {
             'nvim-telescope/telescope.nvim',
         },
@@ -98,7 +105,8 @@ return {
             },
         },
     },
-    {'AckslD/nvim-neoclip.lua',
+    {
+        'AckslD/nvim-neoclip.lua',
         dependencies = {
             'nvim-telescope/telescope.nvim',
         },
@@ -107,7 +115,7 @@ return {
                 telescope = {
                     i = {
                         paste_behind = '<C-S-p>', -- replace default <c-k> which is used to move up telescope results
-                        delete = '<C-S-d>', -- delete an entry (replace default <c-d> which is used to scroll down telescope preview)
+                        delete = '<C-S-d>',       -- delete an entry (replace default <c-d> which is used to scroll down telescope preview)
                     },
                 },
             },
@@ -115,14 +123,14 @@ return {
         keys = {
             {
                 '<Leader>c',
-                function ()
+                function()
                     require('telescope').extensions.neoclip['plus']()
                 end,
                 desc = 'Show yank history',
             },
             {
                 '<Leader>m',
-                function ()
+                function()
                     require('telescope').extensions.macroscope.default()
                 end,
                 desc = 'Show macro history',

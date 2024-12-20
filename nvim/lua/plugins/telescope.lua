@@ -1,14 +1,17 @@
 -- Note due to the dependencies and the way Telescope extensions are loaded, all key mappings for Telescope extensions
 -- are defined in the main Telescope plugin configuration.
 return {
-    {'nvim-telescope/telescope.nvim',
+    {
+        'nvim-telescope/telescope.nvim',
         dependencies = {
             'nvim-lua/plenary.nvim',
-            {'nvim-telescope/telescope-fzf-native.nvim',
+            {
+                'nvim-telescope/telescope-fzf-native.nvim',
                 build = 'make',
             },
             'nvim-telescope/telescope-ui-select.nvim',
-            {'TENMAJKL/phpactor-telescope',
+            {
+                'TENMAJKL/phpactor-telescope',
                 dependencies = {
                     'phpactor/phpactor',
                 },
@@ -67,10 +70,10 @@ return {
                     },
                 },
                 live_grep = {
-                    additional_args = {'--hidden'},
+                    additional_args = { '--hidden' },
                 },
                 grep_open_files = {
-                    additional_args = {'--hidden'},
+                    additional_args = { '--hidden' },
                 },
             },
             extensions = {
@@ -100,10 +103,10 @@ return {
 
             maker.register({
                 name = 'lsp_commands',
-                command = function ()
+                command = function()
                     return vim.tbl_keys(vim.lsp.commands)
                 end,
-                onSubmit = function (selection)
+                onSubmit = function(selection)
                     vim.lsp.buf.execute_command(selection)
                 end,
                 picker = {
@@ -131,7 +134,7 @@ return {
             -- Find
             {
                 '<Leader>F',
-                function ()
+                function()
                     require('telescope').extensions.file_browser.file_browser()
                 end,
                 desc = 'Open telescope file browser',
@@ -153,7 +156,7 @@ return {
             {
                 '<Leader>ff',
                 function()
-                    require('telescope.builtin').find_files({hidden = true, no_ignore = true})
+                    require('telescope.builtin').find_files({ hidden = true, no_ignore = true })
                 end,
                 desc = 'Find files in working directory',
             },
@@ -161,9 +164,9 @@ return {
                 '<Leader>fg',
                 function()
                     local builtin = require('telescope.builtin')
-                    if not pcall(builtin.git_files, {show_untracked = true}) then
+                    if not pcall(builtin.git_files, { show_untracked = true }) then
                         -- If not in a git repository, fall back to find_files
-                        builtin.find_files({hidden = true, no_ignore = true})
+                        builtin.find_files({ hidden = true, no_ignore = true })
                     end
                 end,
                 desc = 'Find git files in current repository (including untracked)',
@@ -200,7 +203,7 @@ return {
                 '<Leader>frf',
                 function()
                     require('telescope.builtin').live_grep({
-                        additional_args = {'--no-ignore-vcs'},
+                        additional_args = { '--no-ignore-vcs' },
                     })
                 end,
                 desc = 'Search within all files in working directory',
@@ -209,7 +212,7 @@ return {
                 '<Leader>frb',
                 function()
                     require('telescope.builtin').live_grep({
-                        additional_args = {'--no-ignore-vcs'},
+                        additional_args = { '--no-ignore-vcs' },
                         grep_open_files = true,
                     })
                 end,
@@ -217,7 +220,7 @@ return {
             },
             {
                 '<Leader>frm',
-                function ()
+                function()
                     -- Relies on git-extras being installed for git delta
                     local files = vim.fn.split(vim.fn.system('git delta ' .. require('utils').git_main_branch()), '\n')
 
@@ -261,7 +264,7 @@ return {
 
                     require('telescope.builtin').grep_string({
                         search = selection[1],
-                        additional_args = {'--fixed-strings'},
+                        additional_args = { '--fixed-strings' },
                     })
                 end,
                 desc = 'Search for the selected string within git files in working directory',
@@ -271,7 +274,7 @@ return {
                 '<Leader>fRf',
                 function()
                     require('telescope.builtin').grep_string({
-                        additional_args = {'--no-ignore-vcs'},
+                        additional_args = { '--no-ignore-vcs' },
                     })
                 end,
                 desc = 'Search for the string under the cursor within all files in working directory',
@@ -289,7 +292,7 @@ return {
 
                     require('telescope.builtin').grep_string({
                         search = selection[1],
-                        additional_args = {'--fixed-strings', '--no-ignore-vcs'},
+                        additional_args = { '--fixed-strings', '--no-ignore-vcs' },
                     })
                 end,
                 desc = 'Search for the selected string within all files in working directory',
@@ -299,7 +302,7 @@ return {
                 '<Leader>fRb',
                 function()
                     require('telescope.builtin').grep_string({
-                        additional_args = {'--no-ignore-vcs'},
+                        additional_args = { '--no-ignore-vcs' },
                         grep_open_files = true,
                     })
                 end,
@@ -318,7 +321,7 @@ return {
 
                     require('telescope.builtin').grep_string({
                         search = selection[1],
-                        additional_args = {'--fixed-strings', '--no-ignore-vcs'},
+                        additional_args = { '--fixed-strings', '--no-ignore-vcs' },
                         grep_open_files = true,
                     })
                 end,
@@ -402,7 +405,7 @@ return {
             {
                 '<Leader>le',
                 function()
-                    require('telescope.builtin').diagnostics({bufnr = 0})
+                    require('telescope.builtin').diagnostics({ bufnr = 0 })
                 end,
                 desc = 'LSP diagnostics in the buffer (e for errors)',
             },
@@ -415,7 +418,7 @@ return {
             },
             {
                 '<Leader>lc',
-                function ()
+                function()
                     require('telescope').extensions.lsp_commands.lsp_commands()
                 end,
                 desc = 'Show LSP commands',
@@ -427,7 +430,8 @@ return {
             },
         },
     },
-    {'axkirillov/easypick.nvim',
+    {
+        'axkirillov/easypick.nvim',
         dependencies = {
             'nvim-telescope/telescope.nvim',
         },
@@ -443,18 +447,18 @@ return {
                 {
                     name = 'Changes in the last commit',
                     command = 'git diff --name-only HEAD~1..HEAD',
-                    previewer = easypick.previewers.branch_diff({base_branch = 'HEAD~1'}),
+                    previewer = easypick.previewers.branch_diff({ base_branch = 'HEAD~1' }),
                 },
             }
 
             local main_branch = require('utils').git_main_branch()
             local develop_branch = require('utils').git_develop_branch()
 
-            for _, branch in ipairs({main_branch, develop_branch}) do
+            for _, branch in ipairs({ main_branch, develop_branch }) do
                 table.insert(pickers, {
                     name = 'Changes between ' .. branch .. ' and the last commit',
                     command = 'git diff --name-only ' .. branch .. '..HEAD',
-                    previewer = easypick.previewers.branch_diff({base_branch = branch}),
+                    previewer = easypick.previewers.branch_diff({ base_branch = branch }),
                 })
             end
 

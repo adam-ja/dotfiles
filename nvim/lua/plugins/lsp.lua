@@ -1,16 +1,19 @@
 return {
-    {'williamboman/mason-lspconfig.nvim',
+    {
+        'williamboman/mason-lspconfig.nvim',
         lazy = false,
         dependencies = {
-            {'williamboman/mason.nvim',
+            {
+                'williamboman/mason.nvim',
                 config = true,
             },
-            {'folke/lazydev.nvim',
+            {
+                'folke/lazydev.nvim',
                 ft = 'lua',
             },
         },
         build = ':MasonUpdate',
-        config = function ()
+        config = function()
             local mason_lspconfig = require('mason-lspconfig')
 
             mason_lspconfig.setup({
@@ -35,10 +38,10 @@ return {
             })
 
             mason_lspconfig.setup_handlers({
-                function (server_name)
+                function(server_name)
                     require('lspconfig')[server_name].setup({})
                 end,
-                ['emmet_language_server'] = function ()
+                ['emmet_language_server'] = function()
                     require('lspconfig').emmet_language_server.setup({
                         filetypes = {
                             'blade',
@@ -52,7 +55,7 @@ return {
                         },
                     })
                 end,
-                ['intelephense'] = function ()
+                ['intelephense'] = function()
                     require('lspconfig').intelephense.setup({
                         settings = {
                             intelephense = {
@@ -72,7 +75,8 @@ return {
             })
         end,
     },
-    {'neovim/nvim-lspconfig',
+    {
+        'neovim/nvim-lspconfig',
         lazy = false,
         dependencies = {
             'williamboman/mason-lspconfig.nvim',
@@ -80,7 +84,7 @@ return {
         keys = {
             {
                 '<Leader>d',
-                function ()
+                function()
                     require('utils').exclusive_float(vim.lsp.buf.hover)
                 end,
                 desc = 'Show documentation',
@@ -89,7 +93,7 @@ return {
                 '<Leader>la',
                 vim.lsp.buf.code_action,
                 desc = 'Show code actions',
-                mode = {'n', 'v'},
+                mode = { 'n', 'v' },
             },
             {
                 '<Leader>ln', -- n for name because r is used for references
@@ -99,24 +103,25 @@ return {
             {
                 '<Leader>lD', -- ld for definition, lD for declaration
                 vim.lsp.buf.declaration,
-                desc = 'Go to declaration of the symbol under the cursor (e.g. interface or abstract method rather than concrete implementation)',
+                desc =
+                'Go to declaration of the symbol under the cursor (e.g. interface or abstract method rather than concrete implementation)',
             },
             {
                 '<Leader>j',
-                function ()
-                    vim.diagnostic.jump({count = 1, float = true})
+                function()
+                    vim.diagnostic.jump({ count = 1, float = true })
                 end,
                 desc = 'Go to next diagnostic',
             },
             {
                 '<Leader>k',
-                function ()
-                    vim.diagnostic.jump({count = -1, float = true})
+                function()
+                    vim.diagnostic.jump({ count = -1, float = true })
                 end,
                 desc = 'Go to previous diagnostic',
             },
         },
-        init = function ()
+        init = function()
             vim.diagnostic.config({
                 virtual_text = false,
                 underline = false,
@@ -176,13 +181,14 @@ return {
             })
         end
     },
-     -- Community maintained fork of null-ls - only the repo name has changed, the plugin is still called null-ls
-    {'nvimtools/none-ls.nvim',
+    -- Community maintained fork of null-ls - only the repo name has changed, the plugin is still called null-ls
+    {
+        'nvimtools/none-ls.nvim',
         dependencies = {
             'williamboman/mason.nvim',
             'davidmh/cspell.nvim',
         },
-        opts = function ()
+        opts = function()
             local builtins = require('null-ls').builtins
             local cspell = require('cspell')
 
@@ -206,11 +212,13 @@ return {
             }
         end,
     },
-    {'hrsh7th/nvim-cmp',
+    {
+        'hrsh7th/nvim-cmp',
         dependencies = {
             'neovim/nvim-lspconfig',
             'onsails/lspkind.nvim',
-            {'L3MON4D3/LuaSnip',
+            {
+                'L3MON4D3/LuaSnip',
                 build = 'make install_jsregexp',
                 dependencies = {
                     'rafamadriz/friendly-snippets',
@@ -228,10 +236,11 @@ return {
             local lspkind = require('lspkind')
             local luasnip = require('luasnip')
 
-            local has_words_before = function ()
+            local has_words_before = function()
                 unpack = unpack or table.unpack
                 local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-                return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1] :sub(col, col) :match('%s') == nil
+                return col ~= 0 and
+                    vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') == nil
             end
 
             cmp.setup({
@@ -251,11 +260,11 @@ return {
                     ['<C-d>'] = cmp.mapping.scroll_docs(4),
                     ['<C-j>'] = cmp.mapping.select_next_item(),
                     ['<C-k>'] = cmp.mapping.select_prev_item(),
-                    ['<CR>'] = cmp.mapping.confirm({select = true}),
+                    ['<CR>'] = cmp.mapping.confirm({ select = true }),
                     ['<C-q>'] = cmp.mapping.abort(),
 
                     -- https://github.com/hrsh7th/nvim-cmp/wiki/Example-mappings#luasnip
-                    ['<Tab>'] = cmp.mapping(function (fallback)
+                    ['<Tab>'] = cmp.mapping(function(fallback)
                         if cmp.visible() then
                             cmp.select_next_item()
                         elseif require('copilot.suggestion').is_visible() then
@@ -267,9 +276,9 @@ return {
                         else
                             fallback()
                         end
-                    end, {'i', 's'}),
+                    end, { 'i', 's' }),
 
-                    ['<S-Tab>'] = cmp.mapping(function (fallback)
+                    ['<S-Tab>'] = cmp.mapping(function(fallback)
                         if cmp.visible() then
                             cmp.select_prev_item()
                         elseif luasnip.jumpable(-1) then
@@ -277,7 +286,7 @@ return {
                         else
                             fallback()
                         end
-                    end, {'i', 's'}),
+                    end, { 'i', 's' }),
                 }),
 
                 sources = {
@@ -321,18 +330,19 @@ return {
                 },
             })
 
-            cmp.event:on('menu_opened', function ()
+            cmp.event:on('menu_opened', function()
                 vim.b.copilot_suggestion_hidden = true
             end)
 
-            cmp.event:on('menu_closed', function ()
+            cmp.event:on('menu_closed', function()
                 vim.b.copilot_suggestion_hidden = false
             end)
 
             require('luasnip.loaders.from_vscode').lazy_load()
         end,
     },
-    {'phpactor/phpactor',
+    {
+        'phpactor/phpactor',
         build = 'composer install --no-dev -o',
         ft = 'php',
     },

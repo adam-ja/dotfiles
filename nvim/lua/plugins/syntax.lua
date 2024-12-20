@@ -1,7 +1,8 @@
 return {
-    {'nvim-treesitter/nvim-treesitter',
+    {
+        'nvim-treesitter/nvim-treesitter',
         build = ':TSUpdate',
-        event = {'BufReadPost', 'BufNewFile'},
+        event = { 'BufReadPost', 'BufNewFile' },
         opts = {
             ensure_installed = 'all',
             auto_install = true,
@@ -20,12 +21,14 @@ return {
             vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
         end,
     },
-    {'JoosepAlviste/nvim-ts-context-commentstring',
+    {
+        'JoosepAlviste/nvim-ts-context-commentstring',
         opts = {
             enable_autocmd = false,
         }
     },
-    {'numToStr/Comment.nvim',
+    {
+        'numToStr/Comment.nvim',
         dependencies = {
             'JoosepAlviste/nvim-ts-context-commentstring',
         },
@@ -35,12 +38,14 @@ return {
             end,
         },
     },
-    {'HiPhish/rainbow-delimiters.nvim',
+    {
+        'HiPhish/rainbow-delimiters.nvim',
         dependencies = {
             'nvim-treesitter/nvim-treesitter',
         },
     },
-    {'Wansmer/treesj',
+    {
+        'Wansmer/treesj',
         dependencies = {
             'nvim-treesitter/nvim-treesitter',
         },
@@ -65,7 +70,8 @@ return {
             },
         },
     },
-    {'Wansmer/sibling-swap.nvim',
+    {
+        'Wansmer/sibling-swap.nvim',
         dependencies = {
             'nvim-treesitter/nvim-treesitter',
         },
@@ -104,7 +110,8 @@ return {
         },
     },
     'jwalton512/vim-blade', -- No treesitter support for blade yet
-    {'windwp/nvim-autopairs',
+    {
+        'windwp/nvim-autopairs',
         dependencies = {
             'nvim-treesitter/nvim-treesitter',
             'hrsh7th/nvim-cmp',
@@ -121,14 +128,16 @@ return {
         end,
         event = 'InsertEnter',
     },
-    {'windwp/nvim-ts-autotag',
+    {
+        'windwp/nvim-ts-autotag',
         dependencies = {
             'nvim-treesitter/nvim-treesitter',
         },
         config = true,
         event = 'InsertEnter',
     },
-    {'folke/todo-comments.nvim',
+    {
+        'folke/todo-comments.nvim',
         dependencies = {
             'nvim-lua/plenary.nvim',
         },

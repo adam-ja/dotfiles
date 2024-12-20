@@ -1,5 +1,6 @@
 return {
-    {'folke/tokyonight.nvim',
+    {
+        'folke/tokyonight.nvim',
         lazy = false,
         priority = 1000, -- make sure this is loaded first
         opts = {
@@ -7,20 +8,21 @@ return {
                 comments = { italic = true },
                 virtual_text = { italic = true },
             },
-            on_highlights = function (highlights, colours)
+            on_highlights = function(highlights, colours)
                 -- Highlight the current line blame virtual text as a comment (required to make it italic)
                 highlights.GitSignsCurrentLineBlame = highlights.Comment
             end,
             dim_inactive = true,
         },
-        config = function (_, opts)
+        config = function(_, opts)
             require('tokyonight').setup(opts)
 
             vim.cmd('colorscheme tokyonight-moon')
             vim.opt.cursorline = true
         end,
     },
-    {'nvim-lualine/lualine.nvim',
+    {
+        'nvim-lualine/lualine.nvim',
         dependencies = {
             'nvim-tree/nvim-web-devicons',
         },
@@ -32,7 +34,7 @@ return {
                         icon = '',
                     },
                 },
-                lualine_b = {'branch', 'diff'},
+                lualine_b = { 'branch', 'diff' },
                 lualine_c = {
                     {
                         'filename',
@@ -43,7 +45,7 @@ return {
                 lualine_x = {
                     {
                         'diagnostics',
-                        sources = {'nvim_diagnostic'},
+                        sources = { 'nvim_diagnostic' },
                         symbols = {
                             error = ' ',
                             warning = ' ',
@@ -62,7 +64,7 @@ return {
                 },
                 lualine_z = {
                     {
-                        function ()
+                        function()
                             local search_term = vim.fn.getreg('/')
 
                             if vim.v.hlsearch == 0 or search_term == '' then
@@ -102,47 +104,48 @@ return {
         },
     },
     'edkolev/tmuxline.vim',
-    {'luukvbaal/statuscol.nvim',
-        opts = function ()
+    {
+        'luukvbaal/statuscol.nvim',
+        opts = function()
             local builtin = require('statuscol.builtin')
             return {
                 setopt = true,
                 relculright = true,
                 segments = {
-                    {-- folds
+                    { -- folds
                         text = {
                             builtin.foldfunc,
                             ' '
                         },
                         condition = {
-                            true, -- always show the output of foldfund
+                            true,             -- always show the output of foldfund
                             builtin.not_empty -- if the rest of the column isn't empty (i.e there are folds) add the separator
                         },
                         click = 'v:lua.ScFa',
                     },
-                    {-- diagnostics
+                    { -- diagnostics
                         sign = {
-                            namespace = {'diagnostic/signs'},
+                            namespace = { 'diagnostic/signs' },
                             auto = true,
                             foldcolsed = true,
                         },
                         click = 'v:lua.ScSa',
                     },
-                    {-- anything else
+                    { -- anything else
                         sign = {
-                            name = {'.*'},
-                            namespace = {'.*'},
-                            text = {'.*'},
+                            name = { '.*' },
+                            namespace = { '.*' },
+                            text = { '.*' },
                             auto = true,
                         },
                     },
-                    {-- line number
-                        text = {builtin.lnumfunc},
+                    { -- line number
+                        text = { builtin.lnumfunc },
                         click = 'v:lua.ScLa',
                     },
-                    {-- gitsigns
+                    { -- gitsigns
                         sign = {
-                            namespace = {'gitsigns'},
+                            namespace = { 'gitsigns' },
                             foldclosed = true,
                         },
                         click = 'v:lua.ScSa',
@@ -151,9 +154,10 @@ return {
             }
         end,
     },
-    {'lukas-reineke/indent-blankline.nvim',
+    {
+        'lukas-reineke/indent-blankline.nvim',
         main = 'ibl',
-        config = function ()
+        config = function()
             require('ibl').setup({
                 indent = {
                     char = '',
@@ -168,8 +172,9 @@ return {
             hooks.register(hooks.type.WHITESPACE, hooks.builtin.hide_first_tab_indent_level)
         end,
     },
-    {'uga-rosa/ccc.nvim',
-        config = function ()
+    {
+        'uga-rosa/ccc.nvim',
+        config = function()
             local ccc = require('ccc')
             local pickers = require('ccc.config.default').pickers
             vim.list_extend(pickers, {
@@ -203,7 +208,8 @@ return {
             })
         end,
     },
-    {'declancm/cinnamon.nvim',
+    {
+        'declancm/cinnamon.nvim',
         opts = {
             keymaps = {
                 basic = true,
@@ -214,18 +220,22 @@ return {
             },
         },
     },
-    {'cpea2506/relative-toggle.nvim',
+    {
+        'cpea2506/relative-toggle.nvim',
         event = 'BufEnter',
     },
-    {'tzachar/highlight-undo.nvim',
+    {
+        'tzachar/highlight-undo.nvim',
         config = true,
     },
     'Bekaboo/dropbar.nvim',
-    {'folke/noice.nvim',
+    {
+        'folke/noice.nvim',
         event = 'VeryLazy',
         dependencies = {
             'MunifTanjim/nui.nvim',
-            {'rcarriga/nvim-notify',
+            {
+                'rcarriga/nvim-notify',
                 opts = {
                     on_open = function(win)
                         vim.api.nvim_win_set_config(win, { focusable = false })
@@ -234,7 +244,7 @@ return {
                 keys = {
                     {
                         '<Leader>nd',
-                        function ()
+                        function()
                             require('notify').dismiss()
                         end,
                         desc = 'Dismiss all notification windows currently displayed',
@@ -242,7 +252,7 @@ return {
                 },
             },
         },
-        init = function ()
+        init = function()
             vim.opt.shortmess:remove('t')
             vim.opt.shortmess:remove('T')
             vim.opt.shortmess:append('sW')
@@ -250,8 +260,8 @@ return {
         opts = {
             lsp = {
                 override = {
-                    ['vim.lsp.util.convert_input_to_markdown_lines' ] = true,
-                    ['vim.lsp.util.stylize_markdown' ] = true,
+                    ['vim.lsp.util.convert_input_to_markdown_lines'] = true,
+                    ['vim.lsp.util.stylize_markdown'] = true,
                     ['cmp.entry.get_documentation'] = true,
                 },
             },
@@ -276,7 +286,7 @@ return {
                     filter = {
                         event = 'lsp',
                         kind = 'progress',
-                        cond = function (message)
+                        cond = function(message)
                             local client = vim.tbl_get(message.opts, 'progress', 'client')
                             return client == 'null-ls'
                         end,
@@ -288,33 +298,34 @@ return {
         keys = {
             {
                 '<C-d>',
-                function ()
+                function()
                     -- If noice is showing lsp docs, scroll those, otherwise fallback to whatever else <C-d> does
                     if not require('noice.lsp').scroll(4) then
                         return '<C-d>'
                     end
                 end,
-                mode = {'n', 'i', 's'},
+                mode = { 'n', 'i', 's' },
                 desc = 'Scroll down in LSP documentation',
                 silent = true,
                 expr = true,
             },
             {
                 '<C-u>',
-                function ()
+                function()
                     -- If noice is showing lsp docs, scroll those, otherwise fallback to whatever else <C-u> does
                     if not require('noice.lsp').scroll(-4) then
                         return '<C-u>'
                     end
                 end,
-                mode = {'n', 'i', 's'},
+                mode = { 'n', 'i', 's' },
                 desc = 'Scroll up in LSP documentation',
                 silent = true,
                 expr = true,
             },
         },
     },
-    {'yorickpeterse/nvim-pqf',
+    {
+        'yorickpeterse/nvim-pqf',
         config = true,
     },
 }
