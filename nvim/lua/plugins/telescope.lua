@@ -229,6 +229,19 @@ return {
                 desc = 'Search within files that differ from the main branch'
             },
             {
+                '<Leader>frM',
+                function()
+                    -- Relies on git-extras being installed for git delta
+                    local files = vim.fn.split(vim.fn.system('git delta ' .. require('utils').git_develop_branch()), '\n')
+
+                    require('telescope.builtin').live_grep({
+                        prompt_title = 'Search within files that differ from the develop branch',
+                        search_dirs = files,
+                    })
+                end,
+                desc = 'Search within files that differ from the develop branch'
+            },
+            {
                 '<Leader>fRg',
                 function()
                     require('telescope.builtin').grep_string()
@@ -392,6 +405,13 @@ return {
                     require('telescope.builtin').diagnostics({bufnr = 0})
                 end,
                 desc = 'LSP diagnostics in the buffer (e for errors)',
+            },
+            {
+                '<Leader>fd',
+                function()
+                    require('telescope.builtin').diagnostics()
+                end,
+                desc = 'LSP diagnostics for the current workspace',
             },
             {
                 '<Leader>lc',
