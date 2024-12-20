@@ -113,7 +113,10 @@ return {
 
             vim.api.nvim_create_autocmd('User', {
                 pattern = 'TelescopePreviewerLoaded',
-                command = 'setlocal wrap | setlocal number',
+                callback = function()
+                    vim.wo.wrap = true
+                    vim.wo.number = true
+                end,
             })
         end,
         keys = {
