@@ -56,6 +56,10 @@ return {
                     require('lspconfig').intelephense.setup({
                         settings = {
                             intelephense = {
+                                format = {
+                                    -- Intelephense formatting rules aren't configurable - use PHP CS Fixer instead
+                                    enable = false,
+                                },
                                 references = {
                                     -- Don't exclude the vendor directory from references search
                                     exclude = {}
