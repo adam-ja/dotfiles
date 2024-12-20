@@ -25,6 +25,7 @@ return {
                     'intelephense',
                     'jsonls',
                     'lua_ls',
+                    'rust_analyzer',
                     -- 'tailwindcss', - TODO: this causes freezes when opening files that don't even have any CSS?!
                     'ts_ls',
                     -- 'typos_lsp', - TODO: Try to get this working to replace cspell
@@ -63,6 +64,7 @@ return {
                         }
                     })
                 end,
+                ['rust_analyzer'] = function() end, -- Let rustaceanvim manage this
             })
         end,
     },
@@ -320,5 +322,29 @@ return {
     {'phpactor/phpactor',
         build = 'composer install --no-dev -o',
         ft = 'php',
+    },
+    {
+        'mrcjkb/rustaceanvim',
+        version = '^5',
+        lazy = false,
+        init = function()
+            vim.g.rustaceanvim = {
+                server = {
+                    cmd = function() -- `:h rustaceanvim.mason`
+                        local mason_registry = require('mason-registry')
+
+                        if (mason_registry:is_installed('rust-analyzer')) then
+                            -- This may need to be tweaked depending on the operating system.
+                            local ra = mason_registry.get_package('rust-analyzer')
+                            local ra_filename = ra:get_receipt():get().links.bin['rust-analyzer']
+                            return { ('%s/%s'):format(ra:get_install_path(), ra_filename or 'rust-analyzer') }
+                        else
+                            -- global installation
+                            return { 'rust-analyzer' }
+                        end
+                    end,
+                },
+            }
+        end,
     },
 }
