@@ -365,6 +365,20 @@ return {
                 end,
                 desc = 'Notification history'
             },
+            {
+                '<Leader>fq',
+                function()
+                    require('telescope.builtin').quickfix()
+                end,
+                desc = 'Quickfix list items',
+            },
+            {
+                '<Leader>fQ',
+                function()
+                    require('telescope.builtin').quickfixhistory()
+                end,
+                desc = 'Quickfix list history',
+            },
 
             -- LSP
             {
