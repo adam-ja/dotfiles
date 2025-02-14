@@ -1,3 +1,26 @@
+-- Enables opening multiple selected files at once
+-- https://github.com/nvim-telescope/telescope.nvim/issues/1048
+local multi_open = function(prompt_bufnr)
+    local picker = require('telescope.actions.state').get_current_picker(prompt_bufnr)
+    local multi = picker:get_multi_selection()
+
+    if vim.tbl_isempty(multi) then
+        require('telescope.actions').select_default(prompt_bufnr)
+        return
+    end
+
+    require('telescope.actions').close(prompt_bufnr)
+    for _, entry in ipairs(multi) do
+        local filename = entry.filename or entry.value
+        if filename then
+            local line = entry.lnum or 1
+            local col = entry.col or 1
+            vim.cmd(string.format('edit +%d %s', line, filename))
+            vim.cmd(string.format('normal! %d|', col))
+        end
+    end
+end
+
 -- Note due to the dependencies and the way Telescope extensions are loaded, all key mappings for Telescope extensions
 -- are defined in the main Telescope plugin configuration.
 return {
@@ -27,10 +50,12 @@ return {
                     i = {
                         ['<C-k>'] = 'move_selection_previous',
                         ['<C-j>'] = 'move_selection_next',
+                        ['<CR>'] = multi_open,
                     },
                     n = {
                         ['<C-k>'] = 'move_selection_previous',
                         ['<C-j>'] = 'move_selection_next',
+                        ['<CR>'] = multi_open,
                     },
                 },
                 wrap_results = true,
