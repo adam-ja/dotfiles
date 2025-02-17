@@ -366,6 +366,13 @@ return {
                             return { 'rust-analyzer' }
                         end
                     end,
+                    default_settings = {
+                        ['rust-analyzer'] = {
+                            cargo = {
+                                targetDir = '/tmp/rust-analyzer-cargo',
+                            },
+                        },
+                    },
                 },
             }
         end,
