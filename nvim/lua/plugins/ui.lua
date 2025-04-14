@@ -125,7 +125,7 @@ return {
                     },
                     { -- diagnostics
                         sign = {
-                            namespace = { 'diagnostic/signs' },
+                            namespace = { 'diagnostic' },
                             auto = true,
                             foldcolsed = true,
                         },
