@@ -386,6 +386,9 @@ return {
                             cargo = {
                                 targetDir = '/tmp/rust-analyzer-cargo',
                             },
+                            lru = {
+                                capacity = 64, -- number of syntax trees kept in memory (defaults to 128)
+                            },
                         },
                     },
                 },
