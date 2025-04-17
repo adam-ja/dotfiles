@@ -41,14 +41,18 @@ require('lazy').setup(
 -- Indentation
 --------------
 
--- Tabs = 4 spaces
-vim.opt.tabstop = 4
--- Delete 4 spaces with backspace
-vim.opt.softtabstop = 4
--- Use 4 spaces for (auto)indentation
-vim.opt.shiftwidth = 4
--- Convert tabs to spaces
+-- The values below are pretty standard, although they might be overridden with ftplugins or by an editorconfig file.
+-- Usually the integer values will all match but if not things can get pretty confusing.
+-- https://arisweedler.medium.com/tab-settings-in-vim-1ea0863c5990
+
+-- Convert tabs to spaces when hitting tab or indenting
 vim.opt.expandtab = true
+-- How many columns of whitespace a tab character counts for
+vim.opt.tabstop = 4
+-- How many columns of whitespace are added or removed when hitting tab or backspace
+vim.opt.softtabstop = 4
+-- How many columns text is indented at each level of indentation
+vim.opt.shiftwidth = 4
 
 
 -- Search
