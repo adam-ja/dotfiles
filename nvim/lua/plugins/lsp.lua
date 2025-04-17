@@ -16,9 +16,7 @@ return {
         },
         build = ':MasonUpdate',
         config = function()
-            local mason_lspconfig = require('mason-lspconfig')
-
-            mason_lspconfig.setup({
+            require('mason-lspconfig').setup({
                 ensure_installed = {
                     'bashls',
                     'cssls',
@@ -37,43 +35,50 @@ return {
                     'vimls',
                     'yamlls',
                 },
-            })
-
-            mason_lspconfig.setup_handlers({
-                function(server_name)
-                    require('lspconfig')[server_name].setup({})
-                end,
-                ['emmet_language_server'] = function()
-                    require('lspconfig').emmet_language_server.setup({
-                        filetypes = {
-                            'blade',
-                            'css',
-                            'html',
-                            'javascript',
-                            'javascriptreact',
-                            'scss',
-                            'typescript',
-                            'typescriptreact',
-                        },
-                    })
-                end,
-                ['intelephense'] = function()
-                    require('lspconfig').intelephense.setup({
-                        settings = {
-                            intelephense = {
-                                format = {
-                                    -- Intelephense formatting rules aren't configurable - use PHP CS Fixer instead
-                                    enable = false,
-                                },
-                                references = {
-                                    -- Don't exclude the vendor directory from references search
-                                    exclude = {}
+                handlers = {
+                    -- Default setup for all LSP servers
+                    function(server_name)
+                        vim.lsp.enable(server_name)
+                    end,
+                    -- Custom setup for specific LSP servers
+                    ['emmet_language_server'] = function()
+                        vim.lsp.config('emmet_language_server', {
+                            filetypes = {
+                                'blade',
+                                'css',
+                                'html',
+                                'javascript',
+                                'javascriptreact',
+                                'scss',
+                                'typescript',
+                                'typescriptreact',
+                            },
+                        })
+                        vim.lsp.enable('emmet_language_server')
+                    end,
+                    ['intelephense'] = function()
+                        vim.lsp.config('intelephense', {
+                            settings = {
+                                intelephense = {
+                                    format = {
+                                        -- Intelephense formatting rules aren't configurable - use PHP CS Fixer instead
+                                        enable = false,
+                                    },
+                                    references = {
+                                        -- Don't exclude the vendor directory from references search
+                                        exclude = {}
+                                    }
                                 }
                             }
-                        }
-                    })
-                end,
-                ['rust_analyzer'] = function() end, -- Let rustaceanvim manage this
+                        })
+                        vim.lsp.enable('intelephense')
+                    end,
+                    ['rust_analyzer'] = function()
+                        -- Let rustaceanvim handle the rust_analyzer config
+                        vim.lsp.config('rust_analyzer', {})
+                        vim.lsp.enable('rust_analyzer')
+                    end,
+                }
             })
         end,
     },
