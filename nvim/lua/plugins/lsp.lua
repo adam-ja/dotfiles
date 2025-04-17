@@ -10,6 +10,8 @@ return {
             {
                 'folke/lazydev.nvim',
                 ft = 'lua',
+                cmd = "LazyDev",
+                opts = {},
             },
         },
         build = ':MasonUpdate',
