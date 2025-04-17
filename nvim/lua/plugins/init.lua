@@ -80,7 +80,7 @@ return {
     'stefandtw/quickfix-reflector.vim',
     {
         'nacro90/numb.nvim',
-        config = true,
+        opts = {},
     },
     {
         'ziontee113/icon-picker.nvim',

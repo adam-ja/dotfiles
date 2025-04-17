@@ -133,7 +133,7 @@ return {
         dependencies = {
             'nvim-treesitter/nvim-treesitter',
         },
-        config = true,
+        opts = {},
         event = 'InsertEnter',
     },
     {

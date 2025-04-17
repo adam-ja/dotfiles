@@ -5,7 +5,7 @@ return {
         dependencies = {
             {
                 'williamboman/mason.nvim',
-                config = true,
+                opts = {},
             },
             {
                 'folke/lazydev.nvim',

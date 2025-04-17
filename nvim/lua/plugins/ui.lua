@@ -226,7 +226,7 @@ return {
     },
     {
         'tzachar/highlight-undo.nvim',
-        config = true,
+        opts = {},
     },
     'Bekaboo/dropbar.nvim',
     {
@@ -326,6 +326,6 @@ return {
     },
     {
         'yorickpeterse/nvim-pqf',
-        config = true,
+        opts = {},
     },
 }
