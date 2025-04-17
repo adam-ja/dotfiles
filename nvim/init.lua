@@ -67,8 +67,14 @@ vim.opt.ignorecase = true
 
 -- Display whitespace
 vim.opt.list = true
--- Highlight tabs and trailing spaces
-vim.opt.listchars = { tab = '|·', trail = '`' }
+-- Render various types of whitespace as these characters
+vim.opt.listchars = {
+    tab = '󰌒·',
+    trail = '󱁐',
+    extends = '',
+    precedes = '',
+    nbsp = '␣',
+}
 -- Remove trailing spaces when saving a buffer, and return cursor to starting position
 vim.api.nvim_create_autocmd('BufWritePre', {
     command = [[lua require('utils').preserve_cursor_position('%s/\\s\\+$//e')]]
