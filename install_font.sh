@@ -7,6 +7,6 @@ curl -LO ${DOWNLOAD_URL}${TAG}/JetBrainsMono.zip
 
 mkdir -p ${HOME}/.fonts
 
-unzip JetBrainsMono.zip *.ttf -d ${HOME}/.fonts
+unzip -o JetBrainsMono.zip *.ttf -d ${HOME}/.fonts
 
 rm JetBrainsMono.zip
