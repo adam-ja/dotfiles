@@ -235,133 +235,180 @@ return {
         end,
     },
     {
-        'hrsh7th/nvim-cmp',
+        'saghen/blink.cmp',
+        version = '*',
+        event = 'InsertEnter',
         dependencies = {
-            'neovim/nvim-lspconfig',
-            'onsails/lspkind.nvim',
+            {
+                'onsails/lspkind.nvim',
+                opts = {
+                    symbol_map = {
+                        Copilot = '',
+                    }
+                }
+            },
+            'xzbdmw/colorful-menu.nvim',
+            {
+                'fang2hou/blink-copilot',
+                dependencies = {
+                    {
+                        'zbirenbaum/copilot.lua',
+                        cmd = 'Copilot',
+                        event = 'InsertEnter',
+                        config = function()
+                            require('copilot').setup({
+                                panel = {
+                                    enabled = false,
+                                },
+                                suggestion = {
+                                    enabled = false,
+                                },
+                                filetypes = {
+                                    ['*'] = true,
+                                },
+                            })
+                        end
+                    },
+                },
+            },
             {
                 'L3MON4D3/LuaSnip',
+                version = "v2.*",
                 build = 'make install_jsregexp',
                 dependencies = {
                     'rafamadriz/friendly-snippets',
                 },
+                config = function()
+                    require('luasnip').setup()
+                    require('luasnip.loaders.from_vscode').lazy_load()
+                end,
             },
-            'saadparwaiz1/cmp_luasnip',
-            'hrsh7th/cmp-nvim-lsp',
-            'hrsh7th/cmp-buffer',
-            'hrsh7th/cmp-path',
-            'hrsh7th/cmp-cmdline',
-            'hrsh7th/cmp-calc',
         },
-        config = function()
-            local cmp = require('cmp')
-            local lspkind = require('lspkind')
-            local luasnip = require('luasnip')
-
-            local has_words_before = function()
-                unpack = unpack or table.unpack
-                local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-                return col ~= 0 and
-                    vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') == nil
-            end
-
-            cmp.setup({
-                formatting = {
-                    format = lspkind.cmp_format({
-                        mode = 'symbol_text',
-                    }),
+        opts = {
+            cmdline = {
+                enabled = true,
+                completion = {
+                    menu = { auto_show = true },
+                    list = { selection = { preselect = false, auto_insert = false } },
                 },
+                keymap = { preset = 'inherit' },
+            },
+            completion = {
+                menu = {
+                    border = 'rounded',
+                    draw = {
+                        columns = {
+                            { 'kind_icon',  'kind', gap = 1 },
+                            -- No need for label_description because colorful-menu.nvim merges it into label
+                            { 'label' },
+                            { 'source_name' },
+                        },
+                        components = {
+                            -- https://cmp.saghen.dev/recipes.html#nvim-web-devicons-lspkind
+                            kind_icon = {
+                                text = function(ctx)
+                                    local icon = ctx.kind_icon
+                                    if vim.tbl_contains({ "Path" }, ctx.source_name) then
+                                        local dev_icon, _ = require("nvim-web-devicons").get_icon(ctx.label)
+                                        if dev_icon then
+                                            icon = dev_icon
+                                        end
+                                    else
+                                        local lspkind_icon = require("lspkind").symbolic(ctx.kind, {
+                                            mode = "symbol",
+                                        })
+                                        if lspkind_icon then
+                                            icon = lspkind_icon
+                                        end
+                                    end
 
-                window = {
-                    completion = cmp.config.window.bordered(),
-                    documentation = cmp.config.window.bordered(),
-                },
-
-                mapping = cmp.mapping.preset.insert({
-                    ['<C-u>'] = cmp.mapping.scroll_docs(-4),
-                    ['<C-d>'] = cmp.mapping.scroll_docs(4),
-                    ['<C-j>'] = cmp.mapping.select_next_item(),
-                    ['<C-k>'] = cmp.mapping.select_prev_item(),
-                    ['<CR>'] = cmp.mapping.confirm({ select = true }),
-                    ['<C-q>'] = cmp.mapping.abort(),
-
-                    -- https://github.com/hrsh7th/nvim-cmp/wiki/Example-mappings#luasnip
-                    ['<Tab>'] = cmp.mapping(function(fallback)
-                        if cmp.visible() then
-                            cmp.select_next_item()
-                        elseif require('copilot.suggestion').is_visible() then
-                            require('copilot.suggestion').accept()
-                        elseif luasnip.expand_or_jumpable() then
-                            luasnip.expand_or_jump()
-                        elseif has_words_before() then
-                            cmp.complete()
-                        else
-                            fallback()
-                        end
-                    end, { 'i', 's' }),
-
-                    ['<S-Tab>'] = cmp.mapping(function(fallback)
-                        if cmp.visible() then
-                            cmp.select_prev_item()
-                        elseif luasnip.jumpable(-1) then
-                            luasnip.jump(-1)
-                        else
-                            fallback()
-                        end
-                    end, { 'i', 's' }),
-                }),
-
-                sources = {
-                    { name = 'nvim_lsp' },
-                    { name = 'luasnip' },
-                    {
-                        name = 'buffer',
-                        option = {
-                            get_bufnrs = function()
-                                return vim.api.nvim_list_bufs()
-                            end,
+                                    return icon .. ctx.icon_gap
+                                end,
+                                highlight = function(ctx)
+                                    local hl = ctx.kind_hl
+                                    if vim.tbl_contains({ "Path" }, ctx.source_name) then
+                                        local dev_icon, dev_hl = require("nvim-web-devicons").get_icon(ctx.label)
+                                        if dev_icon then
+                                            hl = dev_hl
+                                        end
+                                    end
+                                    return hl
+                                end,
+                            },
+                            kind = {
+                                -- Same as kind_icon.highlight
+                                highlight = function(ctx)
+                                    local hl = ctx.kind_hl
+                                    if vim.tbl_contains({ "Path" }, ctx.source_name) then
+                                        local dev_icon, dev_hl = require("nvim-web-devicons").get_icon(ctx.label)
+                                        if dev_icon then
+                                            hl = dev_hl
+                                        end
+                                    end
+                                    return hl
+                                end,
+                            },
+                            -- https://github.com/xzbdmw/colorful-menu.nvim#use-it-in-blinkcmp
+                            label = {
+                                text = function(ctx)
+                                    return require("colorful-menu").blink_components_text(ctx)
+                                end,
+                                highlight = function(ctx)
+                                    return require("colorful-menu").blink_components_highlight(ctx)
+                                end,
+                            },
                         },
                     },
-                    { name = 'path' },
-                    { name = 'calc' },
-                    {
-                        name = 'lazydev',
-                        group_index = 0,
+                },
+                documentation = {
+                    window = { border = 'rounded' },
+                    auto_show = true,
+                    auto_show_delay_ms = 100,
+                },
+                ghost_text = { enabled = true },
+                list = { selection = { preselect = false, auto_insert = false } },
+                trigger = {
+                    -- Default config blocks triggering on certain characters returned by sources (e.g. LSPs) but I
+                    -- found this prevented completion when in places where I wanted it.
+                    show_on_blocked_trigger_characters = {},
+                    show_on_x_blocked_trigger_characters = {},
+                },
+            },
+            keymap = {
+                preset = 'none',
+                ['<C-Space>'] = { 'show', 'fallback' },
+                ['<Tab>'] = { 'snippet_forward', 'select_next', 'fallback' },
+                ['<S-Tab>'] = { 'snippet_backward', 'select_prev', 'fallback' },
+                ['<C-j>'] = { 'select_next', 'fallback' },
+                ['<C-k>'] = { 'select_prev', 'fallback' },
+                ['<C-u>'] = { 'scroll_documentation_up', 'fallback' },
+                ['<C-d>'] = { 'scroll_documentation_down', 'fallback' },
+                ['<C-q>'] = { 'cancel', 'fallback' },
+                ['<CR>'] = { 'accept', 'fallback' },
+            },
+            signature = {
+                enabled = true,
+                window = { border = 'rounded' },
+            },
+            snippets = { preset = 'luasnip' },
+            sources = {
+                default = { 'copilot', 'lsp', 'snippets', 'buffer', 'path', 'cmdline' },
+                providers = {
+                    -- https://cmp.saghen.dev/recipes.html#buffer-completion-from-all-open-buffers
+                    buffer = {
+                        opts = {
+                            get_bufnrs = function()
+                                return vim.tbl_filter(function(bufnr)
+                                    return vim.bo[bufnr].buftype == ''
+                                end, vim.api.nvim_list_bufs())
+                            end
+                        },
                     },
+                    copilot = { name = 'copilot', module = 'blink-copilot', score_offset = 100, async = true },
                 },
-
-                snippet = {
-                    expand = function(args)
-                        require('luasnip').lsp_expand(args.body)
-                    end,
-                },
-            })
-
-            cmp.setup.cmdline('/', {
-                mapping = cmp.mapping.preset.cmdline(),
-                sources = {
-                    { name = 'buffer' },
-                },
-            })
-
-            cmp.setup.cmdline(':', {
-                mapping = cmp.mapping.preset.cmdline(),
-                sources = {
-                    { name = 'path' },
-                    { name = 'cmdline' },
-                },
-            })
-
-            cmp.event:on('menu_opened', function()
-                vim.b.copilot_suggestion_hidden = true
-            end)
-
-            cmp.event:on('menu_closed', function()
-                vim.b.copilot_suggestion_hidden = false
-            end)
-
-            require('luasnip.loaders.from_vscode').lazy_load()
-        end,
+            },
+        },
+        opts_extend = { 'sources.default' },
     },
     {
         'phpactor/phpactor',

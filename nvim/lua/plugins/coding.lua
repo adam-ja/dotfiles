@@ -1,26 +1,6 @@
 -- "Coding" related plugins that don't fit neatly into syntax, LSP, etc
 return {
     {
-        'zbirenbaum/copilot.lua',
-        cmd = 'Copilot',
-        event = 'InsertEnter',
-        config = function()
-            require('copilot').setup({
-                panel = {
-                    enabled = false,
-                },
-                suggestion = {
-                    enabled = true,
-                    auto_trigger = true,
-                    accept = false, -- disable built-in keymapping
-                },
-                filetypes = {
-                    ['*'] = true,
-                },
-            })
-        end
-    },
-    {
         'vim-test/vim-test',
         keys = {
             {
