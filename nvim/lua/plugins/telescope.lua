@@ -41,6 +41,7 @@ return {
             },
             'adoyle-h/telescope-extension-maker.nvim',
             'nvim-telescope/telescope-file-browser.nvim',
+            'nvim-telescope/telescope-symbols.nvim',
         },
         branch = '0.1.x',
         lazy = false,
@@ -403,6 +404,21 @@ return {
                     require('telescope.builtin').quickfixhistory()
                 end,
                 desc = 'Quickfix list history',
+            },
+            {
+                '<Leader>fi',
+                function()
+                    require('telescope.builtin').symbols()
+                end,
+                desc = 'Pick an icon/symbol',
+            },
+            {
+                '<A-i>',
+                function()
+                    require('telescope.builtin').symbols()
+                end,
+                desc = 'Pick an icon/symbol',
+                mode = 'i',
             },
 
             -- LSP

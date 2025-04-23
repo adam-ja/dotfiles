@@ -83,28 +83,6 @@ return {
         opts = {},
     },
     {
-        'ziontee113/icon-picker.nvim',
-        dependencies = {
-            'nvim-telescope/telescope.nvim',
-        },
-        opts = {
-            disable_legacy_commands = true,
-        },
-        keys = {
-            {
-                '<Leader>fi',
-                '<cmd>IconPickerNormal<CR>',
-                desc = 'Pick an icon',
-            },
-            {
-                '<A-i>',
-                '<cmd>IconPickerNormal<CR>',
-                desc = 'Pick an icon',
-                mode = 'i',
-            },
-        },
-    },
-    {
         'AckslD/nvim-neoclip.lua',
         dependencies = {
             'nvim-telescope/telescope.nvim',
