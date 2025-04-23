@@ -10,7 +10,7 @@ case "$(uname -s)" in
         # Add neovim nightly ppa
         sudo add-apt-repository ppa:neovim-ppa/unstable
 
-        PACKAGES='bat build-essential curl fd-find fzf git-extra jq kitty nala neovim openssh-server php php-curl php-mbstring php-xml python3-neovim tmux tree wget xclip xtail zsh'
+        PACKAGES='bat build-essential curl fd-find fzf git-extra jq nala neovim openssh-server php php-curl php-mbstring php-xml python3-neovim tmux tree wget xclip xtail zsh'
         sudo apt install --assume-yes ${PACKAGES}
 
         # Install golang
@@ -44,6 +44,7 @@ case "$(uname -s)" in
         ;;
 esac
 
+${DIR}/install_kitty.sh
 ${DIR}/install_composer.sh
 ${DIR}/install_node.sh
 ${DIR}/install_rust.sh
