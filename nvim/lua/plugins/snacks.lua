@@ -5,5 +5,9 @@ return { {
     opts = {
         dashboard = { enabled = true },
         image = { enabled = true },
+        indent = {
+            enabled = true,
+            scope = { enabled = false },
+        },
     },
 } }
