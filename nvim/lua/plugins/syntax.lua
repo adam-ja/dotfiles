@@ -105,7 +105,7 @@ return {
                 function()
                     require('sibling-swap').swap_with_right_with_opp()
                 end,
-                desc = 'Swap with sibling to the right including operator (`_5_ > 3` becomes `3 < _5_)',
+                desc = 'Swap with sibling to the right including operator (`_5_ > 3` becomes `3 < _5_`)',
             },
         },
     },
