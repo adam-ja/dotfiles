@@ -114,18 +114,10 @@ return {
         'windwp/nvim-autopairs',
         dependencies = {
             'nvim-treesitter/nvim-treesitter',
-            'hrsh7th/nvim-cmp',
         },
-        config = function()
-            require('nvim-autopairs').setup({
-                check_ts = true,
-            })
-
-            -- Insert `(` after selecting a function/method from the completion menu
-            local cpm_autopairs = require('nvim-autopairs.completion.cmp')
-            local cmp = require('cmp')
-            cmp.event:on('confirm_done', cpm_autopairs.on_confirm_done())
-        end,
+        opts = {
+            check_ts = true,
+        },
         event = 'InsertEnter',
     },
     {
