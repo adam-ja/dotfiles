@@ -339,4 +339,9 @@ return {
             completions = { blink = { enabled = true } },
         },
     },
+    {
+        'folke/which-key.nvim',
+        event = 'VeryLazy',
+        opts = {},
+    },
 }
