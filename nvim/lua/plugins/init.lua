@@ -5,12 +5,6 @@ return {
         version = '*',
     },
     {
-        'iamcco/markdown-preview.nvim',
-        ft = 'markdown',
-        -- https://github.com/iamcco/markdown-preview.nvim/issues/612#issuecomment-1807828452
-        build = 'cd app && npm install && git restore .',
-    },
-    {
         'chrisgrieser/nvim-spider',
         keys = { -- Note cmd must be used instead of lua functions for dot-repeat to work
             {
