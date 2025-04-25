@@ -26,87 +26,101 @@ return {
         dependencies = {
             'nvim-tree/nvim-web-devicons',
             'AndreM222/copilot-lualine',
+            {
+                'bezhermoso/todos-lualine.nvim',
+                dependencides = {
+                    'folke/todo-comments.nvim',
+                },
+            },
         },
-        opts = {
-            sections = {
-                lualine_a = {
-                    {
-                        'mode',
-                        icon = '',
-                    },
-                },
-                lualine_b = { 'branch', 'diff' },
-                lualine_c = {
-                    {
-                        'filename',
-                        newfile_status = true,
-                    },
-                },
+        config = function()
+            local todos_component = require('todos-lualine').component({
+                -- Current file only
+                cwd = '%',
+            })
 
-                lualine_x = {
-                    {
-                        'diagnostics',
-                        sources = { 'nvim_diagnostic' },
-                        symbols = {
-                            error = ' ',
-                            warning = ' ',
-                            info = ' ',
-                            hint = ' ',
-                            ok = ' '
+            require('lualine').setup({
+                sections = {
+                    lualine_a = {
+                        {
+                            'mode',
+                            icon = '',
+                        },
+                    },
+                    lualine_b = { 'branch', 'diff' },
+                    lualine_c = {
+                        {
+                            'filename',
+                            newfile_status = true,
+                        },
+                    },
+
+                    lualine_x = {
+                        todos_component,
+                        {
+                            'diagnostics',
+                            sources = { 'nvim_diagnostic' },
+                            symbols = {
+                                error = ' ',
+                                warning = ' ',
+                                info = ' ',
+                                hint = ' ',
+                                ok = ' '
+                            },
+                        },
+                    },
+                    lualine_y = {
+                        {
+                            'copilot',
+                            show_colors = true,
+                        },
+                        'filetype',
+                        {
+                            'filesize',
+                            icon = '',
+                        },
+                    },
+                    lualine_z = {
+                        {
+                            function()
+                                local search_term = vim.fn.getreg('/')
+
+                                if vim.v.hlsearch == 0 or search_term == '' then
+                                    return ''
+                                end
+
+                                local ok, result = pcall(vim.fn.searchcount)
+
+                                if not ok or next(result) == nil then
+                                    return ''
+                                end
+
+                                return string.format('%s [%d/%d]', search_term, result.current, result.total)
+                            end,
+                            icon = '',
+                        },
+                        {
+                            '%c/%{strwidth(getline("."))}', -- column number
+                            icon = '',
+                        },
+                        {
+                            '%l/%L', -- line number
+                            icon = '',
                         },
                     },
                 },
-                lualine_y = {
-                    {
-                        'copilot',
-                        show_colors = true,
+                options = {
+                    section_separators = {
+                        left = '',
+                        right = '',
                     },
-                    'filetype',
-                    {
-                        'filesize',
-                        icon = '',
-                    },
-                },
-                lualine_z = {
-                    {
-                        function()
-                            local search_term = vim.fn.getreg('/')
-
-                            if vim.v.hlsearch == 0 or search_term == '' then
-                                return ''
-                            end
-
-                            local ok, result = pcall(vim.fn.searchcount)
-
-                            if not ok or next(result) == nil then
-                                return ''
-                            end
-
-                            return string.format('%s [%d/%d]', search_term, result.current, result.total)
-                        end,
-                        icon = '',
-                    },
-                    {
-                        '%c/%{strwidth(getline("."))}', -- column number
-                        icon = '',
-                    },
-                    {
-                        '%l/%L', -- line number
-                        icon = '',
+                    component_separators = {
+                        left = '',
+                        right = '',
                     },
                 },
-            },
-            options = {
-                section_separators = {
-                    left = '',
-                    right = '',
-                },
-                component_separators = {
-                    left = '',
-                    right = '',
-                },
-            },
-        },
+            })
+        end,
     },
     'edkolev/tmuxline.vim',
     {
