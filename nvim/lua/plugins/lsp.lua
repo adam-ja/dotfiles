@@ -35,50 +35,6 @@ return {
                     'vimls',
                     'yamlls',
                 },
-                handlers = {
-                    -- Default setup for all LSP servers
-                    function(server_name)
-                        vim.lsp.enable(server_name)
-                    end,
-                    -- Custom setup for specific LSP servers
-                    ['emmet_language_server'] = function()
-                        vim.lsp.config('emmet_language_server', {
-                            filetypes = {
-                                'blade',
-                                'css',
-                                'html',
-                                'javascript',
-                                'javascriptreact',
-                                'scss',
-                                'typescript',
-                                'typescriptreact',
-                            },
-                        })
-                        vim.lsp.enable('emmet_language_server')
-                    end,
-                    ['intelephense'] = function()
-                        vim.lsp.config('intelephense', {
-                            settings = {
-                                intelephense = {
-                                    format = {
-                                        -- Intelephense formatting rules aren't configurable - use PHP CS Fixer instead
-                                        enable = false,
-                                    },
-                                    references = {
-                                        -- Don't exclude the vendor directory from references search
-                                        exclude = {}
-                                    }
-                                }
-                            }
-                        })
-                        vim.lsp.enable('intelephense')
-                    end,
-                    ['rust_analyzer'] = function()
-                        -- Let rustaceanvim handle the rust_analyzer config
-                        vim.lsp.config('rust_analyzer', {})
-                        vim.lsp.enable('rust_analyzer')
-                    end,
-                }
             })
         end,
     },
@@ -201,6 +157,37 @@ return {
                     end
                 end,
             })
+
+            vim.lsp.config('emmet_language_server', {
+                filetypes = {
+                    'blade',
+                    'css',
+                    'html',
+                    'javascript',
+                    'javascriptreact',
+                    'scss',
+                    'typescript',
+                    'typescriptreact',
+                },
+            })
+
+            vim.lsp.config('intelephense', {
+                settings = {
+                    intelephense = {
+                        format = {
+                            -- Intelephense formatting rules aren't configurable - use PHP CS Fixer instead
+                            enable = false,
+                        },
+                        references = {
+                            -- Don't exclude the vendor directory from references search
+                            exclude = {}
+                        }
+                    }
+                }
+            })
+
+            -- Let rustaceanvim handle the rust_analyzer config
+            vim.lsp.config('rust_analyzer', {})
         end
     },
     -- Community maintained fork of null-ls - only the repo name has changed, the plugin is still called null-ls
