@@ -1,10 +1,10 @@
 return {
     {
-        'williamboman/mason-lspconfig.nvim',
+        'mason-org/mason-lspconfig.nvim',
         lazy = false,
         dependencies = {
             {
-                'williamboman/mason.nvim',
+                'mason-org/mason.nvim',
                 opts = {},
             },
             {
@@ -86,7 +86,7 @@ return {
         'neovim/nvim-lspconfig',
         lazy = false,
         dependencies = {
-            'williamboman/mason-lspconfig.nvim',
+            'mason-org/mason-lspconfig.nvim',
         },
         keys = {
             {
@@ -207,7 +207,7 @@ return {
     {
         'nvimtools/none-ls.nvim',
         dependencies = {
-            'williamboman/mason.nvim',
+            'mason-org/mason.nvim',
             'davidmh/cspell.nvim',
         },
         opts = function()
@@ -425,11 +425,8 @@ return {
                     cmd = function() -- `:h rustaceanvim.mason`
                         local mason_registry = require('mason-registry')
 
-                        if (mason_registry:is_installed('rust-analyzer')) then
-                            -- This may need to be tweaked depending on the operating system.
-                            local ra = mason_registry.get_package('rust-analyzer')
-                            local ra_filename = ra:get_receipt():get().links.bin['rust-analyzer']
-                            return { ('%s/%s'):format(ra:get_install_path(), ra_filename or 'rust-analyzer') }
+                        if (mason_registry.is_installed 'rust-analyzer') then
+                            return { '$MASON/bin/rust-analyzer' }
                         else
                             -- global installation
                             return { 'rust-analyzer' }
