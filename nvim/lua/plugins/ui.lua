@@ -106,6 +106,10 @@ return {
                             icon = '',
                         },
                         {
+                            'selectioncount',
+                            icon = '󰸱',
+                        },
+                        {
                             '%c/%{strwidth(getline("."))}', -- column number
                             icon = '',
                         },
