@@ -56,7 +56,13 @@ return {
                     },
 
                     lualine_x = {
-                        todos_component,
+                        {
+                            todos_component,
+                            cond = function()
+                                local path = vim.fn.expand('%:p')
+                                return vim.bo.buftype == '' and path ~= '' and vim.fn.filereadable(path)
+                            end,
+                        },
                         {
                             'diagnostics',
                             sources = { 'nvim_diagnostic' },
