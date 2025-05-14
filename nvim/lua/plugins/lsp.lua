@@ -35,6 +35,12 @@ return {
                     'vimls',
                     'yamlls',
                 },
+                automatic_enable = {
+                    exclude = {
+                        -- Let rustaceanvim handle rust_analyzer
+                        'rust_analyzer',
+                    },
+                },
             })
         end,
     },
@@ -186,8 +192,28 @@ return {
                 }
             })
 
-            -- Let rustaceanvim handle the rust_analyzer config
-            vim.lsp.config('rust_analyzer', {})
+            vim.lsp.config('rust-analyzer', {
+                cmd = function() -- `:h rustaceanvim.mason`
+                    local mason_registry = require('mason-registry')
+
+                    if (mason_registry.is_installed 'rust-analyzer') then
+                        return { vim.fn.expand('$MASON/bin/rust-analyzer') }
+                    else
+                        -- global installation
+                        return { 'rust-analyzer' }
+                    end
+                end,
+                default_settings = {
+                    ['rust-analyzer'] = {
+                        cargo = {
+                            targetDir = '/tmp/rust-analyzer-cargo',
+                        },
+                        lru = {
+                            capacity = 64, -- number of syntax trees kept in memory (defaults to 128)
+                        },
+                    },
+                },
+            })
         end
     },
     -- Community maintained fork of null-ls - only the repo name has changed, the plugin is still called null-ls
@@ -404,33 +430,7 @@ return {
     },
     {
         'mrcjkb/rustaceanvim',
-        version = '^5',
+        version = '^6',
         lazy = false,
-        init = function()
-            vim.g.rustaceanvim = {
-                server = {
-                    cmd = function() -- `:h rustaceanvim.mason`
-                        local mason_registry = require('mason-registry')
-
-                        if (mason_registry.is_installed 'rust-analyzer') then
-                            return { '$MASON/bin/rust-analyzer' }
-                        else
-                            -- global installation
-                            return { 'rust-analyzer' }
-                        end
-                    end,
-                    default_settings = {
-                        ['rust-analyzer'] = {
-                            cargo = {
-                                targetDir = '/tmp/rust-analyzer-cargo',
-                            },
-                            lru = {
-                                capacity = 64, -- number of syntax trees kept in memory (defaults to 128)
-                            },
-                        },
-                    },
-                },
-            }
-        end,
     },
 }
