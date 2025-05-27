@@ -1,8 +1,17 @@
 return {
     {
         'nvim-treesitter/nvim-treesitter',
+        branch = 'main',
         build = ':TSUpdate',
-        event = { 'BufReadPost', 'BufNewFile' },
+        lazy = false,
+        init = function()
+            -- Use treesitter for folding
+            vim.opt.foldmethod = 'expr'
+            vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+
+            -- Use treesitter for indentation
+            vim.opt.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+        end,
         opts = {
             ensure_installed = 'all',
             auto_install = true,
@@ -13,13 +22,6 @@ return {
                 enable = true,
             },
         },
-        config = function(_, opts)
-            require('nvim-treesitter.configs').setup(opts)
-
-            -- Use treesitter for folding
-            vim.opt.foldmethod = 'expr'
-            vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
-        end,
     },
     {
         'JoosepAlviste/nvim-ts-context-commentstring',
