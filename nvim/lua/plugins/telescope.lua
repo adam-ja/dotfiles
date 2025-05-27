@@ -43,7 +43,6 @@ return {
             'nvim-telescope/telescope-file-browser.nvim',
             'nvim-telescope/telescope-symbols.nvim',
         },
-        branch = '0.1.x',
         lazy = false,
         opts = {
             defaults = {
