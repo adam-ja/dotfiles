@@ -4,24 +4,33 @@ return {
         branch = 'main',
         build = ':TSUpdate',
         lazy = false,
-        init = function()
-            -- Use treesitter for folding
-            vim.opt.foldmethod = 'expr'
-            vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+        config = function()
+            -- Install all available parsers
+            require('nvim-treesitter').install(require('nvim-treesitter.config').get_available()):wait(300000)
 
-            -- Use treesitter for indentation
-            vim.opt.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+            vim.api.nvim_create_autocmd('FileType', {
+                pattern = '*',
+                callback = function(args)
+                    local filetype = args.match
+                    local parser_name = vim.treesitter.language.get_lang(filetype)
+
+                    if not parser_name then
+                        return
+                    end
+
+                    if not pcall(vim.treesitter.get_parser, args.buf, parser_name) then
+                        return
+                    end
+
+                    vim.treesitter.start()
+
+                    vim.wo.foldmethod = 'expr'
+                    vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+
+                    vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+                end,
+            })
         end,
-        opts = {
-            ensure_installed = 'all',
-            auto_install = true,
-            highlight = {
-                enable = true,
-            },
-            indent = {
-                enable = true,
-            },
-        },
     },
     {
         'JoosepAlviste/nvim-ts-context-commentstring',

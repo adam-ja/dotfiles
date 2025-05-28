@@ -12,7 +12,7 @@ $HOME/.local/bin/fnm completions --shell zsh > ${DIR}/zsh/completions/_fnm
 $HOME/.local/bin/fnm install --lts
 
 # Install tree-sitter-cli for use with nvim-treesitter
-npm install tree-sitter-cli
+npm install -g tree-sitter-cli
 
 # Install cspell for spellchecking via null-ls
 npm install -g cspell@latest
