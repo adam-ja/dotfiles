@@ -33,15 +33,14 @@ return {
         end,
     },
     {
-        'JoosepAlviste/nvim-ts-context-commentstring',
-        opts = {
-            enable_autocmd = false,
-        }
-    },
-    {
         'numToStr/Comment.nvim',
         dependencies = {
-            'JoosepAlviste/nvim-ts-context-commentstring',
+            {
+                'JoosepAlviste/nvim-ts-context-commentstring',
+                opts = {
+                    enable_autocmd = false,
+                }
+            },
         },
         opts = {
             pre_hook = function()
