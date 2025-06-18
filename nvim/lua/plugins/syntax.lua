@@ -120,7 +120,6 @@ return {
             },
         },
     },
-    'jwalton512/vim-blade', -- No treesitter support for blade yet
     {
         'windwp/nvim-autopairs',
         dependencies = {
