@@ -51,15 +51,9 @@ return {
     },
     {
         'HiPhish/rainbow-delimiters.nvim',
-        dependencies = {
-            'nvim-treesitter/nvim-treesitter',
-        },
     },
     {
         'Wansmer/treesj',
-        dependencies = {
-            'nvim-treesitter/nvim-treesitter',
-        },
         opts = {
             use_default_keymaps = false,
         },
@@ -83,9 +77,6 @@ return {
     },
     {
         'Wansmer/sibling-swap.nvim',
-        dependencies = {
-            'nvim-treesitter/nvim-treesitter',
-        },
         opts = {
             use_default_keymaps = false,
         },
@@ -122,9 +113,6 @@ return {
     },
     {
         'windwp/nvim-autopairs',
-        dependencies = {
-            'nvim-treesitter/nvim-treesitter',
-        },
         opts = {
             check_ts = true,
         },
@@ -132,9 +120,6 @@ return {
     },
     {
         'windwp/nvim-ts-autotag',
-        dependencies = {
-            'nvim-treesitter/nvim-treesitter',
-        },
         opts = {},
         event = 'InsertEnter',
     },
