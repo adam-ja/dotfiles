@@ -120,7 +120,18 @@ return {
     {
         'windwp/nvim-ts-autotag',
         opts = {},
-        event = 'InsertEnter',
+        ft = {
+            'html',
+            'xml',
+            'javascript',
+            'typescript',
+            'javascriptreact',
+            'typescriptreact',
+            'blade',
+            'twig',
+            'vue',
+            'markdown',
+        },
     },
     {
         'folke/todo-comments.nvim',
