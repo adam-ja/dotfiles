@@ -44,7 +44,7 @@ return {
                     lualine_a = {
                         {
                             'mode',
-                            icon = '',
+                            icon = '',
                         },
                     },
                     lualine_b = { 'branch', 'diff' },
@@ -83,7 +83,7 @@ return {
                         'filetype',
                         {
                             'filesize',
-                            icon = '',
+                            icon = '󰋊',
                         },
                     },
                     lualine_z = {
