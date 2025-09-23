@@ -425,11 +425,6 @@ return {
         opts_extend = { 'sources.default' },
     },
     {
-        'phpactor/phpactor',
-        build = 'composer install --no-dev -o',
-        ft = 'php',
-    },
-    {
         'mrcjkb/rustaceanvim',
         version = '^6',
         lazy = false,

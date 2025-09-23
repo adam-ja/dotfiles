@@ -33,12 +33,6 @@ return {
                 build = 'make',
             },
             'nvim-telescope/telescope-ui-select.nvim',
-            {
-                'TENMAJKL/phpactor-telescope',
-                dependencies = {
-                    'phpactor/phpactor',
-                },
-            },
             'adoyle-h/telescope-extension-maker.nvim',
             'nvim-telescope/telescope-file-browser.nvim',
             'nvim-telescope/telescope-symbols.nvim',
@@ -476,11 +470,6 @@ return {
                     require('telescope').extensions.lsp_commands.lsp_commands()
                 end,
                 desc = 'Show LSP commands',
-            },
-            {
-                '<Leader>p',
-                '<cmd>PhpactorTelescope<CR>',
-                desc = 'Open Phpactor in telescope',
             },
         },
     },
