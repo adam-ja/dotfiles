@@ -405,7 +405,7 @@ return {
             },
             snippets = { preset = 'luasnip' },
             sources = {
-                default = { 'copilot', 'lsp', 'snippets', 'buffer', 'path', 'cmdline' },
+                default = { 'copilot', 'lazydev', 'lsp', 'snippets', 'buffer', 'path', 'cmdline' },
                 providers = {
                     -- https://cmp.saghen.dev/recipes.html#buffer-completion-from-all-open-buffers
                     buffer = {
@@ -418,6 +418,7 @@ return {
                         },
                     },
                     copilot = { name = 'copilot', module = 'blink-copilot', score_offset = 100, async = true },
+                    lazydev = { name = 'lazydev', module = 'lazydev.integrations.blink', score_offset = 100 },
                 },
             },
         },
