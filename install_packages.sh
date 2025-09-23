@@ -7,11 +7,11 @@ case "$(uname -s)" in
         # Get the latest version of php rather than the default for the current Ubuntu version
         sudo add-apt-repository ppa:ondrej/php
 
-        # Add neovim nightly ppa
-        sudo add-apt-repository ppa:neovim-ppa/unstable
-
-        PACKAGES='bat build-essential curl fd-find fzf git-extra imagemagick jq nala neovim openssh-server php php-curl php-mbstring php-xml python3-neovim tmux tree wget xclip xtail zsh'
+        PACKAGES='bat build-essential curl fd-find fzf git-extra imagemagick jq nala openssh-server php php-curl php-mbstring php-xml tmux tree wget xclip xtail zsh'
         sudo apt install --assume-yes ${PACKAGES}
+
+        # Install neovim (the stable version in the PPAs is way out of date)
+        sudo snap install nvim --classic
 
         # Install golang
         sudo snap install go --classic
