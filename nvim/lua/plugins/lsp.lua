@@ -89,6 +89,13 @@ return {
                 end,
                 desc = 'Go to previous diagnostic',
             },
+            {
+                '<Leader>lh',
+                function()
+                    vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+                end,
+                desc = 'Toggle inlay hints',
+            },
         },
         init = function()
             vim.diagnostic.config({
