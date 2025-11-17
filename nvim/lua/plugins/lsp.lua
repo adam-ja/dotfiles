@@ -187,6 +187,13 @@ return {
             vim.lsp.config('intelephense', {
                 settings = {
                     intelephense = {
+                        codeLens = {
+                            references = { enable = true },
+                            implementations = { enable = true },
+                            usages = { enable = true },
+                            overrides = { enable = true },
+                            parent = { enable = true },
+                        },
                         format = {
                             -- Intelephense formatting rules aren't configurable - use PHP CS Fixer instead
                             enable = false,
@@ -435,5 +442,95 @@ return {
         'mrcjkb/rustaceanvim',
         version = '^6',
         lazy = false,
+    },
+    {
+        'Wansmer/symbol-usage.nvim',
+        event = 'LspAttach',
+        config = function()
+            local SymbolKind = vim.lsp.protocol.SymbolKind
+
+            local function h(name)
+                return vim.api.nvim_get_hl(0, { name = name })
+            end
+
+            vim.api.nvim_set_hl(0, 'SymbolUsageRounding', { fg = h('CursorLine').bg, italic = true })
+            vim.api.nvim_set_hl(0, 'SymbolUsageContent',
+                { bg = h('CursorLine').bg, fg = h('CursorLine').fg, italic = true })
+
+            require('symbol-usage').setup({
+                kinds = {
+                    SymbolKind.Class,
+                    SymbolKind.Constant,
+                    SymbolKind.Constructor,
+                    SymbolKind.Enum,
+                    SymbolKind.EnumMember,
+                    SymbolKind.Function,
+                    SymbolKind.Interface,
+                    SymbolKind.Method,
+                    SymbolKind.Property,
+                    SymbolKind.Struct,
+                },
+                references = { enabled = true },
+                definition = { enabled = true },
+                implementation = { enabled = true },
+                vt_position = 'end_of_line',
+                request_pending_text = false,
+                text_format = function(symbol)
+                    local result = {}
+                    local round_start = { '◖', 'SymbolUsageRounding' }
+                    local round_end = { '◗', 'SymbolUsageRounding' }
+
+                    -- Indicator shows if tere are any other symbols in the same line
+                    local stacked_symbols_content = symbol.stacked_count > 0
+                        and ('+%s'):format(symbol.stacked_count)
+                        or ''
+
+                    if symbol.references then
+                        table.insert(result, round_start)
+                        table.insert(result, {
+                            ('%s %s'):format(symbol.references, symbol.references == 1 and 'usage' or 'usages'),
+                            'SymbolUsageContent',
+                        })
+                        table.insert(result, round_end)
+                    end
+
+                    if symbol.definition then
+                        if #result > 0 then
+                            table.insert(result, { ' ', 'NonText' })
+                        end
+                        table.insert(result, round_start)
+                        table.insert(result, {
+                            ('%s %s'):format(symbol.definition, symbol.definition == 1 and 'definition' or 'definitions'),
+                            'SymbolUsageContent',
+                        })
+                        table.insert(result, round_end)
+                    end
+
+                    if symbol.implementation then
+                        if #result > 0 then
+                            table.insert(result, { ' ', 'NonText' })
+                        end
+                        table.insert(result, round_start)
+                        table.insert(result, {
+                            ('%s %s'):format(symbol.implementation,
+                                symbol.implementation == 1 and 'implementation' or 'implementations'),
+                            'SymbolUsageContent',
+                        })
+                        table.insert(result, round_end)
+                    end
+
+                    if stacked_symbols_content ~= '' then
+                        if #result > 0 then
+                            table.insert(result, { ' ', 'NonText' })
+                        end
+                        table.insert(result, round_start)
+                        table.insert(result, { stacked_symbols_content, 'SymbolUsageContent' })
+                        table.insert(result, round_end)
+                    end
+
+                    return result
+                end,
+            })
+        end,
     },
 }
