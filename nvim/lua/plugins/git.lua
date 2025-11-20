@@ -43,6 +43,13 @@ return {
                 desc = 'Toggle current line blame [gitsigns]',
             },
             {
+                '<Leader>gb',
+                function()
+                    require('gitsigns').blame_line({ full = true })
+                end,
+                desc = 'Show full blame for current line in a floating window [gitsigns]',
+            },
+            {
                 '<Leader>gtd',
                 function()
                     require('gitsigns').toggle_deleted()
