@@ -137,6 +137,8 @@ vim.opt.number = true
 vim.opt.scrolloff = 999
 -- Draw a vertical line at 120 characters
 vim.opt.colorcolumn = '120'
+-- Default to a rounded border for floating windows
+vim.opt.winborder = 'rounded'
 
 -- Display folds in the status column (allows clickable folds with statuscol plugin)
 vim.opt.foldcolumn = 'auto:3'
