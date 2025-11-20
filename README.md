@@ -26,10 +26,7 @@ source $HOME/dotfiles/zsh/zshrc
 ### Extras
 
 - A [Nerd Font][nerdfonts] is required to see fancy symbols. The popular JetBrains Mono Nerd Font is installed as part of the process above, and this also includes ligatures where supported.
-- The kitty terminal emulator is also installed and configured to use the JetBrains font (kitty supports ligatures) and the matching theme from the tokyonight neovim theme. If using kitty, it's worth changing the default terminal app in the OS to this, and updating any keyboard shortcuts (e.g. Ctrl-Alt-T in Ubuntu).
-- If not using kitty, you'll need to set the font and theme in your terminal emulator of choice.
-    - Some themes are provided by the tokyonight.nvim plugin.
-    - Not all terminal emulators support ligatures (including GNOME Terminal).
+- The kitty terminal emulator is also installed and configured to use the JetBrains font (kitty supports ligatures) and the matching theme from the tokyonight neovim theme.
 
 ## License
 
