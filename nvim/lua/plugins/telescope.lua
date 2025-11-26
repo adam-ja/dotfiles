@@ -451,14 +451,14 @@ return {
                 desc = 'LSP references',
             },
             {
-                '<Leader>le',
+                '<Leader>fd',
                 function()
                     require('telescope.builtin').diagnostics({ bufnr = 0 })
                 end,
-                desc = 'LSP diagnostics in the buffer (e for errors)',
+                desc = 'LSP diagnostics in the current buffer',
             },
             {
-                '<Leader>fd',
+                '<Leader>fD',
                 function()
                     require('telescope.builtin').diagnostics()
                 end,
