@@ -480,7 +480,7 @@ return {
                     local round_start = { '◖', 'SymbolUsageRounding' }
                     local round_end = { '◗', 'SymbolUsageRounding' }
 
-                    -- Indicator shows if tere are any other symbols in the same line
+                    -- Indicator shows if there are any other symbols in the same line
                     local stacked_symbols_content = symbol.stacked_count > 0
                         and ('+%s'):format(symbol.stacked_count)
                         or ''
