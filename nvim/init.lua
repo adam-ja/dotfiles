@@ -149,6 +149,11 @@ vim.opt.foldlevelstart = 3
 -- Modernise fold symbols
 vim.opt.fillchars:append('foldopen:,foldsep:│,foldclose:')
 
+-- Open vertical splits to the right of the current window (default is left)
+vim.opt.splitright = true
+-- Open horizontal splits below the current window (default is above)
+vim.opt.splitbelow = true
+
 
 -- Other
 --------
