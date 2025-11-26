@@ -4,33 +4,36 @@ return {
         branch = 'main',
         build = ':TSUpdate',
         lazy = false,
-        config = function()
-            -- Install all available parsers
-            require('nvim-treesitter').install(require('nvim-treesitter.config').get_available()):wait(300000)
-
-            vim.api.nvim_create_autocmd('FileType', {
-                pattern = '*',
-                callback = function(args)
-                    local filetype = args.match
-                    local parser_name = vim.treesitter.language.get_lang(filetype)
-
-                    if not parser_name then
-                        return
-                    end
-
-                    if not pcall(vim.treesitter.get_parser, args.buf, parser_name) then
-                        return
-                    end
-
-                    vim.treesitter.start()
-
-                    vim.wo.foldmethod = 'expr'
-                    vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-
-                    vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-                end,
-            })
-        end,
+    },
+    {
+        'MeanderingProgrammer/treesitter-modules.nvim',
+        dependencies = { 'nvim-treesitter/nvim-treesitter' },
+        lazy = false,
+        opts = {
+            -- These parsers must always be installed
+            ensure_installed = {
+                'c',
+                'lua',
+                'vim',
+                'vimdoc',
+                'query',
+                'markdown',
+                'markdown_inline',
+            },
+            -- Automatically install missing parsers when entering buffer
+            auto_install = true,
+            fold = { enable = true },
+            highlight = { enable = true },
+            incremental_selection = {
+                enable = true,
+                keymaps = {
+                    init_selection = '<CR>',
+                    node_incremental = '<CR>',
+                    node_decremental = '<BS>',
+                },
+            },
+            indent = { enable = true },
+        },
     },
     {
         'numToStr/Comment.nvim',
