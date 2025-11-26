@@ -15,18 +15,32 @@ return {
         event = 'BufRead',
         keys = {
             {
-                '<Leader>gj',
+                '[G',
                 function()
-                    require('gitsigns').nav_hunk('next', { target = 'all' })
+                    require('gitsigns').nav_hunk('first', { target = 'all' })
                 end,
-                desc = 'Go to next hunk [gitsigns]',
+                desc = 'Jump to the first hunk in the current buffer [gitsigns]',
             },
             {
-                '<Leader>gk',
+                '[g',
                 function()
                     require('gitsigns').nav_hunk('prev', { target = 'all' })
                 end,
-                desc = 'Go to previous hunk [gitsigns]',
+                desc = 'Jump to the previous hunk in the current buffer [gitsigns]',
+            },
+            {
+                ']g',
+                function()
+                    require('gitsigns').nav_hunk('next', { target = 'all' })
+                end,
+                desc = 'Jump to the next hunk in the current buffer [gitsigns]',
+            },
+            {
+                ']G',
+                function()
+                    require('gitsigns').nav_hunk('last', { target = 'all' })
+                end,
+                desc = 'Jump to the last hunk in the current buffer [gitsigns]',
             },
             {
                 '<Leader>gp',

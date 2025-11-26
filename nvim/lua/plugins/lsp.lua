@@ -76,20 +76,6 @@ return {
                 'Go to declaration of the symbol under the cursor (e.g. interface or abstract method rather than concrete implementation)',
             },
             {
-                '<Leader>j',
-                function()
-                    vim.diagnostic.jump({ count = 1, float = true })
-                end,
-                desc = 'Go to next diagnostic',
-            },
-            {
-                '<Leader>k',
-                function()
-                    vim.diagnostic.jump({ count = -1, float = true })
-                end,
-                desc = 'Go to previous diagnostic',
-            },
-            {
                 '<Leader>lh',
                 function()
                     vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
