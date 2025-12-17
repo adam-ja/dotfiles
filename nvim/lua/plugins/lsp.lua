@@ -88,7 +88,6 @@ return {
                 virtual_text = false,
                 underline = false,
                 severity_sort = true,
-                -- This is the correct way to configure diagnostic signs
                 signs = {
                     text = {
                         [vim.diagnostic.severity.ERROR] = '',
@@ -104,19 +103,6 @@ return {
                     },
                 },
             })
-
-            -- Using `vim.fn.sign_define()` to configure diagnostic signs is deprecated in favour of the `signs` table
-            -- in `vim.diagnostic.config()` but telescope.nvim still relies on it (`vim.fn.sign_getdefined(...)`
-            -- https://github.com/nvim-telescope/telescope.nvim/blob/master/lua/telescope/make_entry.lua#L1151)
-            for name, icon in pairs({
-                Error = '',
-                Warn = '',
-                Info = '',
-                Hint = '',
-            }) do
-                local hl = 'DiagnosticSign' .. name
-                vim.fn.sign_define(hl, { text = icon, numhl = hl })
-            end
 
             vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
                 border = 'rounded',
