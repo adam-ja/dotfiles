@@ -212,7 +212,7 @@ return {
                 sources = {
                     -- PHP
                     builtins.diagnostics.phpstan,
-                    -- builtins.formatting.phpcsfixer,
+                    builtins.formatting.phpcsfixer,
                     -- shell
                     builtins.hover.dictionary,
                     builtins.hover.printenv,
