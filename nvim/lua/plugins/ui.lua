@@ -4,20 +4,29 @@ return {
         lazy = false,
         priority = 1000, -- make sure this is loaded first
         opts = {
+            style = 'moon',
             styles = {
                 comments = { italic = true },
-                virtual_text = { italic = true },
+                floats = 'moon',
+                sidebars = 'moon',
             },
-            on_highlights = function(highlights, colours)
-                -- Highlight the current line blame virtual text as a comment (required to make it italic)
+            on_highlights = function(highlights, _)
+                -- Highlight the current line blame virtual text as a comment
+                -- (required to make it italic, since tokyonight doesn't define
+                -- a highlight for GitSignsCurrentLineBlame by default)
                 highlights.GitSignsCurrentLineBlame = highlights.Comment
+
+                -- Make LSP inlay hints italic
+                local lsp_inlay_hint = highlights.LspInlayHint
+                lsp_inlay_hint.italic = true
+                highlights.LspInlayHint = lsp_inlay_hint
             end,
             dim_inactive = true,
         },
         config = function(_, opts)
             require('tokyonight').setup(opts)
 
-            vim.cmd('colorscheme tokyonight-moon')
+            vim.cmd('colorscheme tokyonight')
             vim.opt.cursorline = true
         end,
     },
