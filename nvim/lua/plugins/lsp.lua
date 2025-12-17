@@ -104,16 +104,11 @@ return {
                 },
             })
 
-            vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
-                border = 'rounded',
-            })
-
             vim.api.nvim_create_autocmd("CursorHold", {
                 callback = function()
                     vim.diagnostic.open_float({
                         focusable = false,
                         close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
-                        border = 'rounded',
                         source = true,
                         prefix = ' ',
                     })
@@ -294,7 +289,6 @@ return {
             },
             completion = {
                 menu = {
-                    border = 'rounded',
                     draw = {
                         columns = {
                             { 'kind_icon',  'kind', gap = 1 },
@@ -360,7 +354,6 @@ return {
                     },
                 },
                 documentation = {
-                    window = { border = 'rounded' },
                     auto_show = true,
                     auto_show_delay_ms = 100,
                 },
@@ -387,7 +380,6 @@ return {
             },
             signature = {
                 enabled = true,
-                window = { border = 'rounded' },
             },
             snippets = { preset = 'luasnip' },
             sources = {
