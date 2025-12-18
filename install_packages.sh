@@ -42,6 +42,7 @@ case "$(uname -s)" in
         ;;
 esac
 
+${DIR}/install_ubi.sh
 ${DIR}/install_kitty.sh
 ${DIR}/install_composer.sh
 ${DIR}/install_node.sh

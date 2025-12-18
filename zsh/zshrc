@@ -79,6 +79,9 @@ export FZF_DEFAULT_OPTS="--layout=reverse --bind ctrl-alt-k:preview-up,ctrl-alt-
 # Set up fnm (--use-on-cd auto-switches to the right version when a directory contains a .node-version or .nvmrc file)
 eval "$(fnm env --use-on-cd)"
 
+# git-spice completion
+eval "$(git-spice shell completion zsh)"
+
 # Bind Ctrl+Backspace to delete the previous word
 # (use `showkey -a` to find the correct escape sequence for a key combination, which may vary by terminal)
 bindkey '^H' backward-kill-word
@@ -104,5 +107,6 @@ alias gds='git diff --compact-summary'
 alias gcf='git status --porcelain | cut -c 1-3 --complement | xargs' # List all changed files (staged and unstaged) on a single line
 alias gitgone="git fetch --prune && git branch -vv | grep ': gone] '" # List all local branches that have been deleted on the remote
 alias gitgoned="gcm && gitgone | grep -v '\*' | awk '{print \$1}' | xargs git branch -D" # Delete all local branches that have been deleted on the remote
+alias gsp='git-spice'
 # Makes all aliases also work when running as root
 alias sudo='sudo '

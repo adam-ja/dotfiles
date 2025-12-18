@@ -30,3 +30,9 @@
     diffFilter = delta --color-only
 [delta]
     line-numbers = true
+[spice "experiment"]
+    commitFixup = true
+    commitPick = true
+[spice "log"]
+    crFormat = "url"
+    pushStatusFormat = "aheadBehind"
