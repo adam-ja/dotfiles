@@ -20,17 +20,11 @@ case "$(uname -s)" in
         # fd clashes with another package so the executable is installed as fdfind. Alias this to fd.
         ln -s $(which fdfind) ~/.local/bin/fd
 
-        # Workaround for a bug with the ripgrep package
-        # https://bugs.launchpad.net/ubuntu/+source/rust-bat/+bug/1868517/comments/32
-        apt download ripgrep
-        sudo dpkg --force-overwrite -i ripgrep*.deb
-        rm ripgrep*.deb
-
         ${DIR}/install_delta.sh
         ${DIR}/install_font.sh
         ;;
     Darwin)
-        brew install bat fzf git-delta jq php ripgrep tmux tree wget
+        brew install bat fzf git-delta jq php tmux tree wget
 
         brew install --HEAD luajit neovim
 
