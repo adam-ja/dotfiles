@@ -20,11 +20,10 @@ case "$(uname -s)" in
         # fd clashes with another package so the executable is installed as fdfind. Alias this to fd.
         ln -s $(which fdfind) ~/.local/bin/fd
 
-        ${DIR}/install_delta.sh
         ${DIR}/install_font.sh
         ;;
     Darwin)
-        brew install bat fzf git-delta jq php tmux tree wget
+        brew install bat fzf jq php tmux tree wget
 
         brew install --HEAD luajit neovim
 

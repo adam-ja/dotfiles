@@ -14,3 +14,6 @@ ubi --project abhinav/git-spice --exe gs --rename-exe git-spice --in $HOME/.loca
 
 # Install/update ripgrep
 ubi --project BurntSushi/ripgrep --exe rg --in $HOME/.local/bin
+
+# Install/update delta
+ubi --project dandavison/delta --in $HOME/.local/bin
