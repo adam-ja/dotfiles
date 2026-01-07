@@ -229,6 +229,25 @@ return {
         end,
     },
     {
+        'mfussenegger/nvim-lint',
+        config = function()
+            local lint = require('lint')
+
+            lint.linters_by_ft = {
+                rust = { 'clippy' },
+            }
+        end,
+        keys = {
+            {
+                '<Leader>ll',
+                function()
+                    require('lint').try_lint()
+                end,
+                desc = 'Lint current buffer with nvim-lint',
+            },
+        },
+    },
+    {
         'saghen/blink.cmp',
         version = '*',
         event = 'InsertEnter',
@@ -406,6 +425,13 @@ return {
         'mrcjkb/rustaceanvim',
         version = '^6',
         lazy = false,
+        init = function()
+            vim.g.rustaceanvim = {
+                tools = {
+                    enable_clippy = false,
+                },
+            }
+        end
     },
     {
         'Wansmer/symbol-usage.nvim',
