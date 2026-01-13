@@ -90,24 +90,27 @@ vim.opt.formatlistpat:append([[\|^\s*[\*-]\s\+]])
 
 local utils = require('utils')
 
--- Hide search highlighting
-utils.nmap('<Leader>/', ':nohlsearch<CR>')
--- Disable arrow keys (except in insert mode) - use h,j,k,l
-utils.map('<Up>', '<NOP>')
-utils.map('<Down>', '<NOP>')
-utils.map('<Left>', '<NOP>')
-utils.map('<Right>', '<NOP>')
--- Easy window switching
-utils.nmap('<C-h>', '<C-w>h')
-utils.nmap('<C-j>', '<C-w>j')
-utils.nmap('<C-k>', '<C-w>k')
-utils.nmap('<C-l>', '<C-w>l')
--- Sort the paragraph around the current cursor position (above and below to the nearest blank line) alphabetically
-utils.nmap('<Leader>al', '<C-v>apb:sort i<CR>')
--- Sort the selected lines alphabetically
-utils.vmap('<Leader>al', ':sort<CR>')
--- Press Ctrl-q to get back to Normal mode from Terminal mode
-utils.tmap('<C-q>', '<C-\\><C-n>')
+utils.map('<Up>', '<NOP>', { desc = 'Arrow keys are disabled, use h,j,k,l instead' })
+utils.map('<Down>', '<NOP>', { desc = 'Arrow keys are disabled, use h,j,k,l instead' })
+utils.map('<Left>', '<NOP>', { desc = 'Arrow keys are disabled, use h,j,k,l instead' })
+utils.map('<Right>', '<NOP>', { desc = 'Arrow keys are disabled, use h,j,k,l instead' })
+
+utils.nmap('<C-h>', '<C-w>h', { desc = 'Go to window to the left' })
+utils.nmap('<C-j>', '<C-w>j', { desc = 'Go to window below' })
+utils.nmap('<C-k>', '<C-w>k', { desc = 'Go to window above' })
+utils.nmap('<C-l>', '<C-w>l', { desc = 'Go to window to the right' })
+
+utils.tmap('<C-q>', '<C-\\><C-n>', { desc = 'Switch from Terminal mode to Normal mode' })
+
+utils.nmap('<Leader>/', ':nohlsearch<CR>', { desc = 'Hide search highlighting' })
+
+utils.nmap('<Leader>al', '<C-v>apb:sort i<CR>', { desc = 'Sort paragraph around cursor alphabetically' })
+utils.vmap('<Leader>al', ':sort<CR>', { desc = 'Sort selected lines alphabetically' })
+
+utils.nmap('<Leader>jp', ':%!jq<CR>', { desc = 'Prettify current buffer as JSON using jq' })
+utils.nmap('<Leader>ju', ':%!jq -c<CR>', { desc = 'Uglify current buffer as JSON using jq' })
+utils.vmap('<Leader>jp', ':!jq<CR>', { desc = 'Prettify selected lines as JSON using jq' })
+utils.vmap('<Leader>ju', ':!jq -c<CR>', { desc = 'Uglify selected lines as JSON using jq' })
 
 
 -- Custom commands
