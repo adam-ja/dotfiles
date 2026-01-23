@@ -82,6 +82,90 @@ return {
                 end,
                 desc = 'Toggle inlay hints',
             },
+            {
+                '[D',
+                function()
+                    vim.diagnostic.jump({
+                        count = -vim.v.numbermax,
+                        wrap = false,
+                        namespace = require('utils').reject_diagnostic_namespaces({ 'codebook' })
+                    })
+                end,
+                desc = 'Jump to the first diagnostic in the current buffer',
+            },
+            {
+                '[d',
+                function()
+                    vim.diagnostic.jump({
+                        count = -1,
+                        namespace = require('utils').reject_diagnostic_namespaces({ 'codebook' })
+                    })
+                end,
+                desc = 'Jump to the previous diagnostic in the current buffer',
+            },
+            {
+                ']d',
+                function()
+                    vim.diagnostic.jump({
+                        count = 1,
+                        namespace = require('utils').reject_diagnostic_namespaces({ 'codebook' })
+                    })
+                end,
+                desc = 'Jump to the next diagnostic in the current buffer',
+            },
+            {
+                ']D',
+                function()
+                    vim.diagnostic.jump({
+                        count = vim.v.numbermax,
+                        wrap = false,
+                        namespace = require('utils').reject_diagnostic_namespaces({ 'codebook' })
+                    })
+                end,
+                desc = 'Jump to the last diagnostic in the current buffer',
+            },
+            {
+                '[S',
+                function()
+                    vim.diagnostic.jump({
+                        count = -vim.v.numbermax,
+                        wrap = false,
+                        namespace = require('utils').get_diagnostic_namespace('codebook')
+                    })
+                end,
+                desc = 'Jump to the first spelling mistake in the current buffer',
+            },
+            {
+                '[s',
+                function()
+                    vim.diagnostic.jump({
+                        count = -1,
+                        namespace = require('utils').get_diagnostic_namespace('codebook')
+                    })
+                end,
+                desc = 'Jump to the previous spelling mistake in the current buffer',
+            },
+            {
+                ']s',
+                function()
+                    vim.diagnostic.jump({
+                        count = 1,
+                        namespace = require('utils').get_diagnostic_namespace('codebook')
+                    })
+                end,
+                desc = 'Jump to the next spelling mistake in the current buffer',
+            },
+            {
+                ']S',
+                function()
+                    vim.diagnostic.jump({
+                        count = vim.v.numbermax,
+                        wrap = false,
+                        namespace = require('utils').get_diagnostic_namespace('codebook')
+                    })
+                end,
+                desc = 'Jump to the last spelling mistake in the current buffer',
+            },
         },
         init = function()
             vim.diagnostic.config({

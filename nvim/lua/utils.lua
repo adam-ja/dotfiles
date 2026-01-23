@@ -106,4 +106,35 @@ function M.git_develop_branch()
     )[1]
 end
 
+function M.get_diagnostic_namespace(lsp_client_name)
+    assert(type(lsp_client_name) == 'string', 'lsp_client_name must be a string')
+
+    local client = vim.lsp.get_clients({ name = lsp_client_name })[1]
+    return client and vim.lsp.diagnostic.get_namespace(client.id)
+end
+
+function M.reject_diagnostic_namespaces(rejected_lsp_client_names)
+    assert(type(rejected_lsp_client_names) == 'table', 'rejected_lsp_client_names must be a table')
+
+    local rejected_namespaces = {}
+
+    for _, client_name in pairs(rejected_lsp_client_names) do
+        local client_ns = M.get_diagnostic_namespace(client_name)
+
+        if (client_ns ~= nil) then
+            rejected_namespaces[client_ns] = true
+        end
+    end
+
+    local filtered_namespaces = {}
+
+    for namespace, _ in pairs(vim.diagnostic.get_namespaces()) do
+        if rejected_namespaces[namespace] ~= true then
+            table.insert(filtered_namespaces, namespace)
+        end
+    end
+
+    return filtered_namespaces
+end
+
 return M
