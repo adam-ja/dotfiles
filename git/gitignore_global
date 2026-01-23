@@ -2,7 +2,7 @@
 .vim/
 .DS_Store
 .ignore
-cspell.json
+codebook.toml
 
 #####=== Vim ===#####
 [._]*.s[a-w][a-z]

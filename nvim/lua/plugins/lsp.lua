@@ -19,6 +19,7 @@ return {
             require('mason-lspconfig').setup({
                 ensure_installed = {
                     'bashls',
+                    'codebook',
                     'cssls',
                     'dockerls',
                     'emmet_language_server',
@@ -31,7 +32,6 @@ return {
                     'rust_analyzer',
                     -- 'tailwindcss', - TODO: this causes freezes when opening files that don't even have any CSS?!
                     'ts_ls',
-                    -- 'typos_lsp', - TODO: Try to get this working to replace cspell
                     'vimls',
                     'yamlls',
                 },
@@ -138,6 +138,19 @@ return {
                 end,
             })
 
+            vim.lsp.config('codebook', {
+                init_options = {
+                    diagnosticSeverity = "error",
+                },
+                on_attach = function(client, bufrn)
+                    local namespace = vim.lsp.diagnostic.get_namespace(client.id)
+                    vim.diagnostic.config({
+                        underline = true,
+                        signs = false,
+                    }, namespace)
+                end,
+            })
+
             vim.lsp.config('emmet_language_server', {
                 filetypes = {
                     'blade',
@@ -202,11 +215,9 @@ return {
         'nvimtools/none-ls.nvim',
         dependencies = {
             'mason-org/mason.nvim',
-            'davidmh/cspell.nvim',
         },
         opts = function()
             local builtins = require('null-ls').builtins
-            local cspell = require('cspell')
 
             return {
                 sources = {
@@ -216,14 +227,6 @@ return {
                     -- shell
                     builtins.hover.dictionary,
                     builtins.hover.printenv,
-                    -- spellcheck
-                    cspell.code_actions,
-                    cspell.diagnostics.with({
-                        diagnostic_config = {
-                            underline = true,
-                            signs = false,
-                        },
-                    }),
                 },
             }
         end,
