@@ -319,6 +319,9 @@ return {
         'mfussenegger/nvim-lint',
         config = function()
             local lint = require('lint')
+            local clippy = lint.linters.clippy
+            -- Don't print cargo log errors that can't be parsed by nvim-lint
+            table.insert(clippy.args, '--quiet')
 
             lint.linters_by_ft = {
                 rust = { 'clippy' },
