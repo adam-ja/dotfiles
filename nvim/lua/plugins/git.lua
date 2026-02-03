@@ -127,11 +127,11 @@ return {
         'sindrets/diffview.nvim',
         keys = {
             {
-                '<Leader>gd',
+                '<Leader>gdv',
                 function()
                     require('diffview').open()
                 end,
-                desc = 'Diff current file [diffview]',
+                desc = 'Open diffview [git]',
             },
         }
     },
