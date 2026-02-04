@@ -10,7 +10,6 @@ return {
             enabled = true,
             wipe = true,
         },
-        dashboard = { enabled = true },
         image = { enabled = true },
         indent = {
             enabled = true,
