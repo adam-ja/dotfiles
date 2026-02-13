@@ -1,3 +1,4 @@
+---@param ctx snacks.picker.preview.ctx
 local file_with_path_previewer = function(ctx)
     -- Use the default file previewer
     require('snacks').picker.preview.file(ctx)
@@ -5,8 +6,28 @@ local file_with_path_previewer = function(ctx)
     ctx.preview:set_title(vim.fn.fnamemodify(ctx.item.file, ':.'))
 end
 
+---@param item snacks.picker.finder.Item
+---@return boolean
+local reject_codebook_diagnostics_filter = function(item)
+    local reject_namespace = require('utils').get_diagnostic_namespace('codebook')
+
+    return item.item.namespace ~= reject_namespace
+end
+
+---@type snacks.picker.win.Config
+local uncommitted_changes_keys = {
+    input = {
+        keys = {
+            ['<Tab>'] = { 'select_and_next', mode = { 'i', 'n' } },
+            ['<C-s>'] = { 'git_stage', mode = { 'i', 'n' } },
+        },
+    },
+}
+
+---@type LazyPluginSpec
 return {
     'snacks.nvim',
+    ---@type snacks.Config
     opts = {
         picker = {
             enabled = true,
@@ -51,6 +72,7 @@ return {
             '<Leader>fb',
             function()
                 require('snacks').picker.buffers({
+                    ---@type snacks.picker.win.Config
                     win = {
                         input = {
                             keys = {
@@ -75,15 +97,9 @@ return {
         {
             '<Leader>fd',
             function()
-                local reject_namespace = require('utils').get_diagnostic_namespace('codebook')
-
                 require('snacks').picker.diagnostics_buffer({
-                    filter = {
-                        -- Exclude spelling mistakes
-                        filter = function(item)
-                            return item.item.namespace ~= reject_namespace
-                        end
-                    },
+                    -- Exclude spelling mistakes
+                    filter = { filter = reject_codebook_diagnostics_filter },
                 })
             end,
             desc = 'LSP diagnostics in the current buffer',
@@ -91,15 +107,9 @@ return {
         {
             '<Leader>fD',
             function()
-                local reject_namespace = require('utils').get_diagnostic_namespace('codebook')
-
                 require('snacks').picker.diagnostics({
-                    filter = {
-                        -- Exclude spelling mistakes
-                        filter = function(item)
-                            return item.item.namespace ~= reject_namespace
-                        end
-                    },
+                    -- Exclude spelling mistakes
+                    filter = { filter = reject_codebook_diagnostics_filter },
                 })
             end,
             desc = 'LSP diagnostics for the current workspace',
@@ -324,14 +334,7 @@ return {
             '<Leader>gdu',
             function()
                 require('snacks').picker.git_status({
-                    win = {
-                        input = {
-                            keys = {
-                                ['<Tab>'] = { 'select_and_next', mode = { 'i', 'n' } },
-                                ['<C-s'] = { 'git_stage', mode = { 'i', 'n' } },
-                            },
-                        },
-                    },
+                    win = uncommitted_changes_keys,
                 })
             end,
             desc = 'Show files with uncommitted changes (one result per file) [git]',
@@ -340,14 +343,7 @@ return {
             '<Leader>gdU',
             function()
                 require('snacks').picker.git_diff({
-                    win = {
-                        input = {
-                            keys = {
-                                ['<Tab>'] = { 'select_and_next', mode = { 'i', 'n' } },
-                                ['<C-s'] = { 'git_stage', mode = { 'i', 'n' } },
-                            },
-                        },
-                    },
+                    win = uncommitted_changes_keys,
                 })
             end,
             desc = 'Show uncommitted changes (one result per hunk) [git]',

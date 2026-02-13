@@ -1,3 +1,4 @@
+---@type LazyPluginSpec[]|string[]
 return {
     {
         'nvim-treesitter/nvim-treesitter',
@@ -6,9 +7,11 @@ return {
         lazy = false,
     },
     {
+        ---@module 'treesitter-modules'
         'MeanderingProgrammer/treesitter-modules.nvim',
         dependencies = { 'nvim-treesitter/nvim-treesitter' },
         lazy = false,
+        ---@type ts.mod.UserConfig
         opts = {
             -- These parsers must always be installed
             ensure_installed = {
@@ -36,24 +39,28 @@ return {
         },
     },
     {
+        ---@module 'Comment'
         'numToStr/Comment.nvim',
         dependencies = {
             {
+                ---@module 'ts_context_commentstring
                 'JoosepAlviste/nvim-ts-context-commentstring',
+                ---@type ts_context_commentstring.Config
                 opts = {
                     enable_autocmd = false,
                 }
             },
         },
-        opts = {
-            pre_hook = function()
-                require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook()
-            end,
-        },
+        config = function()
+            ---@type CommentConfig
+            opts = {
+                pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook(),
+            }
+
+            require('Comment').setup(opts)
+        end,
     },
-    {
-        'HiPhish/rainbow-delimiters.nvim',
-    },
+    'HiPhish/rainbow-delimiters.nvim',
     {
         'Wansmer/treesj',
         opts = {
@@ -78,7 +85,9 @@ return {
         },
     },
     {
+        ---@module 'sibling-swap'
         'Wansmer/sibling-swap.nvim',
+        ---@type UserOpts
         opts = {
             use_default_keymaps = false,
         },
@@ -137,11 +146,13 @@ return {
         },
     },
     {
+        ---@module 'todo-comments'
         'folke/todo-comments.nvim',
         dependencies = {
             'nvim-lua/plenary.nvim',
         },
         event = 'BufReadPost',
+        ---@type TodoOptions
         opts = {
             highlight = {
                 keyword = "bg",

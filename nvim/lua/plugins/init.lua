@@ -1,4 +1,5 @@
 -- Core and miscelaneous plugins that don't fit in any other category
+---@type LazyPluginSpec[]|string[]
 return {
     {
         'folke/lazy.nvim', -- let lazy.nvim manage itself

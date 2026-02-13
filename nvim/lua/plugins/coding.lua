@@ -1,4 +1,5 @@
 -- "Coding" related plugins that don't fit neatly into syntax, LSP, etc
+---@type LazyPluginSpec[]
 return {
     {
         'vim-test/vim-test',

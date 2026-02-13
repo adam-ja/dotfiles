@@ -1,7 +1,10 @@
+---@type LazyPluginSpec[]|string[]
 return {
     'tpope/vim-fugitive',
     {
+        ---@module 'gitsigns'
         'lewis6991/gitsigns.nvim',
+        ---@type Gitsigns.Config
         opts = {
             numhl = true,
             current_line_blame = true,

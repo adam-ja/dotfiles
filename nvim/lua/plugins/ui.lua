@@ -1,8 +1,11 @@
+---@type LazyPluginSpec[]|string[]
 return {
     {
+        ---@module 'tokyonight'
         'folke/tokyonight.nvim',
         lazy = false,
         priority = 1000, -- make sure this is loaded first
+        ---@type tokyonight.Config
         opts = {
             style = 'moon',
             styles = {
@@ -240,7 +243,9 @@ return {
         end,
     },
     {
+        ---@module 'cinnamon'
         'declancm/cinnamon.nvim',
+        ---@type CinnamonOptions
         opts = {
             keymaps = {
                 basic = true,
@@ -261,6 +266,7 @@ return {
     },
     'Bekaboo/dropbar.nvim',
     {
+        ---@module 'noice'
         'folke/noice.nvim',
         event = 'VeryLazy',
         dependencies = {
@@ -271,6 +277,7 @@ return {
             vim.opt.shortmess:remove('T')
             vim.opt.shortmess:append('sW')
         end,
+        ---@type NoiceConfig
         opts = {
             lsp = {
                 override = {
@@ -343,11 +350,13 @@ return {
         opts = {},
     },
     {
+        ---@module 'render-markdown'
         'MeanderingProgrammer/render-markdown.nvim',
         dependencies = {
             'nvim-treesitter/nvim-treesitter',
             'nvim-tree/nvim-web-devicons',
         },
+        ---@type render.md.UserConfig
         opts = {
             completions = { blink = { enabled = true } },
         },

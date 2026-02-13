@@ -1,5 +1,8 @@
+---@type LazyPluginSpec
 return {
+    ---@module 'snacks'
     'snacks.nvim',
+    ---@type snacks.Config
     opts = {
         dashboard = {
             enabled = true,
