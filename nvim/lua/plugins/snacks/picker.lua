@@ -42,6 +42,12 @@ return {
                 buffers = {
                     current = false,
                     preview = file_with_path_previewer,
+                    filter = {
+                        filter = function(item)
+                            -- Exclude the quickfix list buffer
+                            return item.buftype ~= 'quickfix'
+                        end,
+                    },
                 },
                 diagnostics = { preview = file_with_path_previewer },
                 files = { preview = file_with_path_previewer },
