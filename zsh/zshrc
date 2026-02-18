@@ -25,7 +25,7 @@ plugins=($plugins spaceship-react spaceship-vi-mode)
 plugins=($plugins tmux)
 plugins=($plugins zsh-autosuggestions)
 
-export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:$HOME/.local/bin:$HOME/.local/share/fnm/aliases/default/bin/:usr/local/bin:$PATH
 
 # Look for additional completions
 fpath=($HOME/dotfiles/zsh/completions/ $fpath)

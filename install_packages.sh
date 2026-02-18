@@ -40,3 +40,4 @@ ${DIR}/install_kitty.sh
 ${DIR}/install_composer.sh
 ${DIR}/install_node.sh
 ${DIR}/install_rust.sh
+${DIR}/install_claude.sh
