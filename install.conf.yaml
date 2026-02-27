@@ -1,13 +1,13 @@
-- clean: ['~']
+- clean: ["~"]
 - defaults:
     link:
-        create: true # Create parent directories to symlinks if they don't already exist
-        ignore-missing: true # Create the link even though the target won't exist until everything is installed
+      create: true # Create parent directories to symlinks if they don't already exist
+      ignore-missing: true # Create the link even though the target won't exist until everything is installed
 - link:
     ~/.ignore: misc/ignore
     ~/.config/composer/composer.json: misc/composer.json
     ~/.local/bin/bat: /usr/bin/batcat
-    ~/.config/bat/themes: ~/.local/share/nvim/lazy/tokyonight.nvim/extras/sublime/*.tmTheme
+    ~/.config/bat/themes: ~/.local/share/nvim/lazy/tokyonight.nvim/extras/sublime
     ~/.config/git/config: git/config
     ~/.local/bin/kitty: ~/.local/kitty.app/bin/kitty
     ~/.config/kitty/kitty.conf: misc/kitty.conf
