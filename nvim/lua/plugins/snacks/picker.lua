@@ -32,11 +32,17 @@ return {
         picker = {
             enabled = true,
             prompt = '⛏️ ',
-            layout = {
-                fullscreen = true,
-            },
             layouts = {
+                default = {
+                    fullscreen = true,
+                    config = function(layout)
+                        -- Make the preview window wider than the list (default is 0.5)
+                        layout.layout[2].width = 0.6
+                    end,
+                },
                 select = { layout = { relative = 'cursor' } },
+                vertical = { fullscreen = true },
+                vscode = { fullscreen = true },
             },
             sources = {
                 buffers = {
@@ -49,7 +55,14 @@ return {
                         end,
                     },
                 },
-                diagnostics = { preview = file_with_path_previewer },
+                diagnostics = {
+                    layout = 'vertical',
+                    preview = file_with_path_previewer,
+                },
+                diagnostics_buffer = {
+                    layout = 'vertical',
+                    preview = file_with_path_previewer,
+                },
                 files = { preview = file_with_path_previewer },
                 git_files = { preview = file_with_path_previewer },
                 grep = { preview = file_with_path_previewer },
@@ -59,6 +72,7 @@ return {
                 lsp_implementations = { preview = file_with_path_previewer },
                 lsp_references = { preview = file_with_path_previewer },
                 lsp_type_definitions = { preview = file_with_path_previewer },
+                notifications = { layout = 'vscode' },
             },
             -- Replace `vim.ui.select` with the snacks picker
             ui_select = true,
@@ -68,6 +82,22 @@ return {
                         ['<C-d>'] = { 'preview_scroll_down', mode = { 'n', 'i' } },
                         ['<C-u>'] = { 'preview_scroll_up', mode = { 'n', 'i' } },
                     },
+                },
+                list = {
+                    wo = {
+                        wrap = true,
+                    },
+                },
+                preview = {
+                    wo = {
+                        wrap = true,
+                    },
+                },
+            },
+            formatters = {
+                file = {
+                    -- Don't truncate file paths (they'll be wrapped instead)
+                    min_width = 999,
                 },
             },
         },
