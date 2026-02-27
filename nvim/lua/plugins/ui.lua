@@ -301,20 +301,6 @@ return {
             messages = {
                 view_search = false,
             },
-            routes = {
-                -- https://github.com/folke/noice.nvim/wiki/Configuration-Recipes#ignore-certain-lsp-servers-for-progress-messages
-                {
-                    filter = {
-                        event = 'lsp',
-                        kind = 'progress',
-                        cond = function(message)
-                            local client = vim.tbl_get(message.opts, 'progress', 'client')
-                            return client == 'null-ls'
-                        end,
-                    },
-                    opts = { skip = true },
-                },
-            },
         },
         keys = {
             {

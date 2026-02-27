@@ -273,7 +273,7 @@ return {
                             parent = { enable = true },
                         },
                         format = {
-                            -- Intelephense formatting rules aren't configurable - use PHP CS Fixer instead
+                            -- Intelephense formatting rules aren't configurable - use Mago instead
                             enable = false,
                         },
                         references = {
@@ -308,38 +308,46 @@ return {
             })
         end
     },
-    -- Community maintained fork of null-ls - only the repo name has changed, the plugin is still called null-ls
-    {
-        'nvimtools/none-ls.nvim',
-        dependencies = {
-            'mason-org/mason.nvim',
-        },
-        opts = function()
-            local builtins = require('null-ls').builtins
-
-            return {
-                sources = {
-                    -- PHP
-                    builtins.diagnostics.phpstan,
-                    builtins.formatting.phpcsfixer,
-                    -- shell
-                    builtins.hover.dictionary,
-                    builtins.hover.printenv,
-                },
-            }
-        end,
-    },
     {
         'mfussenegger/nvim-lint',
+        event = 'FileType',
         config = function()
             local lint = require('lint')
+
             local clippy = lint.linters.clippy
             -- Don't print cargo log errors that can't be parsed by nvim-lint
             table.insert(clippy.args, '--quiet')
 
+            local mago_analyze = lint.linters.mago_analyze
+            mago_analyze.cmd = 'vendor/bin/mago'
+            table.insert(mago_analyze.args, '--ignore-baseline')
+
+            local mago_lint = lint.linters.mago_lint
+            mago_lint.cmd = 'vendor/bin/mago'
+            table.insert(mago_lint.args, '--ignore-baseline')
+
             lint.linters_by_ft = {
+                php = {
+                    'mago_analyze',
+                    'mago_lint',
+                },
                 rust = { 'clippy' },
             }
+
+            vim.api.nvim_create_autocmd('FileType', {
+                pattern = 'php',
+                callback = function()
+                    -- Lint when the filetype is detected (this is better than BufReadPost)
+                    require('lint').try_lint()
+
+                    -- And again on save
+                    vim.api.nvim_create_autocmd('BufWritePost', {
+                        callback = function()
+                            require('lint').try_lint()
+                        end,
+                    })
+                end,
+            })
         end,
         keys = {
             {
@@ -350,6 +358,46 @@ return {
                 desc = 'Lint current buffer with nvim-lint',
             },
         },
+    },
+    {
+        ---@module 'conform'
+        'stevearc/conform.nvim',
+        event = 'BufWritePre',
+        cmd = 'ConformInfo',
+        config = function()
+            local conform_util = require('conform.util')
+            local mago_command = conform_util.find_executable({
+                'vendor/bin/mago',
+            }, 'mago')
+
+            require('conform').setup({
+                formatters = {
+                    mago_format = {
+                        command = mago_command,
+                    },
+                    mago_lint = {
+                        command = mago_command,
+                        args = {
+                            'lint',
+                            '--fix',
+                            '--format-after-fix',
+                            '$FILENAME',
+                        },
+                    },
+                },
+                formatters_by_ft = {
+                    php = {
+                        'mago_format',
+                        'mago_lint',
+                    },
+                },
+                default_format_opts = {
+                    lsp_format = 'first',
+                },
+                -- Format on save using default format options
+                format_on_save = {},
+            })
+        end,
     },
     {
         ---@module 'blink.cmp'

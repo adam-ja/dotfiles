@@ -1,18 +1,8 @@
 {
     "require": {
-        "d11wtq/boris": "@stable",
-        "friendsofphp/php-cs-fixer": "@stable",
-        "phpstan/extension-installer": "@stable",
-        "phpstan/phpstan": "@stable",
-        "phpstan/phpstan-doctrine": "@stable",
-        "phpstan/phpstan-mockery": "@stable",
-        "phpstan/phpstan-phpunit": "@stable",
-        "squizlabs/php_codesniffer": "@stable"
+        "d11wtq/boris": "@stable"
     },
     "config": {
-        "sort-packages": true,
-        "allow-plugins": {
-            "phpstan/extension-installer": true
-        }
+        "sort-packages": true
     }
 }
