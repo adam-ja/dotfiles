@@ -15,7 +15,7 @@ local reject_codebook_diagnostics_filter = function(item)
 end
 
 ---@type snacks.picker.win.Config
-local uncommitted_changes_keys = {
+local git_picker_keys = {
     input = {
         keys = {
             ['<Tab>'] = { 'select_and_next', mode = { 'i', 'n' } },
@@ -64,7 +64,9 @@ return {
                     preview = file_with_path_previewer,
                 },
                 files = { preview = file_with_path_previewer },
+                git_diff = { win = git_picker_keys },
                 git_files = { preview = file_with_path_previewer },
+                git_status = { win = git_picker_keys },
                 grep = { preview = file_with_path_previewer },
                 grep_buffers = { preview = file_with_path_previewer },
                 grep_word = { preview = file_with_path_previewer },
@@ -369,18 +371,14 @@ return {
         {
             '<Leader>gdu',
             function()
-                require('snacks').picker.git_status({
-                    win = uncommitted_changes_keys,
-                })
+                require('snacks').picker.git_status()
             end,
             desc = 'Show files with uncommitted changes (one result per file) [git]',
         },
         {
             '<Leader>gdU',
             function()
-                require('snacks').picker.git_diff({
-                    win = uncommitted_changes_keys,
-                })
+                require('snacks').picker.git_diff()
             end,
             desc = 'Show uncommitted changes (one result per hunk) [git]',
         },
