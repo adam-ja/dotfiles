@@ -32,7 +32,18 @@ return {
                 }
             },
             interactions = {
-                chat = { adapter = 'claude_code' },
+                chat = {
+                    adapter = 'claude_code',
+                    opts = {
+                        ---@param ctx CodeCompanion.SystemPrompt.Context
+                        system_prompts = function(ctx)
+                            return ctx.default_system_prompt .. [[
+                                Additional instructions:
+                                - Always re-read a file after editing before making further edits to it, rather than relying on a potentially stale cached state.
+                            ]]
+                        end,
+                    },
+                },
                 inline = { adapter = 'copilot_gemini' },
                 cmd = { adapter = 'copilot_gemini' },
             },
