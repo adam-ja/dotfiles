@@ -155,7 +155,6 @@ return {
             })
         end,
     },
-    'edkolev/tmuxline.vim',
     {
         'luukvbaal/statuscol.nvim',
         opts = function()
