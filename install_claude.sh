@@ -6,5 +6,5 @@
 curl -fsSL https://claude.ai/install.sh | bash
 
 # Install the Claude ACP adapter
-# https://github.com/zed-industries/claude-code-acp
-npm install -g @zed-industries/claude-code-acp
+# https://github.com/zed-industries/claude-agent-acp
+npm install -g @zed-industries/claude-agent-acp
