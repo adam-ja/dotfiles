@@ -2,7 +2,7 @@
 return {
     {
         'olimorris/codecompanion.nvim',
-        version = '^18.6.0',
+        version = '^19.3.0',
         dependencies = {
             'nvim-lua/plenary.nvim',
             'nvim-treesitter/nvim-treesitter',
