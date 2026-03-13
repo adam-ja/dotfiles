@@ -131,7 +131,7 @@ vim.api.nvim_create_user_command('Rm', ':call delete(expand("%")) | bwipeout!', 
 
 -- Update the terminal title to the filename
 vim.opt.title = true
-vim.opt.titlestring = 'nvim - %f'
+vim.opt.titlestring = 'nvim - %{expand("%:p:.")}'
 -- Enable true colour
 vim.opt.termguicolors = true
 -- Show line numbers
