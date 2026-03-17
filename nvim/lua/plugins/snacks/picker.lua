@@ -44,6 +44,71 @@ return {
                 vertical = { fullscreen = true },
                 vscode = { fullscreen = true },
             },
+            actions = {
+                list_scroll_right = function(picker)
+                    if picker.list.win:valid() then
+                        picker.list.win:hscroll()
+                    end
+                end,
+                list_scroll_left = function(picker)
+                    if picker.list.win:valid() then
+                        picker.list.win:hscroll(true)
+                    end
+                end,
+                peek_list_item = function(picker)
+                    local win = require('snacks').win
+                    local list_buf = picker.list.win.buf
+                    local list_ns = vim.api.nvim_create_namespace('snacks.picker.list')
+
+                    -- Get the cursor row in the list (1-indexed)
+                    local cursor_row = vim.api.nvim_win_get_cursor(picker.list.win.win)[1]
+                    local row_0 = cursor_row - 1
+
+                    -- Get the rendered line text and extmarks from the list buffer
+                    local line_text = vim.api.nvim_buf_get_lines(list_buf, row_0, row_0 + 1, false)[1] or ''
+                    local extmarks = vim.api.nvim_buf_get_extmarks(
+                        list_buf,
+                        list_ns,
+                        { row_0, 0 },
+                        { row_0, -1 },
+                        { details = true }
+                    )
+
+                    local peek_ns = vim.api.nvim_create_namespace('snacks.picker.peek')
+
+                    win.new({
+                        footer_keys = true,
+                        height = 0.6,
+                        width = 0.6,
+                        border = true,
+                        zindex = win.zindex(),
+                        wo = {
+                            wrap = true,
+                        },
+                        on_win = function(self)
+                            vim.cmd('stopinsert')
+
+                            -- Copy extmarks from the list buffer to reproduce highlights
+                            for _, extmark in ipairs(extmarks) do
+                                local col = extmark[3]
+                                local details = extmark[4]
+                                -- Remove fields that shouldn't be copied
+                                details.ns_id = nil
+                                details.id = nil
+                                -- Remap row to 0 (single line in the peek buffer)
+                                details.end_row = details.end_row and 0 or nil
+                                vim.api.nvim_buf_set_extmark(self.buf, peek_ns, 0, col, details)
+                            end
+
+                            vim.api.nvim_set_option_value('modifiable', false, { scope = 'local' })
+                        end,
+                        keys = {
+                            ['<C-p>'] = { 'close', mode = { 'n', 'i' }, desc = 'close' },
+                        },
+                        text = line_text,
+                    })
+                end,
+            },
             sources = {
                 buffers = {
                     current = false,
@@ -83,11 +148,9 @@ return {
                     keys = {
                         ['<C-d>'] = { 'preview_scroll_down', mode = { 'n', 'i' } },
                         ['<C-u>'] = { 'preview_scroll_up', mode = { 'n', 'i' } },
-                    },
-                },
-                list = {
-                    wo = {
-                        wrap = true,
+                        ['<C-l>'] = { 'list_scroll_right', mode = { 'n', 'i' } },
+                        ['<C-h>'] = { 'list_scroll_left', mode = { 'n', 'i' } },
+                        ['<C-p>'] = { 'peek_list_item', mode = { 'n', 'i' } },
                     },
                 },
                 preview = {
@@ -98,7 +161,8 @@ return {
             },
             formatters = {
                 file = {
-                    -- Don't truncate file paths (they'll be wrapped instead)
+                    filename_first = true,
+                    -- Don't truncate file paths
                     min_width = 999,
                 },
             },
