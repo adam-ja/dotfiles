@@ -34,7 +34,6 @@ return {
                     'dockerls',
                     'emmet_language_server',
                     'eslint',
-                    'gopls',
                     'html',
                     'intelephense',
                     'jsonls',
