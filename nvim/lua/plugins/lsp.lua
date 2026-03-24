@@ -39,7 +39,7 @@ return {
                     'jsonls',
                     'lua_ls',
                     'rust_analyzer',
-                    -- 'tailwindcss', - TODO: this causes freezes when opening files that don't even have any CSS?!
+                    'tailwindcss',
                     'ts_ls',
                     'vimls',
                     'yamlls',
@@ -248,18 +248,18 @@ return {
                 end,
             })
 
-            vim.lsp.config('emmet_language_server', {
-                filetypes = {
-                    'blade',
-                    'css',
-                    'html',
-                    'javascript',
-                    'javascriptreact',
-                    'scss',
-                    'typescript',
-                    'typescriptreact',
-                },
-            })
+            local html_css_js_filetypes = {
+                'blade',
+                'css',
+                'html',
+                'javascript',
+                'javascriptreact',
+                'scss',
+                'typescript',
+                'typescriptreact',
+            }
+
+            vim.lsp.config('emmet_language_server', { filetypes = html_css_js_filetypes })
 
             vim.lsp.config('intelephense', {
                 settings = {
@@ -302,6 +302,16 @@ return {
                         lru = {
                             capacity = 64, -- number of syntax trees kept in memory (defaults to 128)
                         },
+                    },
+                },
+            })
+
+            vim.lsp.config('tailwindcss', {
+                filetypes = html_css_js_filetypes,
+                settings = {
+                    tailwindCSS = {
+                        classFunctions = { 'tw', 'tw\\.[a-z-]+' },
+                        emmetCompletions = true,
                     },
                 },
             })
