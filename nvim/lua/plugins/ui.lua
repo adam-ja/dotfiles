@@ -348,6 +348,11 @@ return {
                 lsp = { enabled = true },
             },
             file_types = { 'markdown', 'codecompanion' },
+            code = {
+                width = 'block',
+                border = 'none',
+                right_pad = 1,
+            },
         },
     },
     {
