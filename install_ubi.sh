@@ -10,7 +10,7 @@ else
 fi
 
 # Install/update git-spice
-ubi --project abhinav/git-spice --exe gs --rename-exe git-spice --in $HOME/.local/bin
+ubi --project abhinav/git-spice --exe git-spice --in $HOME/.local/bin
 
 # Install/update ripgrep
 ubi --project BurntSushi/ripgrep --exe rg --in $HOME/.local/bin
