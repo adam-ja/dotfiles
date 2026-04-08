@@ -357,6 +357,42 @@ return {
                     })
                 end,
             })
+
+            -- Grab a reference to the internal running procs table once at config time.
+            -- It's a local in lint.lua so debug.getupvalue on a public function is the only way to reach it.
+            -- The loop looks like it'll run many iterations but it should only take a few to match the variable we need.
+            local running_procs_by_buf
+            for i = 1, math.huge do
+                local name, value = debug.getupvalue(lint.get_running, i)
+                if not name then break end
+                if name == 'running_procs_by_buf' then
+                    running_procs_by_buf = value
+                    break
+                end
+            end
+
+            vim.api.nvim_create_autocmd('BufLeave', {
+                callback = function(args)
+                    -- Do nothing if leaving anything other than a normal file buffer
+                    if vim.bo[args.buf].buftype ~= '' then return end
+
+                    local left_buf = args.buf
+
+                    -- Schedule to run on the next event loop tick so that we can inspect the new buffer
+                    vim.schedule(function()
+                        local new_buf = vim.api.nvim_get_current_buf()
+                        -- If switching to another normal file buffer, cancel any running linters from the left buffer
+                        if new_buf ~= left_buf and vim.bo[new_buf].buftype == '' then
+                            local procs = running_procs_by_buf[left_buf]
+                            if procs then
+                                for _, proc in pairs(procs) do
+                                    proc:cancel()
+                                end
+                            end
+                        end
+                    end)
+                end,
+            })
         end,
         keys = {
             {
