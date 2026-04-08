@@ -60,6 +60,18 @@ return {
 ⠀⢀⣾⣿⣿⣿⣿⠏⣰⣿⣶⣦⣤⣤⣤⣤⣤⣤⣴⣶⣿⣿⡿⠛⠁⠀⠀⠀⠀⠀
 ⢀⣾⣿⣿⣿⣿⡟⠀⠈⠙⠛⠻⠿⠿⠿⠿⠿⠿⠟⠛⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀]],
             },
+            sections = {
+                { section = 'header' },
+                { section = 'keys' },
+                { section = 'startup' },
+                {
+                    text = {
+                        { ' ', hl = 'title' },
+                        { vim.version().build, hl = 'special' },
+                    },
+                    align = 'center',
+                },
+            },
         },
     },
 }
