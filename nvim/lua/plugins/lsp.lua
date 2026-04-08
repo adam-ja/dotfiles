@@ -484,18 +484,7 @@ return {
                     },
                 },
             },
-            {
-                'L3MON4D3/LuaSnip',
-                version = "v2.*",
-                build = 'make install_jsregexp',
-                dependencies = {
-                    'rafamadriz/friendly-snippets',
-                },
-                config = function()
-                    require('luasnip').setup()
-                    require('luasnip.loaders.from_vscode').lazy_load()
-                end,
-            },
+            'rafamadriz/friendly-snippets',
         },
         ---@type blink.cmp.Config
         opts = {
@@ -596,7 +585,6 @@ return {
             signature = {
                 enabled = true,
             },
-            snippets = { preset = 'luasnip' },
             sources = {
                 default = { 'copilot', 'lazydev', 'lsp', 'snippets', 'buffer', 'path', 'cmdline' },
                 providers = {
