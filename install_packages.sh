@@ -35,6 +35,8 @@ case "$(uname -s)" in
         ;;
 esac
 
+bat cache --build
+
 ${DIR}/install_ubi.sh
 ${DIR}/install_kitty.sh
 ${DIR}/install_composer.sh

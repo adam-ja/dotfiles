@@ -19,6 +19,4 @@
 - shell:
     - [git submodule update --init --recursive, Installing submodules]
     - [~/dotfiles/install_packages.sh, Installing useful packages]
-    - [composer global install]
-    - [~/dotfiles/gsettings.sh, Applying gsettings]
-    - [bat cache --build]
+    - [~/dotfiles/apply_configs.sh, Applying configs]

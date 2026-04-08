@@ -14,3 +14,5 @@ fi
 php composer-setup.php --quiet
 rm composer-setup.php
 sudo mv composer.phar /usr/local/bin/composer
+
+composer global install
