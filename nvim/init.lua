@@ -75,10 +75,6 @@ vim.opt.listchars = {
     precedes = '',
     nbsp = '␣',
 }
--- Remove trailing spaces when saving a buffer, and return cursor to starting position
-vim.api.nvim_create_autocmd('BufWritePre', {
-    command = [[lua require('utils').preserve_cursor_position('%s/\\s\\+$//e')]]
-})
 -- Configure auto-formatting (see `:h fo-table`)
 vim.opt.formatoptions:append('croqwanblj')
 -- Consider lines that start with `- ` or `* ` as list characters for auto-formatting

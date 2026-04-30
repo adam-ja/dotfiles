@@ -216,19 +216,6 @@ return {
                         return
                     end
 
-                    if client:supports_method('textDocument/formatting') then
-                        vim.api.nvim_create_autocmd("BufWritePre", {
-                            buffer = args.buf,
-                            callback = function()
-                                vim.lsp.buf.format({
-                                    async = false,
-                                    bufnr = args.buf,
-                                    id = client.id,
-                                })
-                            end,
-                        })
-                    end
-
                     if client:supports_method('textDocument/inlayHint') or client.server_capabilities.inlayHintProvider then
                         vim.lsp.inlay_hint.enable(true, { bufnr = args.buf })
                     end
@@ -431,6 +418,10 @@ return {
                     },
                 },
                 formatters_by_ft = {
+                    ['*'] = {
+                        'trim_newlines',
+                        'trim_whitespace',
+                    },
                     php = {
                         'mago_format',
                         'mago_lint',
