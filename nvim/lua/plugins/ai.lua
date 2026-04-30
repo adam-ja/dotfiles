@@ -6,6 +6,7 @@ return {
         dependencies = {
             'nvim-lua/plenary.nvim',
             'nvim-treesitter/nvim-treesitter',
+            'mrjones2014/codecompanion-ui.nvim',
         },
         lazy = false,
         opts = {
@@ -21,6 +22,9 @@ return {
                         })
                     end,
                 }
+            },
+            extensions = {
+                ui = { enabled = true },
             },
             interactions = {
                 chat = {
