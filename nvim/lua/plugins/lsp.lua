@@ -316,13 +316,31 @@ return {
             -- Don't print cargo log errors that can't be parsed by nvim-lint
             table.insert(clippy.args, '--quiet')
 
+            -- Wrap mago in a transient systemd scope under a shared slice (defined at
+            -- ~/.config/systemd/user/mago.slice) so all concurrent mago invocations share
+            -- a single combined memory cap. Stops parallel analyze + lint from
+            -- collectively pushing the rest of the system into swap thrash.
+            local mago_scope_args = {
+                '--user', '--scope', '--quiet', '--collect',
+                '--slice=mago.slice',
+                '-p', 'RuntimeMaxSec=60',
+                '--',
+                'vendor/bin/mago',
+            }
+
             local mago_analyze = lint.linters.mago_analyze
-            mago_analyze.cmd = 'vendor/bin/mago'
-            table.insert(mago_analyze.args, '--ignore-baseline')
+            mago_analyze.cmd = 'systemd-run'
+            mago_analyze.args = vim.list_extend(
+                vim.deepcopy(mago_scope_args),
+                { '--colors=never', 'analyze', '--reporting-format=short', '--ignore-baseline' }
+            )
 
             local mago_lint = lint.linters.mago_lint
-            mago_lint.cmd = 'vendor/bin/mago'
-            table.insert(mago_lint.args, '--ignore-baseline')
+            mago_lint.cmd = 'systemd-run'
+            mago_lint.args = vim.list_extend(
+                vim.deepcopy(mago_scope_args),
+                { '--colors=never', 'lint', '--reporting-format=short', '--ignore-baseline' }
+            )
 
             lint.linters_by_ft = {
                 php = {
@@ -335,11 +353,9 @@ return {
             vim.api.nvim_create_autocmd('FileType', {
                 pattern = 'php',
                 callback = function()
-                    -- Lint when the filetype is detected (this is better than BufReadPost)
-                    require('lint').try_lint()
-
-                    -- And again on save
+                    -- Lint the buffer on save for matching filetypes
                     vim.api.nvim_create_autocmd('BufWritePost', {
+                        buffer = 0,
                         callback = function()
                             require('lint').try_lint()
                         end,

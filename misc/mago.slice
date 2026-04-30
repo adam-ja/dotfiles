@@ -1,0 +1,5 @@
+[Slice]
+MemoryHigh=4G
+MemoryMax=5G
+MemorySwapMax=2G
+CPUQuota=400%

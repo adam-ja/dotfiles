@@ -14,6 +14,7 @@
     ~/.config/nvim: nvim/
     ~/.config/codebook/codebook.toml: misc/codebook.toml
     ~/.config/spaceship.zsh: zsh/spaceship.zsh
+    ~/.config/systemd/user/mago.slice: misc/mago.slice
     ~/.tmux.conf: tmux/tmux.conf # tmux is supposed to search in ~/.config/tmux/ but for some reason doesn't work
     ~/.claude/settings.json: misc/claude_settings.json
     zsh_custom/themes/spaceship.zsh-theme: zsh_custom/themes/spaceship-prompt/spaceship.zsh-theme
