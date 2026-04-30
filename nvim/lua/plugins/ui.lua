@@ -250,9 +250,6 @@ return {
                 basic = true,
                 extra = true,
             },
-            options = {
-                delay = 1,
-            },
         },
     },
     {
