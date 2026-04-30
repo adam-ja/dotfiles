@@ -10,15 +10,6 @@ return {
         lazy = false,
         opts = {
             adapters = {
-                acp = {
-                    claude_code = function()
-                        return require('codecompanion.adapters').extend('claude_code', {
-                            defaults = {
-                                model = 'opus',
-                            },
-                        })
-                    end,
-                },
                 http = {
                     copilot_gemini = function()
                         return require('codecompanion.adapters').extend('copilot', {
