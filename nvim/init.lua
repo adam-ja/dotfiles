@@ -118,8 +118,37 @@ vim.api.nvim_create_user_command('Q', ':q<bang>', {})
 vim.api.nvim_create_user_command('WQ', ':wq<bang>', {})
 vim.api.nvim_create_user_command('Wq', ':wq<bang>', {})
 
+-- Write without running autocommands (linters, formatters, etc)
+vim.api.nvim_create_user_command(
+    'WW',
+    ':noautocmd w<bang>',
+    { desc = 'Write without autocmds (linters, formatters, etc)' }
+)
+
 -- Delete current file and close the buffer
 vim.api.nvim_create_user_command('Rm', ':call delete(expand("%")) | bwipeout!', {})
+
+-- Sync all tab -> space settings
+vim.api.nvim_create_user_command(
+    'TabSpaces',
+    function(args)
+        local spaces = tonumber(args.args)
+
+        if args.bang then
+            vim.opt.tabstop = spaces
+            vim.opt.softtabstop = spaces
+            vim.opt.shiftwidth = spaces
+        else
+            vim.bo.tabstop = spaces
+            vim.bo.softtabstop = spaces
+            vim.bo.shiftwidth = spaces
+        end
+    end,
+    {
+        desc = 'Sync tabstop/softtabstop/shiftwidth to use the given number of spaces for tabs',
+        nargs = 1,
+    }
+)
 
 
 -- UI / styling
