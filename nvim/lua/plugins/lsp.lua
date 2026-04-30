@@ -628,4 +628,5 @@ return {
             }
         end
     },
+    { 'chrisgrieser/nvim-rulebook' },
 }

@@ -11,5 +11,6 @@ $HOME/.local/bin/fnm completions --shell zsh > ${DIR}/zsh/completions/_fnm
 # Use fnm to install the latest LTS version of node
 $HOME/.local/bin/fnm install --lts
 
+# Install biome for use with nvim-rulebook
 # Install tree-sitter-cli for use with nvim-treesitter
-npm install -g tree-sitter-cli
+npm install -g @biomejs/biome tree-sitter-cli
