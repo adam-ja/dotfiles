@@ -108,6 +108,8 @@ utils.nmap('<Leader>ju', ':%!jq -c<CR>', { desc = 'Uglify current buffer as JSON
 utils.vmap('<Leader>jp', ':!jq<CR>', { desc = 'Prettify selected lines as JSON using jq' })
 utils.vmap('<Leader>ju', ':!jq -c<CR>', { desc = 'Uglify selected lines as JSON using jq' })
 
+utils.nmap('<Leader>w', ':set wrap!<CR>', { desc = 'Toggle line wrapping' })
+
 
 -- Custom commands
 ------------------
