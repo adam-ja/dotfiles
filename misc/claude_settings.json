@@ -1,8 +1,7 @@
 {
   "model": "claude-opus-4-7",
   "enabledPlugins": {
-    "caveman@caveman": true,
-    "skill-creator@claude-plugins-official": true
+    "caveman@caveman": true
   },
   "extraKnownMarketplaces": {
     "caveman": {
@@ -11,5 +10,6 @@
         "repo": "JuliusBrussee/caveman"
       }
     }
-  }
+  },
+  "editorMode": "vim"
 }
