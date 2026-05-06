@@ -1,6 +1,8 @@
 {
+  "model": "claude-opus-4-7",
   "enabledPlugins": {
-    "caveman@caveman": true
+    "caveman@caveman": true,
+    "skill-creator@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "caveman": {
@@ -9,6 +11,5 @@
         "repo": "JuliusBrussee/caveman"
       }
     }
-  },
-  "model": "claude-opus-4-7"
+  }
 }
