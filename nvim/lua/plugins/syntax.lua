@@ -27,15 +27,6 @@ return {
             auto_install = true,
             fold = { enable = true },
             highlight = { enable = true },
-            incremental_selection = {
-                enable = true,
-                keymaps = {
-                    init_selection = '<M-v>',
-                    node_incremental = '=',
-                    scope_incremental = '+',
-                    node_decremental = '-',
-                },
-            },
             indent = { enable = true },
         },
     },
