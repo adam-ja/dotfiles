@@ -260,6 +260,9 @@ return {
                             overrides = { enable = true },
                             parent = { enable = true },
                         },
+                        completion = {
+                            withOverrideAttribute = false,
+                        },
                         format = {
                             -- Intelephense formatting rules aren't configurable - use Mago instead
                             enable = false,
