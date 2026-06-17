@@ -8,3 +8,6 @@ curl -fsSL https://claude.ai/install.sh | bash
 # Install the Claude ACP adapter
 # https://github.com/agentclientprotocol/claude-agent-acp
 npm install -g @agentclientprotocol/claude-agent-acp
+
+# Install rtk to reduce token consumption for bash calls
+cargo install --git https://github.com/rtk-ai/rtk
