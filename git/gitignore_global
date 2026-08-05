@@ -11,3 +11,5 @@ codebook.toml
 Session.vim
 .netrwhist
 *~
+
+**/.claude/settings.local.json

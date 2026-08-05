@@ -34,6 +34,17 @@
   },
   "model": "opus",
   "hooks": {
+    "Notification": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "notify-send '✳ Claude Code' 'Claude Code needs your attention'"
+          }
+        ]
+      }
+    ],
     "PreToolUse": [
       {
         "matcher": "Bash",
@@ -46,11 +57,24 @@
       }
     ]
   },
+  "statusLine": {
+    "type": "command",
+    "command": "bash ~/.claude/statusline-command.sh"
+  },
   "enabledPlugins": {
+    "builder-skills@builder-skills": true,
     "caveman@caveman": true,
-    "superpowers@claude-plugins-official": true
+    "linear@claude-plugins-official": true,
+    "superpowers@claude-plugins-official": true,
+    "rust-analyzer-lsp@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
+    "builder-skills": {
+      "source": {
+        "source": "github",
+        "repo": "BuilderIO/skills"
+      }
+    },
     "caveman": {
       "source": {
         "source": "github",
@@ -58,9 +82,5 @@
       }
     }
   },
-  "editorMode": "vim",
-  "statusLine": {
-    "type": "command",
-    "command": "bash ~/.claude/statusline-command.sh"
-  }
+  "editorMode": "vim"
 }
