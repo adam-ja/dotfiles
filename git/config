@@ -38,3 +38,8 @@
 [spice "log"]
     crFormat = "url"
     pushStatusFormat = "aheadBehind"
+[rerere]
+    # Remember conflict resolutions so they can be automatically applied if the
+    # same conflict arises again in the future.
+    # https://git-scm.com/book/en/v2/Git-Tools-Rerere
+	enabled = true
