@@ -28,6 +28,12 @@ return {
                         enabled = package.loaded.lazy ~= nil,
                     },
                     {
+                        icon = '󰩦',
+                        key = 'M',
+                        desc = 'Mason',
+                        action = ':Mason',
+                    },
+                    {
                         icon = '',
                         key = 'c',
                         desc = 'Config',
