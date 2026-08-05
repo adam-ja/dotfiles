@@ -331,19 +331,97 @@ return {
                 'vendor/bin/mago',
             }
 
+            local severities = {
+                error = vim.diagnostic.severity.ERROR,
+                warning = vim.diagnostic.severity.WARN,
+                note = vim.diagnostic.severity.INFO,
+                help = vim.diagnostic.severity.HINT,
+            }
+
+            -- file:lnum:col: severity[code]: message
+            local header_pattern = '^(.-):(%d+):(%d+):%s(%l+)%[([^%]]+)%]:%s(.*)$'
+
+            -- Mago's medium format is short plus each issue's notes/help/link on following indented lines:
+            --
+            --   src/Foo.php:6:12: warning[identity-comparison]: Use identity comparison `===` instead of `==`.
+            --    = Identity comparison `===` checks for both value and type equality, while `==` coerces ...
+            --    = Help: Use `===` to ensure both value and type are equal.
+            --
+            -- The built-in parsers use lint.parser.from_pattern, which matches every line in isolation and so
+            -- can't attach those lines to the diagnostic they belong to. Walk the output line by line instead:
+            -- a header line starts a diagnostic, indented lines are appended to its message, and any other line
+            -- (e.g. the trailing `found N issues` summary, which carries a note of its own) ends it.
+            local function mago_medium_parser(source)
+                ---@param output string
+                ---@param bufnr integer
+                ---@param linter_cwd string
+                ---@return vim.Diagnostic[]
+                return function(output, bufnr, linter_cwd)
+                    if not vim.api.nvim_buf_is_valid(bufnr) then
+                        return {}
+                    end
+
+                    local buffer_path = vim.fs.normalize(vim.fn.fnamemodify(vim.api.nvim_buf_get_name(bufnr), ':p'))
+                    local diagnostics = {}
+                    -- Diagnostic that following indented lines belong to. Left nil when the last header line was
+                    -- for another file, so that its notes are discarded rather than misattributed.
+                    local current
+
+                    for line in vim.gsplit(output, '\n', { plain = true }) do
+                        if vim.startswith(line, ' ') then
+                            -- ` = ` starts a note, three spaces continue the previous one
+                            local note = line:match('^%s=%s(.*)$') or line:match('^%s%s%s(%S.*)$')
+
+                            if not note then
+                                current = nil
+                            elseif current then
+                                current.message = current.message .. '\n' .. note
+                            end
+                        else
+                            local file, lnum, col, severity, code, message = line:match(header_pattern)
+
+                            current = nil
+
+                            -- Mago reports paths relative to the directory it was run in
+                            local path = file and (
+                                (vim.startswith(file, '/') or file:match('^%w:')) and file
+                                or vim.fn.simplify(linter_cwd .. '/' .. file)
+                            )
+
+                            if path and vim.fs.normalize(path) == buffer_path then
+                                current = {
+                                    lnum = math.max(tonumber(lnum) - 1, 0),
+                                    col = math.max(tonumber(col) - 1, 0),
+                                    severity = severities[severity] or vim.diagnostic.severity.ERROR,
+                                    message = message,
+                                    code = code,
+                                    source = source,
+                                    user_data = { lsp = { code = code } },
+                                }
+                                table.insert(diagnostics, current)
+                            end
+                        end
+                    end
+
+                    return diagnostics
+                end
+            end
+
             local mago_analyze = lint.linters.mago_analyze
             mago_analyze.cmd = 'systemd-run'
             mago_analyze.args = vim.list_extend(
                 vim.deepcopy(mago_scope_args),
-                { '--colors=never', 'analyze', '--reporting-format=short', '--ignore-baseline' }
+                { '--colors=never', 'analyze', '--reporting-format=medium', '--ignore-baseline' }
             )
+            mago_analyze.parser = mago_medium_parser('mago_analyze')
 
             local mago_lint = lint.linters.mago_lint
             mago_lint.cmd = 'systemd-run'
             mago_lint.args = vim.list_extend(
                 vim.deepcopy(mago_scope_args),
-                { '--colors=never', 'lint', '--reporting-format=short', '--ignore-baseline' }
+                { '--colors=never', 'lint', '--reporting-format=medium', '--ignore-baseline' }
             )
+            mago_lint.parser = mago_medium_parser('mago_lint')
 
             lint.linters_by_ft = {
                 php = {
