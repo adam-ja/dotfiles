@@ -238,7 +238,6 @@ return {
             })
 
             local html_css_js_filetypes = {
-                'blade',
                 'css',
                 'html',
                 'javascript',
@@ -248,7 +247,9 @@ return {
                 'typescriptreact',
             }
 
-            vim.lsp.config('emmet_language_server', { filetypes = html_css_js_filetypes })
+            vim.lsp.config('emmet_language_server', {
+                filetypes = { 'blade', (table.unpack or unpack)(html_css_js_filetypes) },
+            })
 
             vim.lsp.config('intelephense', {
                 settings = {
