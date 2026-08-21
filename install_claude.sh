@@ -11,3 +11,4 @@ npm install -g @agentclientprotocol/claude-agent-acp
 
 # Install rtk to reduce token consumption for bash calls
 cargo install --git https://github.com/rtk-ai/rtk
+rtk init -g --auto-patch
