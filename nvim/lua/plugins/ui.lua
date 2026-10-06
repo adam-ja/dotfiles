@@ -344,7 +344,7 @@ return {
                 blink = { enabled = true },
                 lsp = { enabled = true },
             },
-            file_types = { 'markdown', 'codecompanion', 'codecompanion_input' },
+            file_types = { 'markdown' },
             code = {
                 width = 'block',
                 border = 'none',
