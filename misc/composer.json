@@ -1,8 +1,0 @@
-{
-    "require": {
-        "d11wtq/boris": "@stable"
-    },
-    "config": {
-        "sort-packages": true
-    }
-}
