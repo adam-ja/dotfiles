@@ -85,5 +85,8 @@
       }
     }
   },
-  "editorMode": "vim"
+  "timeFormat": "24-hour",
+  "theme": "dark",
+  "editorMode": "vim",
+  "tui": "fullscreen"
 }
