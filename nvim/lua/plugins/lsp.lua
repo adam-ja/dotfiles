@@ -504,18 +504,8 @@ return {
 
             require('conform').setup({
                 formatters = {
-                    mago_format = {
-                        command = mago_command,
-                    },
-                    mago_lint = {
-                        command = mago_command,
-                        args = {
-                            'lint',
-                            '--fix',
-                            '--format-after-fix',
-                            '$FILENAME',
-                        },
-                    },
+                    mago_format = { command = mago_command },
+                    mago_lint = { command = mago_command },
                 },
                 formatters_by_ft = {
                     ['*'] = {
