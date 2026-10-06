@@ -37,7 +37,6 @@ return {
         'nvim-lualine/lualine.nvim',
         dependencies = {
             'nvim-tree/nvim-web-devicons',
-            'AndreM222/copilot-lualine',
             {
                 'bezhermoso/todos-lualine.nvim',
                 dependencides = {
@@ -99,10 +98,6 @@ return {
                         },
                     },
                     lualine_y = {
-                        {
-                            'copilot',
-                            show_colors = true,
-                        },
                         'filetype',
                         {
                             'filesize',

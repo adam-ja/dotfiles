@@ -534,37 +534,8 @@ return {
             {
                 ---@module 'lspkind'
                 'onsails/lspkind.nvim',
-                ---@type LspkindOpts
-                opts = {
-                    symbol_map = {
-                        Copilot = '',
-                    }
-                }
             },
             'xzbdmw/colorful-menu.nvim',
-            {
-                'fang2hou/blink-copilot',
-                dependencies = {
-                    {
-                        ---@module 'copilot'
-                        'zbirenbaum/copilot.lua',
-                        cmd = 'Copilot',
-                        event = 'InsertEnter',
-                        ---@type CopilotConfig
-                        opts = {
-                            panel = {
-                                enabled = false,
-                            },
-                            suggestion = {
-                                enabled = false,
-                            },
-                            filetypes = {
-                                ['*'] = true,
-                            },
-                        }
-                    },
-                },
-            },
             'rafamadriz/friendly-snippets',
         },
         ---@type blink.cmp.Config
@@ -667,7 +638,7 @@ return {
                 enabled = true,
             },
             sources = {
-                default = { 'copilot', 'lazydev', 'lsp', 'snippets', 'buffer', 'path', 'cmdline' },
+                default = { 'lazydev', 'lsp', 'snippets', 'buffer', 'path', 'cmdline' },
                 providers = {
                     -- https://cmp.saghen.dev/recipes.html#buffer-completion-from-all-open-buffers
                     buffer = {
@@ -679,7 +650,6 @@ return {
                             end
                         },
                     },
-                    copilot = { name = 'copilot', module = 'blink-copilot', score_offset = 100, async = true },
                     lazydev = { name = 'lazydev', module = 'lazydev.integrations.blink', score_offset = 100 },
                 },
             },
